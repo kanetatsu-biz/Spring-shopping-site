@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>商品一覧</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+	<header th:replace="header"></header>
+
+	<hr>
+
+	<main>
+<!--		カテゴリー表示-->
+		<nav>
+			<a href="/items">全商品</a>
+			<a
+				th:each="category:${categories}"
+				th:href="'/items?categoryId='+${category.id}"
+			>
+				<span th:text="${category.name}"></span>
+			</a>
+		</nav>
+
+		<div>
+			<div th:each="item:${items}">
+				<form action="/cart/add" method="post">
+					<img src="img/sample_test1.jpg" width="200px" height="150px">
+					<span th:text="${item.name}"></span>
+					<span th:text="${item.price}"></span>
+					<span>
+						<input type="hidden" name="itemId" th:value="${item.id}">
+						<button>カートに追加</button>
+					</span>
+				</form>
+			</div>
+		</div>
+	</main>
+
+	<hr>
+
+	<footer th:replace="footer"></footer>
+</body>
+</html>
