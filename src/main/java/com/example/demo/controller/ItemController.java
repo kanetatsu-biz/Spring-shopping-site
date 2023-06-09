@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Category;
@@ -43,5 +44,18 @@ public class ItemController {
 		model.addAttribute("items", items);
 
 		return "items";
+	}
+
+	// 商品詳細表示
+	@GetMapping("/items/{itemId}")
+	public String show(
+			@PathVariable("itemId") Integer itemId,
+			Model model) {
+
+		//	商品IDをもとに商品を取得
+		Item item = itemRepository.findById(itemId).get();
+		model.addAttribute("item", item);
+
+		return "showItem";
 	}
 }
