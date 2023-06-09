@@ -25,13 +25,15 @@
 		<div>
 			<div th:each="item:${items}">
 				<form action="/cart/add" method="post">
-					<img src="img/sample_test1.jpg" width="200px" height="150px">
-					<span th:text="${item.name}"></span>
-					<span th:text="${item.price}"></span>
-					<span>
-						<input type="hidden" name="itemId" th:value="${item.id}">
-						<button>カートに追加</button>
-					</span>
+					<a th:href="'/items/' + ${item.id}">
+						<img th:src="@{/img/sample_test1.jpg}" width="200px" height="150px">
+						<span th:text="${item.name}"></span>
+						<span th:text="${item.price}"></span>
+						<span>
+							<input type="hidden" name="itemId" th:value="${item.id}">
+							<button>カートに追加</button>
+						</span>
+					</a>
 				</form>
 			</div>
 		</div>
