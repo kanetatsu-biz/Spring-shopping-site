@@ -39,7 +39,7 @@ public class Item {
 		return price;
 	}
 
-	private String getDescription() {
+	public String getDescription() {
 		return description;
 	}
 }
