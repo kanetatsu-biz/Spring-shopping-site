@@ -1,9 +1,9 @@
 -- 各種テーブル削除
-DROP TABLE IF EXISTS categories;
-DROP TABLE IF EXISTS items;
-DROP TABLE IF EXISTS accounts;
-DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS order_details;
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS accounts;
+DROP TABLE IF EXISTS items;
+DROP TABLE IF EXISTS categories;
 
 -- カテゴリーテーブル
 CREATE TABLE categories
@@ -19,7 +19,8 @@ CREATE TABLE items
    category_id INTEGER,
    name TEXT,
    price INTEGER,
-   description TEXT
+   description TEXT,
+   FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 
 -- アカウントテーブル
@@ -37,8 +38,8 @@ CREATE TABLE orders
    id SERIAL PRIMARY KEY,
    customer_id INTEGER,
    ordered_on DATE,
-   total_price INTEGER
-   
+   total_price INTEGER,
+   FOREIGN KEY (customer_id) REFERENCES accounts(id)
 );
 
 -- 注文明細テーブル
@@ -47,5 +48,7 @@ CREATE TABLE order_details
    id SERIAL PRIMARY KEY,
    order_id INTEGER,
    item_id INTEGER,
-   quantity INTEGER
+   quantity INTEGER,
+   FOREIGN KEY (order_id) REFERENCES orders(id),
+   FOREIGN KEY (item_id) REFERENCES items(id)
 );
