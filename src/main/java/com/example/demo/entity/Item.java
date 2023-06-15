@@ -54,6 +54,10 @@ public class Item {
 		return quantity;
 	}
 
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
 	//	小計　＝　価格　＊　数量
 	public Integer getSubTotalPrice() {
 		return price * quantity;
