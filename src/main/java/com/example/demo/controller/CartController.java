@@ -54,4 +54,17 @@ public class CartController {
 		// カート一覧画面にリダイレクト
 		return "redirect:/cart";
 	}
+
+	//	カート追加
+	//	（一旦数量は１で固定）
+	@PostMapping("/cart/delete")
+	public String deleteCart(
+			@RequestParam("itemId") int itemId) {
+
+		//	指定された商品IDをもとにカートから削除
+		cart.delete(itemId);
+
+		// カート一覧画面にリダイレクト
+		return "redirect:/cart";
+	}
 }

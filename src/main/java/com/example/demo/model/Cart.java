@@ -37,4 +37,9 @@ public class Cart {
 	public void add(Item newItem) {
 		this.items.add(newItem);
 	}
+
+	//	商品IDをもとにカートから削除
+	public void delete(Integer itemId) {
+		this.items.removeIf(item -> item.getId() == itemId);
+	}
 }
