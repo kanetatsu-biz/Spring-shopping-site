@@ -1,7 +1,15 @@
 <header>
 	<nav>
 		<a href="/items">使いやすいショッピングサイト</a>
-		<span>新規登録 / ログイン</span>
+		<th:block th:if="${@loginUser.getName() != null}">
+			[[${@loginUser.getName()}]]
+		</th:block>
+		<th:block th:if="${@loginUser.getName() != null}">
+			<a href="/logout">ログアウト</a>
+		</th:block>
+		<th:block th:unless="${@loginUser.getName() != null}">
+			<a href="/login">新規登録 &#047; ログイン</a>
+		</th:block>
 		<a href="/cart">カート</a>
 	</nav>
 </header>
