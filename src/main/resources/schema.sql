@@ -37,12 +37,12 @@ CREATE TABLE orders
 (
    id SERIAL PRIMARY KEY,
    customer_id INTEGER,
-   ordered_on DATE,
+   ordered_datetime TIMESTAMP,
    total_price INTEGER,
    FOREIGN KEY (customer_id) REFERENCES accounts(id)
 );
 
--- 注文明細テーブル
+-- 注文詳細テーブル
 CREATE TABLE order_details
 (
    id SERIAL PRIMARY KEY,
