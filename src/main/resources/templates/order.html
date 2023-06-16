@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>カート一覧</title>
+<title>注文画面</title>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
@@ -27,19 +27,20 @@
 					<span>小計</span>
 					<span th:text="${item.subTotalPrice}"></span>
 				</div>
-				<form action="/cart/delete" method="post">
-					<input type="hidden" name="itemId" th:value="${item.id}">
-					<button>削除</button>
-				</form>
 			</div>
 
 			<div>
 				<span>合計</span>
 				<span th:text="${@cart.totalPrice}"></span>
 			</div>
-			<a href="/order">
-				<button>注文画面に進む</button>
-			</a>
+			<div>
+				<a href="/cart">
+					<button>カートに戻る</button>
+				</a>
+				<a href="/order/confirm">
+					<button>注文内容を確認する</button>
+				</a>
+			</div>
 		</div>
 	</main>
 
