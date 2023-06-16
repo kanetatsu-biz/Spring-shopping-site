@@ -30,14 +30,16 @@ public class AccountController {
 
 	// ログイン画面を表示
 	@GetMapping({ "/", "/login" })
-	public String index(
+	public String loginForm(
 			@RequestParam(name = "email", defaultValue = "") String email,
 			@RequestParam(name = "errMes", defaultValue = "") String errMes,
+			@RequestParam(name = "successMes", defaultValue = "") String successMes,
 			Model model) {
 
 		//	リダイレクト用
 		model.addAttribute("email", email);
 		model.addAttribute("errMes", errMes);
+		model.addAttribute("successMes", successMes);
 
 		return "loginForm";
 	}
@@ -97,6 +99,65 @@ public class AccountController {
 		//	セッションの中身をリセット
 		session.invalidate();
 
+		return "redirect:/login";
+	}
+
+	// 新規登録画面を表示
+	@GetMapping("/register")
+	public String registerForm(
+			@RequestParam(name = "name", defaultValue = "") String name,
+			@RequestParam(name = "email", defaultValue = "") String email,
+			@RequestParam(name = "errMes", defaultValue = "") String errMes,
+			Model model) {
+
+		//	リダイレクト用
+		model.addAttribute("name", name);
+		model.addAttribute("email", email);
+		model.addAttribute("errMes", errMes);
+
+		return "registerForm";
+	}
+
+	// 入力データをもとに新規登録処理
+	@PostMapping("/register")
+	public String register(
+			@RequestParam("name") String name,
+			@RequestParam("email") String email,
+			@RequestParam("password") String password,
+			RedirectAttributes redirectAttributes,
+			Model model) {
+
+		//	必須チェック
+		if (name.length() == 0 || email.length() == 0 || password.length() == 0) {
+			//	入力値はそのままにし、エラーメッセージをリダイレクト先に渡す
+			redirectAttributes.addAttribute("name", name);
+			redirectAttributes.addAttribute("email", email);
+			redirectAttributes.addAttribute("errMes", "全て必須項目です。");
+
+			return "redirect:/register";
+		}
+
+		//	メアドをもとにアカウント情報を取得
+		Optional<Account> existAccountOpt = accountRepository.findByEmail(email);
+
+		//	アカウント存在チェック
+		if (existAccountOpt.isPresent()) {
+			//	入力値はそのままにし、エラーメッセージをリダイレクト先に渡す
+			redirectAttributes.addAttribute("name", name);
+			redirectAttributes.addAttribute("email", email);
+			redirectAttributes.addAttribute("errMes", "そのメールアドレスはすでに登録済みです。");
+
+			return "redirect:/register";
+		}
+
+		//	ユーザ新規登録処理
+		Account account = new Account(name, email, password);
+		accountRepository.save(account);
+
+		//	登録が完了した旨をリダイレクト先に送る
+		redirectAttributes.addAttribute("successMes", "新規ユーザー登録が完了しました。");
+
+		//	ログイン画面にリダイレクト
 		return "redirect:/login";
 	}
 }

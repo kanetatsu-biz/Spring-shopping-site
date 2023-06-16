@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>ログイン画面</title>
+<title>新規登録画面</title>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
@@ -13,11 +13,14 @@
 	<main>
 		<div>
 			<div>
-				<form action="/login" method="post">
-					<!-- エラー・成功メッセージの表示 -->
+				<form action="/register" method="post">
+					<!-- エラーメッセージの表示 -->
 					<p th:if="${errMes.length > 0}">[[${errMes}]]</p>
-					<p th:if="${successMes.length > 0}">[[${successMes}]]</p>
 
+					<div>
+						<span>名前</span>
+						<input type="text" name="name" th:value="${name}">					
+					</div>
 					<div>
 						<span>メールアドレス</span>
 						<input type="email" name="email" th:value="${email}">					
@@ -26,10 +29,8 @@
 						<span>パスワード</span>
 						<input type="password" name="password" th:value="${password}">					
 					</div>
-					<input type="submit" value="ログイン">
+					<input type="submit" value="新規登録">
 				</form>
-
-				<a href="/register">アカウントの新規作成</a>
 			</div>
 		</div>
 	</main>

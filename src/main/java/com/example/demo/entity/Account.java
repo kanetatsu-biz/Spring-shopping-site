@@ -19,6 +19,15 @@ public class Account {
 
 	private String password; // パスワード
 
+	public Account() {
+	}
+
+	public Account(String name, String email, String password) {
+		this.name = name;
+		this.email = email;
+		this.password = password;
+	}
+
 	// ゲッター
 	public Integer getId() {
 		return id;
