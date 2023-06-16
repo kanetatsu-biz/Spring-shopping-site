@@ -14,8 +14,13 @@ import com.example.demo.entity.Account;
 import com.example.demo.model.LoginUser;
 import com.example.demo.repository.AccountRepository;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class AccountController {
+
+	@Autowired
+	HttpSession session;
 
 	@Autowired
 	AccountRepository accountRepository;
@@ -84,5 +89,14 @@ public class AccountController {
 
 		//	商品一覧画面にリダイレクト
 		return "redirect:/items";
+	}
+
+	// ログアウト
+	@GetMapping("/logout")
+	public String logout() {
+		//	セッションの中身をリセット
+		session.invalidate();
+
+		return "redirect:/login";
 	}
 }
