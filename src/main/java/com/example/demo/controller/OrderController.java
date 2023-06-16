@@ -12,4 +12,11 @@ public class OrderController {
 
 		return "order";
 	}
+
+	// 注文確認画面表示
+	@GetMapping("/order/confirm")
+	public String confirm() {
+
+		return "orderConfirm";
+	}
 }

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>注文内容確認画面</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+	<header th:replace="header"></header>
+
+	<hr>
+
+	<main>
+		<div>
+			<div>
+				<p>請求額</p>
+				<p th:text="${@cart.totalPrice}"></p>
+			</div>
+
+			<form action="/order"  method="post">
+				<button>この内容で注文</button>
+			</form>
+
+			<div>
+				<div th:each="item:${@cart.items}">
+					<img th:src="@{/img/sample_test1.jpg}" width="200px" height="150px">
+					<span th:text="${item.name}"></span>
+					<div>
+						<span>価格</span>
+						<span th:text="${item.price}"></span>
+					</div>
+					<div>
+						<span>数量</span>
+						<span th:text="${item.quantity}"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<hr>
+
+	<footer th:replace="footer"></footer>
+</body>
+</html>
