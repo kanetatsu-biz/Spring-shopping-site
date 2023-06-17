@@ -11,27 +11,25 @@
 	<hr>
 
 	<main>
-		<div>
-			<div>
-				<form action="/register" method="post">
-					<!-- エラーメッセージの表示 -->
-					<p th:if="${errMes.length > 0}">[[${errMes}]]</p>
+		<div class="container">
+			<form action="/register" method="post" class="input-form">
+				<!-- エラーメッセージの表示 -->
+				<p class="err-mes" th:if="${errMes.length > 0}">[[${errMes}]]</p>
 
-					<div>
-						<span>名前</span>
-						<input type="text" name="name" th:value="${name}">					
-					</div>
-					<div>
-						<span>メールアドレス</span>
-						<input type="email" name="email" th:value="${email}">					
-					</div>
-					<div>
-						<span>パスワード</span>
-						<input type="password" name="password" th:value="${password}">					
-					</div>
-					<input type="submit" value="新規登録">
-				</form>
-			</div>
+				<div>
+					<span>名前</span>
+					<input type="text" name="name" th:value="${name}">					
+				</div>
+				<div>
+					<span>メールアドレス</span>
+					<input type="email" name="email" th:value="${email}">					
+				</div>
+				<div>
+					<span>パスワード</span>
+					<input type="password" name="password" th:value="${password}">					
+				</div>
+				<input type="submit" value="新規登録">
+			</form>
 		</div>
 	</main>
 
