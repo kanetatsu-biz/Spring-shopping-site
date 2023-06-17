@@ -1,15 +1,19 @@
 <header>
-	<nav>
-		<a href="/items">使いやすいショッピングサイト</a>
-		<th:block th:if="${@loginUser.getName() != null}">
-			[[${@loginUser.getName()}]]
-		</th:block>
-		<th:block th:if="${@loginUser.getName() != null}">
-			<a href="/logout">ログアウト</a>
-		</th:block>
-		<th:block th:unless="${@loginUser.getName() != null}">
-			<a href="/login">新規登録 &#047; ログイン</a>
-		</th:block>
-		<a href="/cart">カート</a>
+	<nav class="header-menu">
+		<div class="header-menu-title">
+			<a href="/items">使いやすいショッピングサイト</a>
+		</div>
+		<div class="header-menu-login">
+			<th:block th:if="${@loginUser.getName() != null}">
+				[[${@loginUser.getName()}]]
+				<a href="/logout">ログアウト</a>
+			</th:block>
+			<th:block th:unless="${@loginUser.getName() != null}">
+				<a href="/login">新規登録 &#047; ログイン</a>
+			</th:block>
+		</div>
+		<div class="header-menu-cart">
+			<a href="/cart">&#128722;カート</a>
+		</div>
 	</nav>
 </header>

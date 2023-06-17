@@ -1,0 +1,29 @@
+/* ヘッダー */
+header {
+	height: 50px;
+}
+
+.header-menu {
+	height: 100%;
+	display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.header-menu-title {
+	width: 50%;
+	text-align: center;
+}
+.header-menu-title a {
+	text-decoration: none;
+    font-size: 25px;
+    font-weight: bold;
+}
+.header-menu-login {
+	width: 25%;
+	text-align: center;
+}
+.header-menu-cart {
+	width: 25%;
+	text-align: center;
+}
