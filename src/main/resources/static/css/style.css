@@ -86,10 +86,16 @@ main {
     display: flex;
     flex-flow: column;
     justify-content: space-around;
+    position: relative;
 	width: 50%;
 }
 .item-contents span {
 	padding: 0 25px;
+}
+.item-contents button {
+	position: absolute;
+    bottom: 0;
+    right: 0;
 }
 
 /* フッター */
