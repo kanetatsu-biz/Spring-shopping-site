@@ -38,7 +38,7 @@ main {
 	background-color: rgb(248, 248, 248);
 	display: flex;
 	flex-flow: column;
-	height: 350px;
+	gap: 20px 0;
 	justify-content: space-around;
 	padding: 25px;
 	width: 80%;
@@ -58,6 +58,38 @@ main {
 }
 .success-mes {
 	color: blue;
+}
+
+/* 商品一覧画面（TOP） */
+.category-list {
+	display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+}
+.item-container {
+	background-color: rgb(255, 255, 255);
+	margin: 0 auto;
+    width: 80%;
+}
+.item {
+    display: flex;
+    gap: 0 10px;
+    justify-content: center;
+    padding: 10px;
+    text-decoration: none;
+}
+.item img {
+	width: 50%;
+}
+.item-contents {
+	align-items: center;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+	width: 50%;
+}
+.item-contents span {
+	padding: 0 25px;
 }
 
 /* フッター */

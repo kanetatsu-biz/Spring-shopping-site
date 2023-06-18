@@ -11,9 +11,9 @@
 	<hr>
 
 	<main>
-		<div>
+		<div class="container">
 			<!--カテゴリー表示-->
-			<nav>
+			<nav class="category-list">
 				<a href="/items">全商品</a>
 				<a
 					th:each="category:${categories}"
@@ -23,20 +23,20 @@
 				</a>
 			</nav>
 	
-			<div>
-				<div th:each="item:${items}">
-					<form action="/cart/add" method="post">
-						<a th:href="'/items/' + ${item.id}">
-							<img th:src="@{/img/sample_test1.jpg}" width="200px" height="150px">
+			<div th:each="item:${items}" class="item-container">
+				<form action="/cart/add" method="post">
+					<a th:href="'/items/' + ${item.id}" class="item">
+						<img th:src="@{/img/sample_test1.jpg}" width="200px" height="150px">
+						<div class="item-contents">
 							<span th:text="${item.name}"></span>
 							<span th:text="${item.price}"></span>
 							<span>
 								<input type="hidden" name="itemId" th:value="${item.id}">
 								<button>カートに追加</button>
 							</span>
-						</a>
-					</form>
-				</div>
+						</div>
+					</a>
+				</form>
 			</div>
 		</div>
 	</main>
