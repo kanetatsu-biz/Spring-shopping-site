@@ -111,7 +111,7 @@ main {
 	width: 70%;
 }
 
-/* カート一覧 */
+/* カート一覧・注文画面 */
 .cart-item {
 	padding: 25px;
 }
@@ -130,6 +130,10 @@ main {
 	font-weight: bold;
 	text-align: center;
 	width: 50%;
+}
+.order-buttons {
+	display: flex;	
+	gap: 50px;
 }
 
 /* フッター */

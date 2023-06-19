@@ -11,10 +11,12 @@
 	<hr>
 
 	<main>
-		<div>
-			<div th:each="item:${@cart.items}">
-				<img th:src="@{/img/sample_test1.jpg}" width="200px" height="150px">
-				<span th:text="${item.name}"></span>
+		<div class="main-container column-center">
+			<div th:each="item:${@cart.items}" class="item-container column-center cart-item">
+				<div class="img-title-container">
+					<img th:src="@{/img/sample_test1.jpg}">
+					<span th:text="${item.name}"></span>
+				</div>
 				<div>
 					<span>価格</span>
 					<span th:text="${item.price}"></span>
@@ -33,7 +35,7 @@
 				<span>合計</span>
 				<span th:text="${@cart.totalPrice}"></span>
 			</div>
-			<div>
+			<div class="order-buttons">
 				<a href="/cart">
 					<button>カートに戻る</button>
 				</a>
