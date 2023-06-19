@@ -101,6 +101,15 @@ main {
     right: 0;
 }
 
+/* 商品詳細 */
+.show-item-container {
+	gap: 0;
+	padding: 25px;
+}
+.show-item-container img {
+	width: 70%;
+}
+
 /* フッター */
 footer  {
 	text-align: center;
