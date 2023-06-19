@@ -110,6 +110,11 @@ main {
 .show-item img {
 	width: 70%;
 }
+.show-item .dots-line {
+	border-top: 3px dotted black;
+	margin-top: 20px;
+    width: 100%;
+}
 
 /* カート一覧・注文・注文確認 */
 .cart-item {
