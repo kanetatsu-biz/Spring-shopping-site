@@ -111,7 +111,7 @@ main {
 	width: 70%;
 }
 
-/* カート一覧・注文画面 */
+/* カート一覧・注文・注文確認 */
 .cart-item {
 	padding: 25px;
 }
@@ -134,6 +134,17 @@ main {
 .order-buttons {
 	display: flex;	
 	gap: 50px;
+}
+.total-price-item {
+	background-color: rgb(255, 255, 255);
+	gap: 0;
+    width: 50%;
+}
+.total-price-item p {
+	font-size: 20px;
+}
+.total-price-item .total-price {
+	font-weight: bold;
 }
 
 /* フッター */
