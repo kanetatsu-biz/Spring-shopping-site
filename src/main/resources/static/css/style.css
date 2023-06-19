@@ -147,6 +147,16 @@ main {
 	font-weight: bold;
 }
 
+/* 注文完了 */
+.ordered-item {
+	background-color: rgb(255, 255, 255);
+	padding: 25px;
+    width: 50%;
+}
+.ordered-item .order-id {
+	font-weight: bold;
+}
+
 /* フッター */
 footer  {
 	text-align: center;

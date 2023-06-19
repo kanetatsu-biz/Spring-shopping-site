@@ -11,12 +11,12 @@
 	<hr>
 
 	<main>
-		<div>
-			<div>
+		<div class="main-container column-center">
+			<div class="column-center ordered-item">
 				<p>注文が確定しました。</p>
 				<div>
 					<span>注文番号：</span>
-					<span th:text="${orderId}"></span>
+					<span class="order-id" th:text="${orderId}"></span>
 				</div>
 				<a href="/items">買い物を続ける</a>
 			</div>
