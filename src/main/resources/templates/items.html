@@ -11,7 +11,7 @@
 	<hr>
 
 	<main>
-		<div class="container">
+		<div class="main-container column-center">
 			<!--カテゴリー表示-->
 			<nav class="category-list">
 				<a href="/items">全商品</a>
@@ -26,7 +26,7 @@
 			<div th:each="item:${items}" class="item-container">
 				<form action="/cart/add" method="post">
 					<a th:href="'/items/' + ${item.id}" class="item">
-						<img th:src="@{/img/sample_test1.jpg}" width="200px" height="150px">
+						<img th:src="@{/img/sample_test1.jpg}">
 						<div class="item-contents">
 							<span th:text="${item.name}"></span>
 							<span th:text="${item.price}"></span>
