@@ -63,7 +63,8 @@ main {
 /* 商品一覧画面（TOP） */
 .category-list {
 	display: flex;
-    justify-content: space-evenly;
+	gap: 50px;
+    justify-content: center;
     width: 80%;
 }
 .item-container {
@@ -79,6 +80,7 @@ main {
     text-decoration: none;
 }
 .item img {
+	padding: 0 25px;
 	width: 50%;
 }
 .item-contents {
