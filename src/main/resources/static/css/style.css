@@ -41,7 +41,7 @@ main {
 	gap: 20px 0;
 	justify-content: space-around;
 	padding: 25px;
-	width: 80%;
+	width: 60%;
 }
 .input-form {
 	align-items: center;
@@ -91,6 +91,7 @@ main {
 }
 .item-contents span {
 	padding: 0 25px;
+	text-align: center;
 }
 .item-contents button {
 	position: absolute;
