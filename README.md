@@ -1,10 +1,6 @@
 # Spring-shopping-site
 
-※書類はgoogle drive上にまとめました。
-
-[設計資料](https://drive.google.com/drive/folders/1ymE40u6TIUJ3l7Xovj8CqWwCYwrb8XFI?usp=sharing)
-
-[ルール](https://drive.google.com/drive/folders/1RR61fhG25ZH7pZ3CAFtz4t9Lb2MEVhOG?usp=drive_link)
+※[設計資料](https://drive.google.com/drive/folders/1ymE40u6TIUJ3l7Xovj8CqWwCYwrb8XFI?usp=sharing)はgoogle drive上にまとめました。
 
 ## 概要説明
 <img width="488" alt="スクリーンショット 2023-06-18 16 55 23" src="https://github.com/kanetatsu-biz/Spring-shopping-site/assets/77796726/0ce2e183-06f0-42d6-b351-5bf5eb163079">
@@ -51,6 +47,9 @@ Viewテンプレート|Thymeleaf
 DB管理ツール|pgAdmin4  
 
 ## デモ動画
+##### 新規登録　＞　ログイン　＞　商品一覧　＞　商品詳細　＞　カート　＞　注文　＞　ログアウト　までの一連の動きをデモ
+https://github.com/kanetatsu-biz/Spring-shopping-site/assets/123366737/d21090fa-0fa0-45c6-9e8a-538dc48cc3f9
+
 
 ## 環境構築やること
 
@@ -59,7 +58,7 @@ DB管理ツール|pgAdmin4
 
 　　ー＞インストールしただけでは、PowerShellでアクセスできなかったので環境変数を編集
 
-　　（参考：https://dattesar.com/powershell-psql/）
+　　（参考：https://dattesar.com/powershell-psql/ ）
  - pgAdmin4のインストール（PostgreSQLインストール時に一緒にインストールできた）
  - Eclipseで新規プロジェクトの作成
 
@@ -71,7 +70,7 @@ DB管理ツール|pgAdmin4
 
 　　ー＞SSH接続できるように設定し、GitHubからプロジェクトへクローン
 
-　　（参考：https://itsakura.com/eclipse-github-clone-push）
+　　（参考：https://itsakura.com/eclipse-github-clone-push ）
  - プロジェクト作成時に追加されたファイルらをリモートへPUSH
 
 　　ー＞プロジェクトを右クリック「チームの共有」から進めていき、全ファイルをステージングし、メッセージを入力し、「コミットおよびプッシュ」
