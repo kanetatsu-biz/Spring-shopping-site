@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>商品一覧</title>
-<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
 	<header th:replace="header"></header>
@@ -25,17 +25,28 @@
 	
 			<div th:each="item:${items}" class="item-container">
 				<form action="/cart/add" method="post">
-					<a th:href="'/items/' + ${item.id}" class="item">
-						<img th:src="@{/img/sample_test1.jpg}">
+					<div class="item">
+						<a th:href="'/items/' + ${item.id}" class="item-img">
+							<img th:src="@{/img/sample_test1.jpg}">
+						</a>
 						<div class="item-contents">
-							<span th:text="${item.name}"></span>
+							<a th:href="'/items/' + ${item.id}">
+								<span th:text="${item.name}"></span>								
+							</a>
 							<span th:text="${item.price}"></span>
+							<span>数量：
+								<select name="quantity">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+								</select>
+							</span>
 							<span>
 								<input type="hidden" name="itemId" th:value="${item.id}">
 								<button>カートに追加</button>
 							</span>
 						</div>
-					</a>
+					</div>
 				</form>
 			</div>
 		</div>
