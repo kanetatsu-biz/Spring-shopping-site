@@ -50,7 +50,8 @@
 					<select name="prefecture">
 						<option
 							th:each="prefecture:${prefectureList}"
-							th:value="${@address.prefecture != null && @address.prefecture.length > 0 ? @address.prefecture: prefecture}">
+							th:value="${prefecture}"
+							th:selected="${@address.isPrefectureSet(prefecture)}">
 							[[${prefecture}]]
 						</option>
 					</select>

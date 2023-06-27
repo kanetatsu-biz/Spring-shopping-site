@@ -66,6 +66,13 @@ public class OrderController {
 			RedirectAttributes redirectAttributes,
 			Model model) {
 
+		//	セッションに値を詰める
+		address.setPostNum(postNum);
+		address.setPrefecture(prefecture);
+		address.setMunicipality(municipality);
+		address.setHouseNum(houseNum);
+		address.setBuildingNameRoomNum(buildingNameRoomNum);
+
 		//	必須のバリデーション
 		if (postNum.equals("") || prefecture.equals("") || municipality.equals("") || houseNum.equals("")) {
 			redirectAttributes.addAttribute("errMes",
