@@ -152,6 +152,13 @@ main {
 	font-weight: bold;
 }
 
+/* 注文 */
+/* あて先入力 */
+.one-form-container {
+	display: flex;
+    flex-flow: column;
+}
+
 /* 注文完了 */
 .ordered-item {
 	background-color: rgb(255, 255, 255);

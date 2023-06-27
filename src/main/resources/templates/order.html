@@ -35,6 +35,37 @@
 				<span>合計</span>
 				<span th:text="${@cart.totalPrice}"></span>
 			</div>
+
+			<!-- あて先入力欄 -->
+			<div class="input-form">
+				<div class="one-form-container">
+					<label>郵便番号</label>
+					<input type="text" name="postNum" th:value="${@address.postNum}">
+				</div>
+				<div class="one-form-container">
+					<label>都道府県</label>
+					<select name="prefecture">
+						<option
+							th:each="prefecture:${prefectureList}"
+							th:value="${@address.postNum}">
+							[[${prefecture}]]
+						</option>
+					</select>
+				</div>
+				<div class="one-form-container">
+					<label>市区町村</label>
+					<input type="text" name="municipalities" th:value="${@address.municipalities}">
+				</div>
+				<div class="one-form-container">
+					<label>番地</label>
+					<input type="text" name="houseNum" th:value="${@address.houseNum}">
+				</div>
+				<div class="one-form-container">
+					<label>建物名・部屋番号</label>
+					<input type="text" name="buildingNameRoomNum" th:value="${@address.buildingNameRoomNum}">
+				</div>
+			</div>
+
 			<div class="order-buttons">
 				<a href="/cart">
 					<button>カートに戻る</button>
