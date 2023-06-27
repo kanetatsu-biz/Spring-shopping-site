@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Item;
 import com.example.demo.entity.Order;
@@ -35,7 +37,9 @@ public class OrderController {
 
 	// 注文画面表示
 	@GetMapping("/order")
-	public String index(Model model) {
+	public String index(
+			@RequestParam(name = "errMes", defaultValue = "") String errMes,
+			Model model) {
 
 		//	都道府県の配列を画面に渡す
 		model.addAttribute("prefectureList", new String[] {
@@ -46,13 +50,28 @@ public class OrderController {
 				"奈良県", "和歌山県", "鳥取県", "島根県", "岡山県", "広島県", "山口県",
 				"徳島県", "香川県", "愛媛県", "高知県", "福岡県", "佐賀県", "長崎県",
 				"熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県" });
+		model.addAttribute("errMes", errMes);
 
 		return "order";
 	}
 
 	// 注文確認画面表示
-	@GetMapping("/order/confirm")
-	public String confirm() {
+	@PostMapping("/order/confirm")
+	public String confirm(
+			@RequestParam(value = "postNum", defaultValue = "") String postNum,
+			@RequestParam(value = "prefecture", defaultValue = "") String prefecture,
+			@RequestParam(value = "municipality", defaultValue = "") String municipality,
+			@RequestParam(value = "houseNum", defaultValue = "") String houseNum,
+			@RequestParam(value = "buildingNameRoomNum", defaultValue = "") String buildingNameRoomNum,
+			RedirectAttributes redirectAttributes,
+			Model model) {
+
+		//	必須のバリデーション
+		if (postNum.equals("") || prefecture.equals("") || municipality.equals("") || houseNum.equals("")) {
+			redirectAttributes.addAttribute("errMes",
+					"「建物名・部屋番号」以外は全て必須項目です。");
+			return "redirect:/order";
+		}
 
 		return "orderConfirm";
 	}
