@@ -28,6 +28,9 @@ public class Item {
 	private Integer quantity; // 数量（カートの処理で使用）
 
 	@Transient
+	private Integer stocks = 10; // 在庫数（カートの処理で使用）
+	
+	@Transient
 	private Integer subTotalPrice; // 小計（カートの処理で使用）
 
 	public Integer getId() {
@@ -56,6 +59,11 @@ public class Item {
 
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+
+//	　在庫数 = 固定で３（仮）
+	public Integer getStocks() {
+		return stocks;
 	}
 
 	//	小計　＝　価格　＊　数量
