@@ -36,9 +36,8 @@
 							<span th:text="${item.price}"></span>
 							<span>数量：
 								<select name="quantity">
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
+									//在庫数分のoptionを表示
+									<option th:each="i : ${#numbers.sequence(1,item.stocks)}"　th:value="${i}" th:text="${i}"></option>										
 								</select>
 							</span>
 							<span>
