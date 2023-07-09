@@ -21,6 +21,30 @@
 				<button>この内容で注文</button>
 			</form>
 
+			<!-- あて先表示 -->
+			<div class="input-form">
+				<div>
+					<spqn>郵便番号：</spqn>
+					[[${@address.postNum}]]
+				</div>
+				<div>
+					<spqn>都道府県：</spqn>
+					[[${@address.prefecture}]]
+				</div>
+				<div>
+					<spqn>市区町村：</spqn>
+					[[${@address.municipality}]]
+				</div>
+				<div>
+					<spqn>番地：</spqn>
+					[[${@address.houseNum}]]
+				</div>
+				<div>
+					<spqn>建物名・部屋番号：</spqn>
+					[[${@address.buildingNameRoomNum}]]
+				</div>
+			</div>
+
 			<div class="column-center">
 				<div th:each="item:${@cart.items}" class="item-container column-center cart-item">
 					<div class="img-title-container">
