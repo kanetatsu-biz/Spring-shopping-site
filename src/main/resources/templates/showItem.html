@@ -24,7 +24,7 @@
 					<p>数量：
 						<select name="quantity">
 							//在庫数分のoptionを表示
-							<option th:each="i : ${#numbers.sequence(1,item.stocks)}"　th:value="${i}" th:text="${i}"></option>	
+							<option th:each="i : ${#numbers.sequence(1,item.stock)}"　th:value="${i}" th:text="${i}"></option>	
 						</select>
 					</p>
 					<input type="hidden" name="itemId" th:value="${item.id}">

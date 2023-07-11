@@ -26,7 +26,7 @@
 					<select name="quantity" th:onchange="'changeQuantity(' + ${item.id} + ', this.value)'">
 						//在庫数分のoptionを表示
 						//一覧・詳細から選択された数量を初期値に設定
-						<option th:each="i : ${#numbers.sequence(1,item.stocks)}" th:selected="${i == item.quantity}"　th:value="${i}" th:text="${i}"></option>										
+						<option th:each="i : ${#numbers.sequence(1,item.stock)}" th:selected="${i == item.quantity}"　th:value="${i}" th:text="${i}"></option>										
 					</select>
 				</div>
 				<div>
