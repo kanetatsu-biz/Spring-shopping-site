@@ -20,14 +20,13 @@
 				<p>価格：
 					<span th:text="${item.price}"></span>
 				</p>
-				<p>数量：
-					<select name="quantity">
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-					</select>
-				</p>
 				<form action="/cart/add" method="post">
+					<p>数量：
+						<select name="quantity">
+							//在庫数分のoptionを表示
+							<option th:each="i : ${#numbers.sequence(1,item.stock)}"　th:value="${i}" th:text="${i}"></option>	
+						</select>
+					</p>
 					<input type="hidden" name="itemId" th:value="${item.id}">
 					<button>カートに追加</button>
 				</form>

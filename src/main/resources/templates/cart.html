@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>カート一覧</title>
-<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
 	<header th:replace="header"></header>
@@ -11,7 +11,7 @@
 	<hr>
 
 	<main>
-		<div class="main-container column-center">
+		<div id="cart-items" th:fragment="cart-items" class="main-container column-center">
 			<div th:each="item:${@cart.items}" class="item-container column-center cart-item">
 				<div class="img-title-container">
 					<img th:src="@{/img/sample_test1.jpg}">
@@ -23,11 +23,15 @@
 				</div>
 				<div>
 					<span>数量：</span>
-					<span th:text="${item.quantity}"></span>
+					<select name="quantity" th:onchange="'changeQuantity(' + ${item.id} + ', this.value)'">
+						//在庫数分のoptionを表示
+						//一覧・詳細から選択された数量を初期値に設定
+						<option th:each="i : ${#numbers.sequence(1,item.stock)}" th:selected="${i == item.quantity}"　th:value="${i}" th:text="${i}"></option>										
+					</select>
 				</div>
 				<div>
 					<span>小計：</span>
-					<span th:text="${item.subTotalPrice}"></span>
+					<span class="sub-total-price" th:text="${item.subTotalPrice}"></span>
 				</div>
 				<form action="/cart/delete" method="post">
 					<input type="hidden" name="itemId" th:value="${item.id}">
@@ -37,7 +41,7 @@
 
 			<div>
 				<span>合計：</span>
-				<span th:text="${@cart.totalPrice}"></span>
+				<span class="total-price"　th:text="${@cart.totalPrice}"></span>
 			</div>
 			<a href="/order">
 				<button>注文画面に進む</button>
@@ -48,5 +52,7 @@
 	<hr>
 
 	<footer th:replace="footer"></footer>
+	
+	<script th:src="@{/js/common.js}"></script>
 </body>
 </html>

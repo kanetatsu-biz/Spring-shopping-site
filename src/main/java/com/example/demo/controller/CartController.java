@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -67,4 +68,21 @@ public class CartController {
 		// カート一覧画面にリダイレクト
 		return "redirect:/cart";
 	}
+
+	//カート数量変更処理
+	@PostMapping("/cart/update/{selected_id}")
+	public String updateQuantity(
+			@PathVariable("selected_id") Integer itemId,
+			@RequestParam(name = "quantity") Integer quantity) {
+
+		//itemIdを元にテーブルから商品情報を持ってくる
+		cart.getItems().stream()
+				.filter(item -> item.getId() == itemId)
+				.findFirst()
+				.get()
+				.setQuantity(quantity);
+
+		return "cart :: cart-items";
+	}
+
 }
