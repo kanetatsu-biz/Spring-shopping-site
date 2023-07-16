@@ -81,8 +81,11 @@ main {
     padding: 10px;
     text-decoration: none;
 }
-.item img {
+.item-img{
 	width: 50%;
+}
+.item-img img{
+	width: 100%;
 }
 .item-contents {
 	align-items: center;

@@ -15,6 +15,7 @@ public class Cart {
 
 	private List<Item> items = new ArrayList<>(); // 商品リスト
 
+	//　商品リストを取得
 	public List<Item> getItems() {
 		return items;
 	}
