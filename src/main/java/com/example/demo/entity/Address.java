@@ -1,17 +1,27 @@
-package com.example.demo.model;
+package com.example.demo.entity;
 
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.SessionScope;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-@Component
-@SessionScope
+@Entity
+@Table(name = "addresses")
 public class Address {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id; // あて先ID
 	private String postNum; // 郵便番号
 	private String prefecture; // 都道府県
 	private String municipality; // 市区町村
 	private String houseNum; // 番地
 	private String buildingNameRoomNum; // 建物名・部屋番号
+
+	public Integer getId() {
+		return id;
+	}
 
 	public String getPostNum() {
 		return postNum;
