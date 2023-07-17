@@ -18,6 +18,8 @@ import com.example.demo.entity.Item;
 import com.example.demo.entity.Order;
 import com.example.demo.entity.OrderDetail;
 import com.example.demo.model.Cart;
+import com.example.demo.model.LoginUser;
+import com.example.demo.repository.AddressRepository;
 import com.example.demo.repository.OrderDetailRepository;
 import com.example.demo.repository.OrderRepository;
 
@@ -26,6 +28,12 @@ public class OrderController {
 
 	@Autowired
 	Cart cart;
+
+	@Autowired
+	LoginUser loginUser;
+
+	@Autowired
+	AddressRepository addressRepository;
 
 	@Autowired
 	OrderRepository orderRepository;
@@ -86,15 +94,19 @@ public class OrderController {
 	public String order(
 			@ModelAttribute Address confirmedAddress,
 			Model model) {
-		//	注文テーブルに保存
-		//	（一旦顧客IDは固定）
+		//	１，あて先テーブルに保存
+		Address savedAddress = addressRepository.save(confirmedAddress);
+
+		//	２，注文テーブルに保存
+		//	（一旦顧客IDはセッションから取得）
 		Order newOrder = new Order(
-				1,
+				loginUser.getId(),
 				LocalDateTime.now(),
-				cart.getTotalPrice());
+				cart.getTotalPrice(),
+				savedAddress.getId());
 		Order savedOrder = orderRepository.save(newOrder);
 
-		//	注文詳細テーブルに保存
+		//	３，注文詳細テーブルに保存
 		List<OrderDetail> orderDetails = new ArrayList<>();
 		for (Item item : cart.getItems()) {
 			orderDetails.add(
@@ -105,10 +117,10 @@ public class OrderController {
 		}
 		orderDetailRepository.saveAll(orderDetails);
 
-		//	カート内を全削除
+		//	４，カート内を全削除
 		cart.getItems().clear();
 
-		//	注文完了画面に注文IDを渡して表示
+		//	５，注文完了画面に注文IDを渡して表示
 		model.addAttribute("orderId", savedOrder.getId());
 
 		return "ordered";

@@ -1,7 +1,7 @@
 -- 各種テーブル削除
-DROP TABLE IF EXISTS addresses;
 DROP TABLE IF EXISTS order_details;
 DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS addresses;
 DROP TABLE IF EXISTS accounts;
 DROP TABLE IF EXISTS items;
 DROP TABLE IF EXISTS categories;
@@ -33,6 +33,17 @@ CREATE TABLE accounts
    password TEXT
 );
 
+-- あて先テーブル
+CREATE TABLE addresses
+(
+   id SERIAL PRIMARY KEY,
+   post_num TEXT,
+   prefecture TEXT,
+   municipality TEXT,
+   house_num TEXT,
+   building_name_room_num TEXT
+);
+
 -- 注文テーブル
 CREATE TABLE orders
 (
@@ -40,7 +51,9 @@ CREATE TABLE orders
    customer_id INTEGER,
    ordered_datetime TIMESTAMP,
    total_price INTEGER,
-   FOREIGN KEY (customer_id) REFERENCES accounts(id)
+   address_id INTEGER,
+   FOREIGN KEY (customer_id) REFERENCES accounts(id),
+   FOREIGN KEY (address_id) REFERENCES addresses(id)
 );
 
 -- 注文詳細テーブル
@@ -52,15 +65,4 @@ CREATE TABLE order_details
    quantity INTEGER,
    FOREIGN KEY (order_id) REFERENCES orders(id),
    FOREIGN KEY (item_id) REFERENCES items(id)
-);
-
--- あて先テーブル
-CREATE TABLE addresses
-(
-   id SERIAL PRIMARY KEY,
-   postNum TEXT,
-   prefecture TEXT,
-   municipality TEXT,
-   houseNum TEXT,
-   buildingNameRoomNum TEXT
 );
