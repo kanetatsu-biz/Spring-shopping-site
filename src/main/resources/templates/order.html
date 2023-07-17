@@ -43,7 +43,7 @@
 
 				<div class="one-form-container">
 					<label>郵便番号</label>
-					<input type="text" name="postNum" th:value="${@address.postNum}">
+					<input type="text" name="postNum" th:value="${address.postNum}">
 				</div>
 				<div class="one-form-container">
 					<label>都道府県</label>
@@ -51,22 +51,22 @@
 						<option
 							th:each="prefecture:${prefectureList}"
 							th:value="${prefecture}"
-							th:selected="${@address.isPrefectureSet(prefecture)}">
+							th:selected="${address.isPrefectureSet(prefecture)}">
 							[[${prefecture}]]
 						</option>
 					</select>
 				</div>
 				<div class="one-form-container">
 					<label>市区町村</label>
-					<input type="text" name="municipality" th:value="${@address.municipality}">
+					<input type="text" name="municipality" th:value="${address.municipality}">
 				</div>
 				<div class="one-form-container">
 					<label>番地</label>
-					<input type="text" name="houseNum" th:value="${@address.houseNum}">
+					<input type="text" name="houseNum" th:value="${address.houseNum}">
 				</div>
 				<div class="one-form-container">
 					<label>建物名・部屋番号</label>
-					<input type="text" name="buildingNameRoomNum" th:value="${@address.buildingNameRoomNum}">
+					<input type="text" name="buildingNameRoomNum" th:value="${address.buildingNameRoomNum}">
 				</div>
 
 				<div class="order-buttons">

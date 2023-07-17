@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.entity.Address;
 import com.example.demo.entity.Item;
 import com.example.demo.entity.Order;
 import com.example.demo.entity.OrderDetail;
@@ -35,6 +37,7 @@ public class OrderController {
 	@GetMapping("/order")
 	public String index(
 			@RequestParam(name = "errMes", defaultValue = "") String errMes,
+			@ModelAttribute("inputAddress") Address inputAddress,
 			Model model) {
 
 		//	都道府県の配列を画面に渡す
@@ -48,40 +51,41 @@ public class OrderController {
 				"熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県" });
 		model.addAttribute("errMes", errMes);
 
+		//	既に入力されていた場合は入力値を保持する
+		model.addAttribute("address", inputAddress == null ? new Address() : inputAddress);
+
 		return "order";
 	}
 
 	// 注文確認画面表示
 	@PostMapping("/order/confirm")
 	public String confirm(
-			@RequestParam(value = "postNum", defaultValue = "") String postNum,
-			@RequestParam(value = "prefecture", defaultValue = "") String prefecture,
-			@RequestParam(value = "municipality", defaultValue = "") String municipality,
-			@RequestParam(value = "houseNum", defaultValue = "") String houseNum,
-			@RequestParam(value = "buildingNameRoomNum", defaultValue = "") String buildingNameRoomNum,
 			RedirectAttributes redirectAttributes,
+			@ModelAttribute Address inputAddress, // 入力値をそのままオブジェクトに詰める
 			Model model) {
 
-		//	セッションに値を詰める
-		address.setPostNum(postNum);
-		address.setPrefecture(prefecture);
-		address.setMunicipality(municipality);
-		address.setHouseNum(houseNum);
-		address.setBuildingNameRoomNum(buildingNameRoomNum);
-
 		//	必須のバリデーション
-		if (postNum.equals("") || prefecture.equals("") || municipality.equals("") || houseNum.equals("")) {
+		if (inputAddress.getPostNum().equals("") ||
+				inputAddress.getPrefecture().equals("") ||
+				inputAddress.getMunicipality().equals("") ||
+				inputAddress.getHouseNum().equals("")) {
+			//	入力値とエラーメッセージをリダイレクト先に送る
+			redirectAttributes.addFlashAttribute("inputAddress", inputAddress);
 			redirectAttributes.addAttribute("errMes",
 					"「建物名・部屋番号」以外は全て必須項目です。");
 			return "redirect:/order";
 		}
+
+		model.addAttribute("confirmedAddress", inputAddress);
 
 		return "orderConfirm";
 	}
 
 	// 注文確定処理実行後、完了画面表示
 	@PostMapping("/order")
-	public String order(Model model) {
+	public String order(
+			@ModelAttribute Address confirmedAddress,
+			Model model) {
 		//	注文テーブルに保存
 		//	（一旦顧客IDは固定）
 		Order newOrder = new Order(
