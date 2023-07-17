@@ -1,4 +1,5 @@
 -- 各種テーブル削除
+DROP TABLE IF EXISTS addresses;
 DROP TABLE IF EXISTS order_details;
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS accounts;
@@ -51,4 +52,15 @@ CREATE TABLE order_details
    quantity INTEGER,
    FOREIGN KEY (order_id) REFERENCES orders(id),
    FOREIGN KEY (item_id) REFERENCES items(id)
+);
+
+-- あて先テーブル
+CREATE TABLE addresses
+(
+   id SERIAL PRIMARY KEY,
+   postNum TEXT,
+   prefecture TEXT,
+   municipality TEXT,
+   houseNum TEXT,
+   buildingNameRoomNum TEXT
 );
