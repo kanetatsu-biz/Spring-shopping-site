@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>商品一覧</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+	<header th:replace="header"></header>
+
+	<hr>
+
+	<main>
+		<div class="main-container column-center">
+			<div th:each="order:${orderList}" class="history-container">
+				<div>
+					<p>アカウント名：[[${order.acoountName}]]</p>
+					<p>注文日時：[[${order.orderedDatetime}]]</p>
+					<p>合計金額：[[${order.totalPrice}]]</p>
+					<div class="column-center">
+						<a th:href="'/admin/order/histories/' + ${order.id}">
+							詳細
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<hr>
+
+	<footer th:replace="footer"></footer>
+</body>
+</html>

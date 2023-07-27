@@ -17,11 +17,13 @@ import com.example.demo.entity.Address;
 import com.example.demo.entity.Item;
 import com.example.demo.entity.Order;
 import com.example.demo.entity.OrderDetail;
+import com.example.demo.entity.VOrderHistory;
 import com.example.demo.model.Cart;
 import com.example.demo.model.LoginUser;
 import com.example.demo.repository.AddressRepository;
 import com.example.demo.repository.OrderDetailRepository;
 import com.example.demo.repository.OrderRepository;
+import com.example.demo.repository.VOrderRepository;
 
 @Controller
 public class OrderController {
@@ -37,6 +39,9 @@ public class OrderController {
 
 	@Autowired
 	OrderRepository orderRepository;
+
+	@Autowired
+	VOrderRepository vOrderRepository;
 
 	@Autowired
 	OrderDetailRepository orderDetailRepository;
@@ -124,5 +129,16 @@ public class OrderController {
 		model.addAttribute("orderId", savedOrder.getId());
 
 		return "ordered";
+	}
+
+	// （管理）注文履歴一覧画面表示
+	@GetMapping("/admin/order/histories")
+	public String histories(Model model) {
+
+		//	全ユーザーの注文履歴を取得し、画面に渡す
+		List<VOrderHistory> orderList = vOrderRepository.findAll();
+		model.addAttribute("orderList", orderList);
+
+		return "histories";
 	}
 }

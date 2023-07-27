@@ -174,7 +174,7 @@ footer  {
 }
 
 /* 管理TOP */
-.admin-function-list  {
+.admin-function-list {
 	display: flex;
     justify-content: center;
 }
@@ -186,4 +186,12 @@ footer  {
     height: 100px;
     padding: 20px;
     text-decoration: none;
+}
+
+/* 管理注文履歴一覧 */
+.history-container {
+	background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    width: 80%;
 }
