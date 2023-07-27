@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>注文内容確認画面</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+	<header th:replace="header"></header>
+
+	<hr>
+
+	<main>
+		<div class="main-container column-center">
+			<div class="history-container">
+				<div>
+					<p>アカウント名：[[${orderInfo.acoountName}]]</p>
+					<p>注文日時：[[${orderInfo.orderedDatetime}]]</p>
+					<p>合計金額：[[${orderInfo.totalPrice}]]</p>
+				</div>
+			</div>
+
+			<!-- あて先表示 -->
+
+			<!-- 商品履歴詳細 -->
+			<div class="column-center">
+				<div th:each="orderHistoryDetail:${orderHistoryDetailList}" class="item-container column-center cart-item">
+					<div class="img-title-container">
+						<img th:src="@{/img/sample_test1.jpg}">
+						<span th:text="${orderHistoryDetail.itemName}"></span>
+					</div>
+					<div>
+						<span>価格</span>
+						<span th:text="${orderHistoryDetail.itemPrice}"></span>
+					</div>
+					<div>
+						<span>数量</span>
+						<span th:text="${orderHistoryDetail.quantity}"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<hr>
+
+	<footer th:replace="footer"></footer>
+</body>
+</html>

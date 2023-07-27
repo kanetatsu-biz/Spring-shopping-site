@@ -1,4 +1,5 @@
 -- 各種ビュー削除
+DROP VIEW IF EXISTS v_order_history_details;
 DROP VIEW IF EXISTS v_order_histories;
 
 -- 各種テーブル削除
@@ -81,4 +82,18 @@ CREATE VIEW v_order_histories AS
    FROM orders o
    LEFT JOIN accounts a
       ON o.customer_id = a.id
+);
+
+-- 注文履歴詳細ビュー
+CREATE VIEW v_order_history_details AS
+(
+   SELECT
+      od.id,
+      od.order_id,
+      i.name AS item_name,
+      i.price AS item_price,
+      od.quantity
+   FROM order_details od
+   JOIN items i
+      ON od.item_id = i.id
 );
