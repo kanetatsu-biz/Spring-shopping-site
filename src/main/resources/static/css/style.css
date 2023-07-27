@@ -19,11 +19,7 @@ header {
     font-weight: bold;
 	text-decoration: none;
 }
-.header-menu-login {
-	text-align: center;
-	width: 25%;
-}
-.header-menu-cart {
+.header-menu-element {
 	text-align: center;
 	width: 25%;
 }
