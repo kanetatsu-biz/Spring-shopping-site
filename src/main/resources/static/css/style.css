@@ -172,3 +172,18 @@ main {
 footer  {
 	text-align: center;
 }
+
+/* 管理TOP */
+.admin-function-list  {
+	display: flex;
+    justify-content: center;
+}
+.round {
+    align-items: center;
+	background-color: white;
+    border-radius: 50%;
+    display: flex;
+    height: 100px;
+    padding: 20px;
+    text-decoration: none;
+}
