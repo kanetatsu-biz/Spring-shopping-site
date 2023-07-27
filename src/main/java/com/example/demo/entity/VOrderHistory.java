@@ -24,6 +24,18 @@ public class VOrderHistory {
 	@Column(name = "total_price")
 	private Integer totalPrice; // 合計金額
 
+	@Column(name = "post_num")
+	private String postNum; // 郵便番号
+
+	private String prefecture; // 都道府県
+	private String municipality; // 市区町村
+
+	@Column(name = "house_num")
+	private String houseNum; // 番地
+
+	@Column(name = "building_name_room_num")
+	private String buildingNameRoomNum; // 建物名・部屋番号
+
 	public Integer getId() {
 		return id;
 	}
@@ -38,5 +50,25 @@ public class VOrderHistory {
 
 	public Integer getTotalPrice() {
 		return totalPrice;
+	}
+
+	public String getPostNum() {
+		return postNum;
+	}
+
+	public String getPrefecture() {
+		return prefecture;
+	}
+
+	public String getMunicipality() {
+		return municipality;
+	}
+
+	public String getHouseNum() {
+		return houseNum;
+	}
+
+	public String getBuildingNameRoomNum() {
+		return buildingNameRoomNum;
 	}
 }

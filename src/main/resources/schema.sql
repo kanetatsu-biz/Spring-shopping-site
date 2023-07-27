@@ -76,12 +76,19 @@ CREATE VIEW v_order_histories AS
 (
    SELECT
       o.id,
-      COALESCE(a.name, 'ゲスト') AS acoount_name,
+      COALESCE(ac.name, 'ゲスト') AS acoount_name,
       to_char(o.ordered_datetime, 'YYYY-MM-DD HH24:MI:SS') AS ordered_datetime,
-      o.total_price
+      o.total_price,
+      ad.post_num,
+      ad.prefecture,
+      ad.municipality,
+      ad.house_num,
+      ad.building_name_room_num
    FROM orders o
-   LEFT JOIN accounts a
-      ON o.customer_id = a.id
+   LEFT JOIN accounts ac
+      ON o.customer_id = ac.id
+   JOIN addresses ad
+      ON o.address_id = ad.id
 );
 
 -- 注文履歴詳細ビュー
