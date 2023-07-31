@@ -65,6 +65,10 @@ public class Item {
 		return stock;
 	}
 
+	public void setStock(Integer stock) {
+		this.stock = stock;
+	}
+
 	//	小計　＝　価格　＊　数量
 	public Integer getSubTotalPrice() {
 		return price * quantity;
