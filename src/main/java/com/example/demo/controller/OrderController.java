@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -17,11 +18,15 @@ import com.example.demo.entity.Address;
 import com.example.demo.entity.Item;
 import com.example.demo.entity.Order;
 import com.example.demo.entity.OrderDetail;
+import com.example.demo.entity.VOrderHistory;
+import com.example.demo.entity.VOrderHistoryDetail;
 import com.example.demo.model.Cart;
 import com.example.demo.model.LoginUser;
 import com.example.demo.repository.AddressRepository;
 import com.example.demo.repository.OrderDetailRepository;
 import com.example.demo.repository.OrderRepository;
+import com.example.demo.repository.VOrderHistoryDetailRepository;
+import com.example.demo.repository.VOrderHistoryRepository;
 
 @Controller
 public class OrderController {
@@ -40,6 +45,12 @@ public class OrderController {
 
 	@Autowired
 	OrderDetailRepository orderDetailRepository;
+
+	@Autowired
+	VOrderHistoryRepository vOrderHistoryRepository;
+
+	@Autowired
+	VOrderHistoryDetailRepository vOrderHistoryDetailRepository;
 
 	// 注文画面表示
 	@GetMapping("/order")
@@ -124,5 +135,33 @@ public class OrderController {
 		model.addAttribute("orderId", savedOrder.getId());
 
 		return "ordered";
+	}
+
+	// （管理）注文履歴一覧画面表示
+	@GetMapping("/admin/order/histories")
+	public String histories(Model model) {
+
+		//	全ユーザーの注文履歴を取得し、画面に渡す
+		List<VOrderHistory> orderList = vOrderHistoryRepository.findAll();
+		model.addAttribute("orderList", orderList);
+
+		return "histories";
+	}
+
+	// （管理）注文履歴詳細画面表示
+	@GetMapping("/admin/order/histories/{orderId}")
+	public String showHistory(
+			@PathVariable("orderId") Integer orderId,
+			Model model) {
+
+		//	１，指定された注文履歴の大まかな情報を取得し、画面に渡す
+		VOrderHistory orderInfo = vOrderHistoryRepository.findById(orderId).get();
+		model.addAttribute("orderInfo", orderInfo);
+
+		//	２，指定された注文履歴の詳細情報を取得し、画面に渡す
+		List<VOrderHistoryDetail> orderHistoryDetailList = vOrderHistoryDetailRepository.findByOrderId(orderId);
+		model.addAttribute("orderHistoryDetailList", orderHistoryDetailList);
+
+		return "showHistory";
 	}
 }

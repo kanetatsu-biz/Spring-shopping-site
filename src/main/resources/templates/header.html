@@ -3,7 +3,10 @@
 		<div class="header-menu-title">
 			<a href="/items">使いやすいショッピングサイト</a>
 		</div>
-		<div class="header-menu-login">
+		<div class="header-menu-element">
+			<a href="/admin">管理画面</a>
+		</div>
+		<div class="header-menu-element">
 			<th:block th:if="${@loginUser.getName() != null}">
 				[[${@loginUser.getName()}]]
 				<a href="/logout">ログアウト</a>
@@ -12,7 +15,7 @@
 				<a href="/login">新規登録 &#047; ログイン</a>
 			</th:block>
 		</div>
-		<div class="header-menu-cart">
+		<div class="header-menu-element">
 			<a href="/cart">&#128722;カート</a>
 		</div>
 	</nav>
