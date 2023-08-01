@@ -35,19 +35,29 @@
 							</a>
 							<span th:text="${item.price}"></span>
 							<span>数量：
-								<select name="quantity">
+								<select name="quantity" th:if="${item.stock > 0}">
 									//在庫数分のoptionを表示
-									<option th:each="i : ${#numbers.sequence(1,item.stock)}"　th:value="${i}" th:text="${i}"></option>										
+									<option
+										th:each="i : ${#numbers.sequence(1,item.stock)}"
+										th:value="${i}"
+										th:text="${i}"></option>
 								</select>
+								<span th:unless="${item.stock > 0}">在庫切れ</span>
 							</span>
 							<span>
 								<input type="hidden" name="itemId" th:value="${item.id}">
-								<button>カートに追加</button>
+								<button　th:disabled="${item.stock == 0}">カートに追加</button>
 							</span>
 						</div>
 					</div>
 				</form>
 			</div>
+			
+			<div th:each="cart:${@cart.items}">
+				<p th:text="${cart.id}"></p>
+				<p th:text="${cart.quantity}"></p>
+			</div>
+			
 		</div>
 	</main>
 
