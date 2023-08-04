@@ -19,11 +19,7 @@ header {
     font-weight: bold;
 	text-decoration: none;
 }
-.header-menu-login {
-	text-align: center;
-	width: 25%;
-}
-.header-menu-cart {
+.header-menu-element {
 	text-align: center;
 	width: 25%;
 }
@@ -175,4 +171,27 @@ main {
 /* フッター */
 footer  {
 	text-align: center;
+}
+
+/* 管理TOP */
+.admin-function-list {
+	display: flex;
+    justify-content: center;
+}
+.round {
+    align-items: center;
+	background-color: white;
+    border-radius: 50%;
+    display: flex;
+    height: 100px;
+    padding: 20px;
+    text-decoration: none;
+}
+
+/* 管理注文履歴一覧 */
+.history-container {
+	background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    width: 80%;
 }

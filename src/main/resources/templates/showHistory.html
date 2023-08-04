@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>注文内容確認画面</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+	<header th:replace="header"></header>
+
+	<hr>
+
+	<main>
+		<div class="main-container column-center">
+			<a href="/admin/order/histories">一覧画面に戻る</a>
+
+			<!-- 注文履歴概要 -->
+			<div class="history-container">
+				<div>
+					<p>アカウント名：[[${orderInfo.acoountName}]]</p>
+					<p>注文日時：[[${orderInfo.orderedDatetime}]]</p>
+					<p>合計金額：[[${orderInfo.totalPrice}]]</p>
+				</div>
+			</div>
+
+			<!-- あて先表示 -->
+			<div class="input-form">
+				<strong>あて先</strong>
+				<div>
+					<spqn>郵便番号：</spqn>
+					[[${orderInfo.postNum}]]
+				</div>
+				<div>
+					<spqn>都道府県：</spqn>
+					[[${orderInfo.prefecture}]]
+				</div>
+				<div>
+					<spqn>市区町村：</spqn>
+					[[${orderInfo.municipality}]]
+				</div>
+				<div>
+					<spqn>番地：</spqn>
+					[[${orderInfo.houseNum}]]
+				</div>
+				<div>
+					<spqn>建物名・部屋番号：</spqn>
+					[[${orderInfo.buildingNameRoomNum}]]
+				</div>
+			</div>
+
+			<!-- 商品履歴詳細 -->
+			<div class="column-center">
+				<div th:each="orderHistoryDetail:${orderHistoryDetailList}" class="item-container column-center cart-item">
+					<div class="img-title-container">
+						<img th:src="@{/img/sample_test1.jpg}">
+						<span th:text="${orderHistoryDetail.itemName}"></span>
+					</div>
+					<div>
+						<span>価格</span>
+						<span th:text="${orderHistoryDetail.itemPrice}"></span>
+					</div>
+					<div>
+						<span>数量</span>
+						<span th:text="${orderHistoryDetail.quantity}"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<hr>
+
+	<footer th:replace="footer"></footer>
+</body>
+</html>

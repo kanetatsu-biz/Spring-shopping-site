@@ -25,15 +25,19 @@ public class Order {
 	@Column(name = "total_price")
 	private Integer totalPrice; // 合計金額
 
+	@Column(name = "address_id")
+	private Integer addressId; // あて先ID
+
 	// コンストラクタ
 	public Order() {
 		super();
 	}
 
-	public Order(Integer customerId, LocalDateTime orderedDatetime, Integer totalPrice) {
+	public Order(Integer customerId, LocalDateTime orderedDatetime, Integer totalPrice, Integer addressId) {
 		this.customerId = customerId;
 		this.orderedDatetime = orderedDatetime;
 		this.totalPrice = totalPrice;
+		this.addressId = addressId;
 	}
 
 	// ゲッター
