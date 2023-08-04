@@ -100,6 +100,7 @@ CREATE VIEW v_order_history_details AS
       od.order_id,
       i.name AS item_name,
       i.price AS item_price,
+      i.file_name,
       od.quantity
    FROM order_details od
    JOIN items i
