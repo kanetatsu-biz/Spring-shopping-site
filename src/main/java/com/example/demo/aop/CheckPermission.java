@@ -18,8 +18,8 @@ public class CheckPermission {
 
 	// 管理ユーザーでしか実行できないメソッド
 	@Pointcut("execution(* com.example.demo.controller.AdminController.*(..)) ||"
-			+ "execution(* com.example.demo.controller.OrderController.histories()) ||"
-			+ "execution(* com.example.demo.controller.OrderController.showHistory())")
+			+ "execution(* com.example.demo.controller.OrderController.histories(..)) ||"
+			+ "execution(* com.example.demo.controller.OrderController.showHistory(..))")
 	public void adminPermissionPointcut() {
 	}
 
@@ -27,6 +27,7 @@ public class CheckPermission {
 	@Around("adminPermissionPointcut()")
 	public Object checkAdminPermission(
 			ProceedingJoinPoint jp) throws Throwable {
+		System.out.println("AOP");
 		// ログインしていない　または　ログインユーザーが管理権限を持っていない場合
 		if (loginUser.getId() == null ||
 				!(loginUser.getRole().equals("admin") || loginUser.getRole().equals("system"))) {
