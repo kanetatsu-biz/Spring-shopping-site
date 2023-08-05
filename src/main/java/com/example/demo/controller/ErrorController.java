@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ErrorController {
-	// 管理画面TOPを表示
+	// アクセス権限エラー画面を表示
 	@GetMapping("/error403")
-	public String index() {
+	public String error403() {
 
 		return "error403";
 	}

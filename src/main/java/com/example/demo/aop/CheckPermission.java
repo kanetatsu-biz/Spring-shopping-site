@@ -23,15 +23,14 @@ public class CheckPermission {
 	public void adminPermissionPointcut() {
 	}
 
-	// 管理ユーザーではない場合はログインページにリダイレクト
+	// 管理ユーザーではない場合はアクセス権限エラー画面にリダイレクト
 	@Around("adminPermissionPointcut()")
 	public Object checkAdminPermission(
 			ProceedingJoinPoint jp) throws Throwable {
-		System.out.println("AOP");
 		// ログインしていない　または　ログインユーザーが管理権限を持っていない場合
 		if (loginUser.getId() == null ||
 				!(loginUser.getRole().equals("admin") || loginUser.getRole().equals("system"))) {
-			// ログイン画面にリダイレクト
+			// アクセス権限エラー画面にリダイレクト
 			return "redirect:/error403";
 		}
 
