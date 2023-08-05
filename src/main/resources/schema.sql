@@ -34,7 +34,8 @@ CREATE TABLE accounts
    id SERIAL PRIMARY KEY,
    name TEXT,
    email TEXT UNIQUE,
-   password TEXT
+   password TEXT,
+   role VARCHAR(10) DEFAULT 'general'
 );
 
 -- あて先テーブル

@@ -16,6 +16,8 @@ INSERT INTO items(category_id, name, price, description) VALUES(3, 'ゲーム３
 
 INSERT INTO accounts(name, email, password) VALUES('test1', 'test1@example.com', 'password');
 INSERT INTO accounts(name, email, password) VALUES('test2', 'test2@example.com', 'password');
+INSERT INTO accounts(name, email, password, role) VALUES('admin', 'admin@example.com', 'admin', 'admin');
+INSERT INTO accounts(name, email, password, role) VALUES('system', 'system@example.com', 'system', 'system');
 
 INSERT INTO addresses(post_num, prefecture, municipality, house_num, building_name_room_num)
 	VALUES ('110-0011', '東京都', '千代田区千代田', '1番1号', '皇居101');
