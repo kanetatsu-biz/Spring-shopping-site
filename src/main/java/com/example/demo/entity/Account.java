@@ -44,4 +44,8 @@ public class Account {
 	public String getPassword() {
 		return password;
 	}
+
+	public String getRole() {
+		return role;
+	}
 }
