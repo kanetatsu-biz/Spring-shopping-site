@@ -88,6 +88,7 @@ public class AccountController {
 		//	セッションにログインユーザ情報を詰める
 		loginUser.setId(existAccount.getId());
 		loginUser.setName(existAccount.getName());
+		loginUser.setRole(existAccount.getRole());
 
 		//	商品一覧画面にリダイレクト
 		return "redirect:/items";
