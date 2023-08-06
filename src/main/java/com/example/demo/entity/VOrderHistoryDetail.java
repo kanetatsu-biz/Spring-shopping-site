@@ -24,6 +24,9 @@ public class VOrderHistoryDetail {
 	@Column(name = "item_price")
 	private Integer itemPrice; // 商品価格
 
+	@Column(name = "file_name")
+	private String fileName; // 画像ファイル名
+
 	private Integer quantity; // 数量
 
 	public String getItemName() {
@@ -32,6 +35,10 @@ public class VOrderHistoryDetail {
 
 	public Integer getItemPrice() {
 		return itemPrice;
+	}
+
+	public String getFileName() {
+		return fileName;
 	}
 
 	public Integer getQuantity() {
