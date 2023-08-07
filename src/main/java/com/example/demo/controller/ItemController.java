@@ -50,7 +50,6 @@ public class ItemController {
 		for (Item cartItem : cart.getItems()) {
 			for (Item item : items) {
 				calcPurchasableStock(item, cartItem);
-				break;
 			}
 		}
 
@@ -71,7 +70,6 @@ public class ItemController {
 		//すでにカートに入っている商品は在庫を変更
 		for (Item cartItem : cart.getItems()) {
 			calcPurchasableStock(item, cartItem);
-			break;
 		}
 
 		model.addAttribute("item", item);
