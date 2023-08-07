@@ -33,7 +33,7 @@
 					</span>
 					<span>
 						<input type="hidden" name="itemId" th:value="${item.id}">
-						<button　th:disabled="${item.stock == 0}">カートに追加</button>
+						<button　th:disabled="${!(item.stock > 0)}">カートに追加</button>
 					</span>
 				</form>
 
