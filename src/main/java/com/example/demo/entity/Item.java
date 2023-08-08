@@ -48,6 +48,10 @@ public class Item {
 		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public Integer getPrice() {
 		return price;
 	}
