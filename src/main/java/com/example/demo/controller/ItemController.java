@@ -77,7 +77,7 @@ public class ItemController {
 		return "showItem";
 	}
 
-	public Integer calcPurchasableStock(Item item, Item cartItem) {
+	public void calcPurchasableStock(Item item, Item cartItem) {
 
 		//	カートに既に商品が存在している場合
 		if (item.getId() == cartItem.getId()) {
@@ -85,6 +85,5 @@ public class ItemController {
 			item.setStock(item.getStock() - cartItem.getQuantity());
 		}
 
-		return item.getStock();
 	}
 }
