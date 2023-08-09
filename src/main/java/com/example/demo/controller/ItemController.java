@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -74,6 +76,17 @@ public class ItemController {
 		}
 
 		model.addAttribute("items", items);
+
+		//	商品名検索の条件をマップに格納し、画面に渡す
+		Map<String, String> matchConditions = new HashMap<String, String>() {
+			{
+				put("partial", "部分一致");
+				put("all", "完全一致");
+				put("starting", "前方一致");
+				put("ending", "後方一致");
+			}
+		};
+		model.addAttribute("matchConditions", matchConditions);
 
 		//	検索条件を保持
 		model.addAttribute("itemName", itemName);

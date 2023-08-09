@@ -32,14 +32,13 @@
 							<input type="text" name="itemName" th:value="${itemName}">
 						</div>
 						<div class="row-space-around">
-							<input type="radio" name="matchCondition" value="partial" th:checked="${matchCondition == 'partial'}" />
-		    				<label for="partial">部分一致</label>
-							<input type="radio" name="matchCondition" value="all" th:checked="${matchCondition == 'all'}" />
-		    				<label for="all">完全一致</label>
-							<input type="radio" name="matchCondition" value="starting" th:checked="${matchCondition == 'starting'}" />
-		    				<label for="start">前方一致</label>
-							<input type="radio" name="matchCondition" value="ending" th:checked="${matchCondition == 'ending'}" />
-		    				<label for="end">後方一致</label>
+							<!--文字列の検索条件-->
+		    				<th:block th:each="mc : ${matchConditions}">
+			    				<input type="radio" name="matchCondition"
+			    					th:value="${mc.key}"
+			    					th:checked="${mc.key == matchCondition}" />
+			    				<label for="${mc.key}">[[${mc.value}]]</label>
+							</th:block>
 						</div>
 					</div>
 					<div class="row-space-around">
