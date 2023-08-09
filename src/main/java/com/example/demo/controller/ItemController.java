@@ -75,6 +75,12 @@ public class ItemController {
 
 		model.addAttribute("items", items);
 
+		//	検索条件を保持
+		model.addAttribute("itemName", itemName);
+		model.addAttribute("matchCondition", matchCondition);
+		model.addAttribute("minPrice", minPrice);
+		model.addAttribute("maxPrice", maxPrice);
+
 		return "items";
 	}
 

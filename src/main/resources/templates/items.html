@@ -29,24 +29,24 @@
 					<div>
 						<div class="row-center">
 							<span>商品名：</span>
-							<input type="text" name="itemName">
+							<input type="text" name="itemName" th:value="${itemName}">
 						</div>
 						<div class="row-space-around">
-							<input type="radio" name="matchCondition" value="partial" checked />
+							<input type="radio" name="matchCondition" value="partial" th:checked="${matchCondition == 'partial'}" />
 		    				<label for="partial">部分一致</label>
-							<input type="radio" name="matchCondition" value="all" />
+							<input type="radio" name="matchCondition" value="all" th:checked="${matchCondition == 'all'}" />
 		    				<label for="all">完全一致</label>
-							<input type="radio" name="matchCondition" value="starting" />
+							<input type="radio" name="matchCondition" value="starting" th:checked="${matchCondition == 'starting'}" />
 		    				<label for="start">前方一致</label>
-							<input type="radio" name="matchCondition" value="ending" />
+							<input type="radio" name="matchCondition" value="ending" th:checked="${matchCondition == 'ending'}" />
 		    				<label for="end">後方一致</label>
 						</div>
 					</div>
 					<div class="row-space-around">
 						<span>価格：</span>
-						<input type="number" name="minPrice" placeholder="下限なし">
+						<input type="number" name="minPrice" placeholder="下限なし" th:value="${minPrice}">
 						<span>～</span>
-						<input type="number" name="maxPrice" placeholder="上限なし">
+						<input type="number" name="maxPrice" placeholder="上限なし" th:value="${maxPrice}">
 					</div>
 					<button>検索</button>
 				</div>
