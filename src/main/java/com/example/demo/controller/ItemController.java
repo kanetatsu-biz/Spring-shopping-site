@@ -1,8 +1,6 @@
 package com.example.demo.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +13,7 @@ import com.example.demo.entity.Category;
 import com.example.demo.entity.Item;
 import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.ItemRepository;
+import com.example.demo.service.SearchService;
 
 @Controller
 public class ItemController {
@@ -30,7 +29,7 @@ public class ItemController {
 	public String index(
 			@RequestParam(value = "categoryId", defaultValue = "") Integer categoryId,
 			@RequestParam(value = "itemName", defaultValue = "") String itemName,
-			@RequestParam(value = "matchCondition", defaultValue = "partial") String matchCondition,
+			@RequestParam(value = "matchPattern", defaultValue = "partial") String matchPattern,
 			@RequestParam(value = "minPrice", defaultValue = "") Integer minPrice,
 			@RequestParam(value = "maxPrice", defaultValue = "") Integer maxPrice,
 			Model model) {
@@ -46,29 +45,8 @@ public class ItemController {
 			//	カテゴリーで絞った商品を取得
 			items = itemRepository.findByCategoryId(categoryId);
 		} else {
-			//	文字列検索条件
-			String itemNameCriteria = itemName;
-
-			//	未入力の場合はスルー
-			if (!itemNameCriteria.equals("")) {
-				switch (matchCondition) {
-				//	完全一致
-				case "all":
-					break;
-				//	部分一致
-				case "partial":
-					itemNameCriteria = '%' + itemNameCriteria + '%';
-					break;
-				//	前方一致
-				case "starting":
-					itemNameCriteria = itemNameCriteria + '%';
-					break;
-				//	後方一致
-				case "ending":
-					itemNameCriteria = '%' + itemName;
-					break;
-				}
-			}
+			//	入力値を文字列検索用に置き換え
+			String itemNameCriteria = SearchService.getValueWithWildcard(itemName, matchPattern);
 
 			//	指定された値をもとに検索した商品を取得
 			items = itemRepository.searchByCriteria(
@@ -77,20 +55,12 @@ public class ItemController {
 
 		model.addAttribute("items", items);
 
-		//	商品名検索の条件をマップに格納し、画面に渡す
-		Map<String, String> matchConditions = new HashMap<String, String>() {
-			{
-				put("partial", "部分一致");
-				put("all", "完全一致");
-				put("starting", "前方一致");
-				put("ending", "後方一致");
-			}
-		};
-		model.addAttribute("matchConditions", matchConditions);
+		//	商品名検索のマッチパターンを取得し、画面に渡す
+		model.addAttribute("matchPatterns", SearchService.stringMatchPatterns);
 
 		//	検索条件を保持
 		model.addAttribute("itemName", itemName);
-		model.addAttribute("matchCondition", matchCondition);
+		model.addAttribute("matchPattern", matchPattern);
 		model.addAttribute("minPrice", minPrice);
 		model.addAttribute("maxPrice", maxPrice);
 

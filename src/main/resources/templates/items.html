@@ -33,11 +33,11 @@
 						</div>
 						<div class="row-space-around">
 							<!--文字列の検索条件-->
-		    				<th:block th:each="mc : ${matchConditions}">
-			    				<input type="radio" name="matchCondition"
-			    					th:value="${mc.key}"
-			    					th:checked="${mc.key == matchCondition}" />
-			    				<label for="${mc.key}">[[${mc.value}]]</label>
+		    				<th:block th:each="mp : ${matchPatterns}">
+			    				<input type="radio" name="matchPattern"
+			    					th:value="${mp.key}"
+			    					th:checked="${mp.key == matchPattern}" />
+			    				<label for="${mp.key}">[[${mc.value}]]</label>
 							</th:block>
 						</div>
 					</div>
