@@ -35,9 +35,9 @@
 							<!--文字列の検索条件-->
 		    				<th:block th:each="mp : ${matchPatterns}">
 			    				<input type="radio" name="matchPattern"
-			    					th:value="${mp.key}"
-			    					th:checked="${mp.key == matchPattern}" />
-			    				<label for="${mp.key}">[[${mc.value}]]</label>
+			    					th:value="${mp.getKey()}"
+			    					th:checked="${mp.getKey() == matchPattern}" />
+			    				<label for="${mp.getKey()}">[[${mp.getValue()}]]</label>
 							</th:block>
 						</div>
 					</div>
