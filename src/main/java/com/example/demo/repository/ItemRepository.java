@@ -14,8 +14,8 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 
 	//	商品名、価格の下限・上限をもとにクエリを作成
 	@Query("SELECT i FROM Item i WHERE " +
-			"(:name = '' OR i.name ILIKE :name) " +
-			"AND (:minPrice IS NULL OR i.price >= :minPrice) " +
+			"(:name = '' OR i.name ILIKE :name)" +
+			"AND (:minPrice IS NULL OR i.price >= :minPrice)" +
 			"AND (:maxPrice IS NULL OR i.price <= :maxPrice)")
 	List<Item> searchByCriteria(
 			@Param("name") String name,

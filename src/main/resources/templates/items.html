@@ -36,7 +36,7 @@
 		    				<th:block th:each="mp : ${matchPatterns}">
 			    				<input type="radio" name="matchPattern"
 			    					th:value="${mp.getKey()}"
-			    					th:checked="${mp.getKey() == matchPattern}" />
+			    					th:checked="${mp.getKey().equals(matchPattern)}" />
 			    				<label for="${mp.getKey()}">[[${mp.getValue()}]]</label>
 							</th:block>
 						</div>
