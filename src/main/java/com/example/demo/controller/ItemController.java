@@ -3,8 +3,6 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,9 +29,10 @@ public class ItemController {
 			@RequestParam(value = "categoryId", defaultValue = "") Integer categoryId,
 			@RequestParam(value = "itemName", defaultValue = "") String itemName,
 			@RequestParam(value = "matchCondition", defaultValue = "partial") String matchCondition,
-			@RequestParam(value = "min", defaultValue = "") Integer min,
-			@RequestParam(value = "max", defaultValue = "") Integer max,
+			@RequestParam(value = "minPrice", defaultValue = "") Integer minPrice,
+			@RequestParam(value = "maxPrice", defaultValue = "") Integer maxPrice,
 			Model model) {
+
 		//	全カテゴリーを取得
 		List<Category> categories = categoryRepository.findAll();
 		model.addAttribute("categories", categories);
@@ -46,37 +45,32 @@ public class ItemController {
 			items = itemRepository.findByCategoryId(categoryId);
 		} else {
 			//	文字列検索条件
-			ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase(); // 大文字小文字区別なし
-			switch (matchCondition) {
-			//	部分一致
-			case "partial":
-				matcher = matcher.withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-				break;
-			//	完全一致
-			case "all":
-				matcher = matcher.withStringMatcher(ExampleMatcher.StringMatcher.EXACT);
+			String itemNameCriteria = itemName;
 
-				break;
-			//	前方一致
-			case "starting":
-				matcher = matcher.withStringMatcher(ExampleMatcher.StringMatcher.STARTING);
-				break;
-			//	後方一致
-			case "ending":
-				matcher = matcher.withStringMatcher(ExampleMatcher.StringMatcher.ENDING);
-				break;
+			//	未入力の場合はスルー
+			if (!itemNameCriteria.equals("")) {
+				switch (matchCondition) {
+				//	完全一致
+				case "all":
+					break;
+				//	部分一致
+				case "partial":
+					itemNameCriteria = '%' + itemNameCriteria + '%';
+					break;
+				//	前方一致
+				case "starting":
+					itemNameCriteria = itemNameCriteria + '%';
+					break;
+				//	後方一致
+				case "ending":
+					itemNameCriteria = '%' + itemName;
+					break;
+				}
 			}
 
-			//	検索条件をもとにQuery by Example用のオブジェクトの作成
-			Item itemSearchCondition = new Item();
-			if (!itemName.equals("")) {
-				//	商品名が入力されていれば条件に追加
-				itemSearchCondition.setName(itemName);
-			}
-
-			//	Query by Exampleの実行
-			Example<Item> example = Example.of(itemSearchCondition, matcher);
-			items = itemRepository.findAll(example);
+			//	指定された値をもとに検索した商品を取得
+			items = itemRepository.searchByCriteria(
+					itemNameCriteria, minPrice, maxPrice);
 		}
 
 		model.addAttribute("items", items);
