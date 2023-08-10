@@ -5,6 +5,7 @@ DROP VIEW IF EXISTS v_order_histories;
 -- 各種テーブル削除
 DROP TABLE IF EXISTS order_details;
 DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS account_addresses;
 DROP TABLE IF EXISTS addresses;
 DROP TABLE IF EXISTS accounts;
 DROP TABLE IF EXISTS items;
@@ -48,6 +49,17 @@ CREATE TABLE addresses
    municipality TEXT,
    house_num TEXT,
    building_name_room_num TEXT
+);
+
+-- あて先とアカウントの中間テーブル
+CREATE TABLE account_addresses
+(
+   account_id INTEGER,
+   address_id INTEGER,
+   address_name VARCHAR(100),
+   PRIMARY KEY (account_id, address_id),
+   FOREIGN KEY (account_id) REFERENCES accounts(id),
+   FOREIGN KEY (address_id) REFERENCES addresses(id)
 );
 
 -- 注文テーブル

@@ -22,6 +22,21 @@ INSERT INTO accounts(name, email, password, role) VALUES('system', 'system@examp
 INSERT INTO addresses(post_num, prefecture, municipality, house_num, building_name_room_num)
 	VALUES ('110-0011', '東京都', '千代田区千代田', '1番1号', '皇居101');
 
+INSERT INTO addresses(post_num, prefecture, municipality, house_num, building_name_room_num)
+	VALUES ('110-0011', '東京都', '千代田区千代田', '1番1号', '皇居102');
+
+INSERT INTO addresses(post_num, prefecture, municipality, house_num, building_name_room_num)
+	VALUES ('110-0011', '東京都', '千代田区千代田', '1番1号', '皇居103');
+
+INSERT INTO public.account_addresses(account_id, address_id, address_name)
+	VALUES (1, 1, '自宅');
+
+INSERT INTO public.account_addresses(account_id, address_id, address_name)
+	VALUES (1, 2, '職場');
+
+INSERT INTO public.account_addresses(account_id, address_id, address_name)
+	VALUES (2, 1, '自宅');
+
 INSERT INTO orders(customer_id, ordered_datetime, total_price, address_id)
 	VALUES (NULL, '2023-07-27 12:00:00.000000', 5000, 1);
 INSERT INTO order_details(order_id, item_id, quantity) VALUES (1, 1, 2);
