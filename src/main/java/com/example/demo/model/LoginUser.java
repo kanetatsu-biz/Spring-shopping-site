@@ -41,4 +41,9 @@ public class LoginUser {
 	public boolean isLogin() {
 		return id != null;
 	}
+
+	//	ログインユーザーが管理ユーザーかどうか
+	public boolean isAdmin() {
+		return role.equals("admin");
+	}
 }

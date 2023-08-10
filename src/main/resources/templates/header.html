@@ -9,6 +9,7 @@
 		<div class="header-menu-element">
 			<th:block th:if="${@loginUser.isLogin()}">
 				[[${@loginUser.getName()}]]
+				<a th:if="${!@loginUser.isAdmin()}" href="/addresses">あて先リスト</a>
 				<a href="/logout">ログアウト</a>
 			</th:block>
 			<th:block th:unless="${@loginUser.isLogin()}">
