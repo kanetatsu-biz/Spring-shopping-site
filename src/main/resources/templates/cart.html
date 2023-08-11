@@ -8,8 +8,6 @@
 <body>
 	<header th:replace="header"></header>
 
-	<hr>
-
 	<main>
 		<div id="cart-items" th:fragment="cart-items" class="main-container column-center">
 			<div th:each="item:${@cart.items}" class="item-container column-center cart-item">
@@ -48,8 +46,6 @@
 			</a>
 		</div>
 	</main>
-
-	<hr>
 
 	<footer th:replace="footer"></footer>
 	
