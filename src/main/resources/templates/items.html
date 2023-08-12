@@ -27,7 +27,7 @@
 				<form action="/cart/add" method="post">
 					<div class="item">
 						<a th:href="'/items/' + ${item.id}" class="item-img">
-							<img th:src="@{/img/sample_test1.jpg}">
+							<img th:src="@{'/img/' + ${item.fileName}}">
 						</a>
 						<div class="item-contents">
 							<a th:href="'/items/' + ${item.id}">

@@ -21,6 +21,8 @@ public class Account {
 
 	private String password; // パスワード
 
+	private String role; // ロール
+
 	public Account() {
 	}
 
@@ -41,5 +43,9 @@ public class Account {
 
 	public String getPassword() {
 		return password;
+	}
+
+	public String getRole() {
+		return role;
 	}
 }

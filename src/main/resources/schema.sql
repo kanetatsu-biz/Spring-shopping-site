@@ -26,6 +26,7 @@ CREATE TABLE items
    price INTEGER,
    description TEXT,
    stock INTEGER,
+   file_name VARCHAR(100),
    FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 
@@ -35,7 +36,8 @@ CREATE TABLE accounts
    id SERIAL PRIMARY KEY,
    name TEXT,
    email TEXT UNIQUE,
-   password TEXT
+   password TEXT,
+   role VARCHAR(10) DEFAULT 'general'
 );
 
 -- あて先テーブル
@@ -100,6 +102,7 @@ CREATE VIEW v_order_history_details AS
       od.order_id,
       i.name AS item_name,
       i.price AS item_price,
+      i.file_name,
       od.quantity
    FROM order_details od
    JOIN items i
