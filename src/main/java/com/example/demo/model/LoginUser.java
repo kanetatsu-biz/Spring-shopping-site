@@ -11,8 +11,18 @@ public class LoginUser {
 
 	private String name;
 
+	private String role;
+
+	public Integer getId() {
+		return id;
+	}
+
 	public String getName() {
 		return name;
+	}
+
+	public String getRole() {
+		return role;
 	}
 
 	public void setId(Integer id) {
@@ -21,5 +31,9 @@ public class LoginUser {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 }

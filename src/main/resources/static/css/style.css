@@ -89,15 +89,19 @@ header {
 	display: flex;
 	justify-content: space-between;
 }
+.header-menu-element {
+	text-align: center;
+	width: 30%;
+}
 .header-menu-login {
 	text-align: center;
-	width: 50%;
+	width: 30%;
 	white-space: nowrap;
 }
 .header-menu-cart {
 	text-align: center;
 	align-self: center;
-	width: 50%;
+	width: 30%;
 }
 .header-menu-cart .sp{
 	display: none;
@@ -340,3 +344,25 @@ footer small{
 	color: var(--background-colour);
 }
 
+/* 管理TOP */
+.admin-function-list {
+	display: flex;
+    justify-content: center;
+}
+.round {
+    align-items: center;
+	background-color: white;
+    border-radius: 50%;
+    display: flex;
+    height: 100px;
+    padding: 20px;
+    text-decoration: none;
+}
+
+/* 管理注文履歴一覧 */
+.history-container {
+	background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    width: 80%;
+}

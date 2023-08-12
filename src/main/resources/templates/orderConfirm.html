@@ -18,6 +18,11 @@
 			</div>
 
 			<form action="/order"  method="post">
+				<input type="hidden" name="postNum" th:value="${confirmedAddress.postNum}">
+				<input type="hidden" name="prefecture" th:value="${confirmedAddress.prefecture}">
+				<input type="hidden" name="municipality" th:value="${confirmedAddress.municipality}">
+				<input type="hidden" name="houseNum" th:value="${confirmedAddress.houseNum}">
+				<input type="hidden" name="buildingNameRoomNum" th:value="${confirmedAddress.buildingNameRoomNum}">
 				<button>この内容で注文</button>
 			</form>
 
@@ -25,30 +30,30 @@
 			<div class="input-form">
 				<div>
 					<spqn>郵便番号：</spqn>
-					[[${@address.postNum}]]
+					[[${confirmedAddress.postNum}]]
 				</div>
 				<div>
 					<spqn>都道府県：</spqn>
-					[[${@address.prefecture}]]
+					[[${confirmedAddress.prefecture}]]
 				</div>
 				<div>
 					<spqn>市区町村：</spqn>
-					[[${@address.municipality}]]
+					[[${confirmedAddress.municipality}]]
 				</div>
 				<div>
 					<spqn>番地：</spqn>
-					[[${@address.houseNum}]]
+					[[${confirmedAddress.houseNum}]]
 				</div>
 				<div>
 					<spqn>建物名・部屋番号：</spqn>
-					[[${@address.buildingNameRoomNum}]]
+					[[${confirmedAddress.buildingNameRoomNum}]]
 				</div>
 			</div>
 
 			<div class="column-center">
 				<div th:each="item:${@cart.items}" class="item-container column-center cart-item">
 					<div class="img-title-container">
-						<img th:src="@{/img/sample_test1.jpg}">
+						<img th:src="@{'/img/' + ${item.fileName}}">
 						<span th:text="${item.name}"></span>
 					</div>
 					<div>
