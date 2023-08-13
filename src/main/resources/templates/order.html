@@ -8,13 +8,11 @@
 <body>
 	<header th:replace="header"></header>
 
-	<hr>
-
 	<main>
 		<div class="main-container column-center">
 			<div th:each="item:${@cart.items}" class="item-container column-center cart-item">
 				<div class="img-title-container">
-					<img th:src="@{'/img/' + ${item.fileName}}">
+					<img th:src="@{'/img/products/' + ${item.fileName}}">
 					<span th:text="${item.name}"></span>
 				</div>
 				<div>
@@ -78,9 +76,7 @@
 			</form>
 		</div>
 	</main>
-
-	<hr>
-
+	
 	<footer th:replace="footer"></footer>
 </body>
 </html>
