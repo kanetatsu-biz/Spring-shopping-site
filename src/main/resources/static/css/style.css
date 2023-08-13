@@ -34,7 +34,7 @@ h1{
 h2{
 	font-size: 18px;
 }
-@media (min-width:600px){
+@media (min-width:700px){
 	h1{
 		font-size: 18px;
 	}
@@ -73,7 +73,7 @@ header {
 .header-menu {
 	display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .header-menu-title {
@@ -87,30 +87,38 @@ header {
 .header-menu-container{
 	width: 50%;
 	display: flex;
-	justify-content: space-between;
+	flex-direction: column;
+	justify-content: flex-start;
 }
-.header-menu-element {
-	text-align: center;
-	width: 30%;
+.header-menu-container div {
+	width: fit-content;
+	margin: 0.83em 0 0 auto;
+	text-align: right;
+}
+.header-menu-container div a{
+	font-weight: bold;
 }
 .header-menu-login {
-	text-align: center;
-	width: 30%;
 	white-space: nowrap;
 }
 .header-menu-cart {
-	text-align: center;
 	align-self: center;
 	width: 30%;
 }
-.header-menu-cart .sp{
-	display: none;
-}
 
-@media (min-width:600px){
-	.header-menu-cart .sp{
-		display: inherit;
-	}
+@media (min-width:700px){
+.header-menu {
+    align-items: center;
+}
+.header-menu-container{
+	flex-direction: row;
+	justify-content: space-between;
+}
+.header-menu-container div{
+	width: fit-content;
+	margin: unset;
+	text-align: center;
+}
 }
 
 /* 共通 */
@@ -123,6 +131,9 @@ main {
 	width: 90%;
 	max-width: 1000px;
 	margin:0 auto;
+}
+.main-container:not(#top) {
+	margin-top: 80px;
 }
 .column-center {
 	/* 縦並び、中央寄せ、幅調整 */
@@ -155,7 +166,7 @@ main {
 .success-mes {
 	color: blue;
 }
-@media (min-width:600px){
+@media (min-width:700px){
 	.item-container {
 		/* 一つ一つの商品の箱 */
 	    min-width: 60%;
@@ -223,7 +234,7 @@ main {
 .item-name{
 	margin-top: 10px;
 	font-size: 20px;
-	flex-grow: 1;
+	margin-bottom:auto;
 }
 .item-price{
 	margin-top: 20px;
@@ -259,7 +270,6 @@ main {
 
 /* 商品詳細 */
 .show-item {
-	margin-top: 80px;
 	gap: 0;
 	padding: 25px;
 }
@@ -275,7 +285,6 @@ main {
 /* カート一覧・注文・注文確認 */
 .cart-item {
 	padding: 25px;
-	margin-top: 80px;
 }
 .img-title-container {
     align-items: center;
@@ -335,6 +344,7 @@ footer  {
 .footer-menu{
 	margin:0 auto 80px
 }
+.footer-menu-login,
 .footer-menu-cart{
 	margin-top: 20px;
 }
