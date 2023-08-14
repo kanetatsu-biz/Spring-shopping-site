@@ -69,24 +69,34 @@ public class AddressController {
 			@ModelAttribute Address inputAddress, // 入力値をそのままオブジェクトに詰める
 			Model model) {
 
-		//	必須のバリデーション
+		String errMes = ""; // エラーメッセージ
+
+		//	１－１，必須のバリデーション
 		if (AddressValidationService.validateRequiredFields(inputAddress)) {
+			errMes = "「建物名・部屋番号」以外は全て必須項目です。";
+		}
+		//	１－２，1人のユーザーに対してのあて先名の重複のバリデーション
+		else if (accountAddressRepository.existsByAccountIdAndAddressName(loginUser.getId(), addressName)) {
+			errMes = "そのあて先名は既に登録済みです。";
+		}
+
+		//	１－３，バリデーションにはじかれた場合
+		if (!errMes.equals("")) {
 			//	入力値とエラーメッセージをリダイレクト先に送る
 			redirectAttributes.addFlashAttribute("inputAddress", inputAddress);
-			redirectAttributes.addAttribute("errMes",
-					"「建物名・部屋番号」以外は全て必須項目です。");
+			redirectAttributes.addAttribute("errMes", errMes);
 			redirectAttributes.addAttribute("addressName", addressName);
 			return "redirect:/addresses/add";
 		}
 
-		//	１，あて先テーブルに保存し、新規登録したあて先情報を取得
+		//	２－１，あて先テーブルに保存し、新規登録したあて先情報を取得
 		Address savedAddress = addressRepository.save(inputAddress);
 
-		//	２，ユーザーとの中間テーブルに保存
+		//	２－２，ユーザーとの中間テーブルに保存
 		accountAddressRepository.save(new AccountAddress(
 				loginUser.getId(), savedAddress.getId(), addressName));
 
-		//	３，登録が完了した旨を一覧画面に送る
+		//	２－３，登録が完了した旨を一覧画面に送る
 		redirectAttributes.addAttribute("successMes", "あて先の新規登録が完了しました。");
 
 		return "redirect:/addresses";
