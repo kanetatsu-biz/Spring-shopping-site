@@ -12,6 +12,9 @@
 
 	<main>
 		<div class="main-container column-center">
+			<!-- 成功メッセージの表示 -->
+			<p class="success-mes" th:if="${successMes.length > 0}">[[${successMes}]]</p>
+
 			<a href="/addresses/add">追加</a>
 
 			<!--あて先の表示-->

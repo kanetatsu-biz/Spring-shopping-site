@@ -24,8 +24,17 @@ public class AccountAddress {
 	private String addressName; // あて先名
 
 	@ManyToOne()
-	@JoinColumn(name = "address_id", referencedColumnName = "id")
+	@JoinColumn(name = "address_id", referencedColumnName = "id", insertable = false, updatable = false)
 	private Address address; // あて先テーブル参照
+
+	public AccountAddress() {
+	}
+
+	public AccountAddress(Integer accountId, Integer addressId, String addressName) {
+		this.accountId = accountId;
+		this.addressId = addressId;
+		this.addressName = addressName;
+	}
 
 	public Integer getAddressId() {
 		return addressId;
