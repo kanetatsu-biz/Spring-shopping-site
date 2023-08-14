@@ -16,6 +16,7 @@ import com.example.demo.entity.Address;
 import com.example.demo.model.LoginUser;
 import com.example.demo.repository.AccountAddressRepository;
 import com.example.demo.repository.AddressRepository;
+import com.example.demo.service.validation.AddressValidationService;
 
 @Controller
 public class AddressController {
@@ -69,10 +70,7 @@ public class AddressController {
 			Model model) {
 
 		//	必須のバリデーション
-		if (inputAddress.getPostNum().equals("") ||
-				inputAddress.getPrefecture().equals("") ||
-				inputAddress.getMunicipality().equals("") ||
-				inputAddress.getHouseNum().equals("")) {
+		if (AddressValidationService.validateRequiredFields(inputAddress)) {
 			//	入力値とエラーメッセージをリダイレクト先に送る
 			redirectAttributes.addFlashAttribute("inputAddress", inputAddress);
 			redirectAttributes.addAttribute("errMes",

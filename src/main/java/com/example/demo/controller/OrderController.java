@@ -27,6 +27,7 @@ import com.example.demo.repository.OrderDetailRepository;
 import com.example.demo.repository.OrderRepository;
 import com.example.demo.repository.VOrderHistoryDetailRepository;
 import com.example.demo.repository.VOrderHistoryRepository;
+import com.example.demo.service.validation.AddressValidationService;
 
 @Controller
 public class OrderController {
@@ -76,10 +77,7 @@ public class OrderController {
 			Model model) {
 
 		//	必須のバリデーション
-		if (inputAddress.getPostNum().equals("") ||
-				inputAddress.getPrefecture().equals("") ||
-				inputAddress.getMunicipality().equals("") ||
-				inputAddress.getHouseNum().equals("")) {
+		if (AddressValidationService.validateRequiredFields(inputAddress)) {
 			//	入力値とエラーメッセージをリダイレクト先に送る
 			redirectAttributes.addFlashAttribute("inputAddress", inputAddress);
 			redirectAttributes.addAttribute("errMes",
