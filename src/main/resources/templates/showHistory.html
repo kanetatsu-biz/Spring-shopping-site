@@ -50,7 +50,7 @@
 			<div class="column-center">
 				<div th:each="orderHistoryDetail:${orderHistoryDetailList}" class="item-container column-center cart-item">
 					<div class="img-title-container">
-						<img th:src="@{'/img/products/' + ${orderHistoryDetail.fileName}}">
+						<img th:src="@{'/img/items/' + ${orderHistoryDetail.fileName}}">
 						<span th:text="${orderHistoryDetail.itemName}"></span>
 					</div>
 					<div>

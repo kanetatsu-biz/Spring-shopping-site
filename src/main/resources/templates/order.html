@@ -12,7 +12,7 @@
 		<div class="main-container column-center">
 			<div th:each="item:${@cart.items}" class="item-container column-center cart-item">
 				<div class="img-title-container">
-					<img th:src="@{'/img/products/' + ${item.fileName}}">
+					<img th:src="@{'/img/items/' + ${item.fileName}}">
 					<span th:text="${item.name}"></span>
 				</div>
 				<div>
