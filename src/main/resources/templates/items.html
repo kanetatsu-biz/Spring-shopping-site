@@ -10,11 +10,12 @@
 
 	<div class="top-banner">
 		<img th:src="@{/img/common/top.jpg}" alt="">
+		<span class="cover"></span>
 	</div>
 	<main>
 		<div class="main-container" id="top">
 			<p class="concept">
-				KTショップの商品は全て植物由来。素材の特徴、材質をそのまま活かす。だから自然と手に馴染む。色は素材からそのまま抽出したアースカラー。まるで森の中で葉の揺らぎを眺めているかのようにすっと目に入り、疲労を感じさせない。そんな商品を作っています。
+				KTショップの商品は全て植物由来。素材の特徴、材質をそのまま活かす。だから自然と体に馴染む。植物本来の触り心地、リラックス効果のある香り、目にやさしいカラー、暖かみ。それらで包まれた空間まるで森の中で葉の揺らぎを眺めているかのよう。本が好きなあなたへ、ゆったりとした読書時間を。
 			</p>
 			<h2>商品</h2>
 			<!--カテゴリー表示-->
@@ -32,7 +33,7 @@
 					<form action="/cart/add" method="post">
 						<div class="item">
 							<a th:href="'/items/' + ${item.id}" class="item-img">
-								<img th:src="@{'/img/products/' + ${item.fileName}}">
+								<img th:src="@{'/img/items/' + ${item.fileName}}">
 							</a>
 							<a th:href="'/items/' + ${item.id}" class="item-name">
 								<span th:text="${item.name}"></span>								
