@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -100,5 +101,23 @@ public class AddressController {
 		redirectAttributes.addAttribute("successMes", "あて先の新規登録が完了しました。");
 
 		return "redirect:/addresses";
+	}
+
+	// あて先一覧画面を表示
+	@GetMapping("/addresses/{addressId}/edit")
+	public String index(
+			@PathVariable("addressId") Integer addressId,
+			@RequestParam(name = "errMes", defaultValue = "") String errMes,
+			Model model) {
+
+		//	ログインユーザーとあて先IDに紐づくあて先を取得
+		AccountAddress accountAddress = accountAddressRepository
+				.findByAccountIdAndAddressId(loginUser.getId(), addressId).get();
+
+		model.addAttribute("accountAddress", accountAddress);
+		model.addAttribute("prefectureList", Address.prefectureList); // 都道府県リスト
+		model.addAttribute("errMes", errMes);
+
+		return "editAddress";
 	}
 }

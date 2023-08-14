@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -13,4 +14,8 @@ public interface AccountAddressRepository extends JpaRepository<AccountAddress, 
 
 	//	SELECT EXISTS (SELECT 1 FROM account_addresses WHERE account_id = ? AND address_name = ?);
 	boolean existsByAccountIdAndAddressName(Integer accountId, String addressName);
+
+	// SELECT * FROM account_addresses aa join addresses a on aa.address_id = a.id
+	// WHERE account_id = ? AND address_id = ?
+	Optional<AccountAddress> findByAccountIdAndAddressId(Integer accountId, Integer addressId);
 }
