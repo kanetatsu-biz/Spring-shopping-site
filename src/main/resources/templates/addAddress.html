@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>あて先リスト</title>
+<title>あて先追加画面</title>
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
@@ -13,7 +13,7 @@
 	<main>
 		<div class="main-container column-center">
 			<!--あて先入力欄-->
-			<form action="/addresses/add" method="post" class="item-container input-form">
+			<form action="/addresses/create" method="post" class="item-container input-form">
 				<!-- エラーメッセージの表示 -->
 				<p class="err-mes" th:if="${errMes.length > 0}">[[${errMes}]]</p>
 				

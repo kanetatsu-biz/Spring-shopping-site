@@ -8,6 +8,4 @@ public class AccountAddressKey {
 	private Integer accountId; // アカウントID
 
 	private Integer addressId; // あて先ID
-
-	private String addressName; // あて先名
 }

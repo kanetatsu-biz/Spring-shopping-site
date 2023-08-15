@@ -36,6 +36,13 @@ public class AccountAddress {
 		this.addressName = addressName;
 	}
 
+	public AccountAddress(Integer accountId, Integer addressId, String addressName, Address address) {
+		this.accountId = accountId;
+		this.setAddressId(addressId);
+		this.setAddressName(addressName);
+		this.address = address;
+	}
+
 	public Integer getAddressId() {
 		return addressId;
 	}
@@ -46,5 +53,13 @@ public class AccountAddress {
 
 	public Address getAddress() {
 		return address;
+	}
+
+	public void setAddressId(Integer addressId) {
+		this.addressId = addressId;
+	}
+
+	public void setAddressName(String addressName) {
+		this.addressName = addressName;
 	}
 }
