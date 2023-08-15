@@ -28,8 +28,28 @@ public class CheckPermission {
 	public Object checkAdminPermission(
 			ProceedingJoinPoint jp) throws Throwable {
 		// ログインしていない　または　ログインユーザーが管理権限を持っていない場合
-		if (loginUser.getId() == null ||
+		if (!loginUser.isLogin() ||
 				!(loginUser.getRole().equals("admin") || loginUser.getRole().equals("system"))) {
+			// アクセス権限エラー画面にリダイレクト
+			return "redirect:/error403";
+		}
+
+		// 元のメソッドを実行する
+		return jp.proceed();
+	}
+
+	// 一般ログインユーザーでしか実行できないメソッド
+	@Pointcut("execution(* com.example.demo.controller.AddressController.*(..))")
+	public void generalLoginUserPermissionPointcut() {
+	}
+
+	// 一般ログインユーザーではない場合はアクセス権限エラー画面にリダイレクト
+	@Around("generalLoginUserPermissionPointcut()")
+	public Object checkGeneralLoginUserPermission(
+			ProceedingJoinPoint jp) throws Throwable {
+		// ログインしていない または　ログインユーザーが管理権限を持っている場合
+		if (!loginUser.isLogin() ||
+				loginUser.getRole().equals("admin") || loginUser.getRole().equals("system")) {
 			// アクセス権限エラー画面にリダイレクト
 			return "redirect:/error403";
 		}
