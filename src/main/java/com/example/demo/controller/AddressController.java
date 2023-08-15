@@ -209,4 +209,19 @@ public class AddressController {
 
 		return "redirect:/addresses";
 	}
+
+	// あて先削除処理
+	@PostMapping("/addresses/{addressId}/delete")
+	public String delete(
+			@PathVariable("addressId") Integer addressId,
+			RedirectAttributes redirectAttributes) {
+
+		//	削除処理
+		accountAddressRepository.deleteByAccountIdAndAddressId(loginUser.getId(), addressId);
+
+		//	削除が完了した旨を一覧画面に送る
+		redirectAttributes.addAttribute("successMes", "あて先の削除が完了しました。");
+
+		return "redirect:/addresses";
+	}
 }
