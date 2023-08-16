@@ -52,7 +52,7 @@ public class AddressController {
 
 	// あて先追加画面を表示
 	@GetMapping("/addresses/add")
-	public String addAddress(
+	public String add(
 			@RequestParam(name = "errMes", defaultValue = "") String errMes,
 			@RequestParam(name = "addressName", defaultValue = "") String addressName,
 			@ModelAttribute("inputAddress") Address inputAddress,
@@ -68,7 +68,7 @@ public class AddressController {
 
 	// あて先新規登録処理
 	@PostMapping("/addresses/create")
-	public String createAddress(
+	public String create(
 			@RequestParam(name = "addressName", defaultValue = "") String addressName,
 			RedirectAttributes redirectAttributes,
 			@ModelAttribute Address inputAddress, // 入力値をそのままオブジェクトに詰める
@@ -109,7 +109,7 @@ public class AddressController {
 
 	// あて先編集画面を表示
 	@GetMapping("/addresses/{addressId}/edit")
-	public String index(
+	public String edit(
 			@PathVariable("addressId") Integer addressId,
 			@RequestParam(name = "errMes", defaultValue = "") String errMes,
 			@RequestParam(name = "addressName", defaultValue = "") String addressName,
@@ -137,7 +137,7 @@ public class AddressController {
 
 	// あて先更新処理
 	@PostMapping("/addresses/{addressId}/update")
-	public String createAddress(
+	public String update(
 			@PathVariable("addressId") Integer addressId,
 			@RequestParam(name = "addressName", defaultValue = "") String addressName,
 			RedirectAttributes redirectAttributes,
