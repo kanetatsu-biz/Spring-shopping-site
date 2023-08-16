@@ -27,4 +27,42 @@ function changeQuantity(selected_id, quantity) {
 		}
 	);
 }
- 
+
+//　指定されたあて先IDに紐づくあて先情報に書き換え
+function changeAddress(selected_address_id) {
+	const url = '/addresses/' +  selected_address_id + '/info';
+	const target = document.getElementById("address-form");
+
+	//変更された数量をpost形式で渡す
+    $.ajax({
+		method: 'GET',
+		data: {},
+		url: url
+	}).then(
+		//戻り値でhtmlを書き換え
+		function(data) {
+			target.outerHTML = data;
+		},
+		function() {
+			alert("error");
+		}
+	);
+}
+
+$(function(){
+    
+    //input属性のものを一括で取得する
+    var inputItem = document.getElementsByTagName("input");
+    //ループしながら全てに処理を行う
+    for (var i=0; i<inputItem.length; i++){
+      //項目がreadonlyの場合のみ処理
+      if (inputItem[i].readOnly){
+        //背景色を設定する
+        inputItem[i].style.backgroundColor = "grey";
+        //タブ遷移を不可にする
+        inputItem[i].tabIndex = "-1";
+        //テキストボックスにマウスオーバーした際に禁止マークに切り替える
+        inputItem[i].style.cursor = "not-allowed";
+      }
+    }
+  });
