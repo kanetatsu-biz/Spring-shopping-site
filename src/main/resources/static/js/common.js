@@ -48,21 +48,3 @@ function changeAddress(selected_address_id) {
 		}
 	);
 }
-
-$(function(){
-    
-    //input属性のものを一括で取得する
-    var inputItem = document.getElementsByTagName("input");
-    //ループしながら全てに処理を行う
-    for (var i=0; i<inputItem.length; i++){
-      //項目がreadonlyの場合のみ処理
-      if (inputItem[i].readOnly){
-        //背景色を設定する
-        inputItem[i].style.backgroundColor = "grey";
-        //タブ遷移を不可にする
-        inputItem[i].tabIndex = "-1";
-        //テキストボックスにマウスオーバーした際に禁止マークに切り替える
-        inputItem[i].style.cursor = "not-allowed";
-      }
-    }
-  });
