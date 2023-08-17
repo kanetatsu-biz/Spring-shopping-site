@@ -11,6 +11,7 @@ import jakarta.persistence.Transient;
 @Entity
 @Table(name = "items")
 public class Item {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id; // 商品ID
@@ -30,8 +31,7 @@ public class Item {
 	@Transient
 	private Integer quantity; // 数量（カートの処理で使用）
 
-	@Transient
-	private Integer stock = 10; // 在庫数（カートの処理で使用）
+	private Integer stock; // 在庫数（カートの処理で使用）
 
 	@Transient
 	private Integer subTotalPrice; // 小計（カートの処理で使用）
@@ -72,8 +72,13 @@ public class Item {
 		return stock;
 	}
 
+	public void setStock(Integer stock) {
+		this.stock = stock;
+	}
+
 	//	小計　＝　価格　＊　数量
 	public Integer getSubTotalPrice() {
 		return price * quantity;
 	}
+
 }
