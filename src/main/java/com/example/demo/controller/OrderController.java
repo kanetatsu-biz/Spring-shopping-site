@@ -2,7 +2,9 @@ package com.example.demo.controller;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,8 @@ import com.example.demo.entity.Address;
 import com.example.demo.entity.Item;
 import com.example.demo.entity.Order;
 import com.example.demo.entity.OrderDetail;
+import com.example.demo.entity.VLoginUserOrderHistory;
+import com.example.demo.entity.VLoginUserOrderHistoryDetail;
 import com.example.demo.entity.VOrderHistory;
 import com.example.demo.entity.VOrderHistoryDetail;
 import com.example.demo.model.Cart;
@@ -25,6 +29,8 @@ import com.example.demo.model.LoginUser;
 import com.example.demo.repository.AddressRepository;
 import com.example.demo.repository.OrderDetailRepository;
 import com.example.demo.repository.OrderRepository;
+import com.example.demo.repository.VLoginUserOrderHistoryDetailRepository;
+import com.example.demo.repository.VLoginUserOrderHistoryRepository;
 import com.example.demo.repository.VOrderHistoryDetailRepository;
 import com.example.demo.repository.VOrderHistoryRepository;
 
@@ -51,6 +57,12 @@ public class OrderController {
 
 	@Autowired
 	VOrderHistoryDetailRepository vOrderHistoryDetailRepository;
+
+	@Autowired
+	VLoginUserOrderHistoryRepository vLoginUserOrderHistoryRepository;
+
+	@Autowired
+	VLoginUserOrderHistoryDetailRepository vLoginUserOrderHistoryDetailRepository;
 
 	// 注文画面表示
 	@GetMapping("/order")
@@ -163,5 +175,44 @@ public class OrderController {
 		model.addAttribute("orderHistoryDetailList", orderHistoryDetailList);
 
 		return "showHistory";
+	}
+
+	// （一般ユーザー）注文履歴一覧画面表示
+	@GetMapping("/loginUser/order/histories")
+	public String loginUserOrderHistories(
+			Model model) {
+
+		Integer customerId = loginUser.getId();
+
+		//　万が一のnullpointerexeption対策
+		if (customerId == null) {
+			return "redirect:/error403";
+		}
+
+		//	ログインしているユーザーの注文履歴を取得し、画面に渡す
+		Optional<List<VLoginUserOrderHistory>> loginUserOrderList = vLoginUserOrderHistoryRepository
+				.findByCustomerId(customerId);
+		List<VLoginUserOrderHistory> orderList = loginUserOrderList.orElse(Collections.emptyList());
+		model.addAttribute("loginUserOrderList", orderList);
+
+		return "loginUserOrderHistories";
+	}
+
+	// （一般ユーザー）注文履歴詳細画面表示
+	@GetMapping("/loginUser/order/history/{orderId}")
+	public String loginUserShowHistory(
+			@PathVariable("orderId") Integer orderId,
+			Model model) {
+
+		//	１，指定された注文履歴の大まかな情報を取得し、画面に渡す
+		VLoginUserOrderHistory loginUserorderInfo = vLoginUserOrderHistoryRepository.findById(orderId).get();
+		model.addAttribute("loginUserOrderInfo", loginUserorderInfo);
+
+		//	２，指定された注文履歴の詳細情報を取得し、画面に渡す
+		List<VLoginUserOrderHistoryDetail> loginUserOrderHistoryDetailList = vLoginUserOrderHistoryDetailRepository
+				.findByOrderId(orderId);
+		model.addAttribute("loginUserOrderHistoryDetailList", loginUserOrderHistoryDetailList);
+
+		return "loginUserShowOrderHistory";
 	}
 }
