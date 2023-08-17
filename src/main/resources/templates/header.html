@@ -7,6 +7,9 @@
 			<a href="/admin">管理画面</a>
 		</div>
 		<div class="header-menu-element">
+			<a href="/loginUser/order/histories">注文履歴</a>
+		</div>
+		<div class="header-menu-element">
 			<th:block th:if="${@loginUser.getName() != null}">
 				[[${@loginUser.getName()}]]
 				<a href="/logout">ログアウト</a>
