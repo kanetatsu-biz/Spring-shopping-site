@@ -26,6 +26,7 @@ CREATE TABLE items
    name TEXT,
    price INTEGER,
    description TEXT,
+   stock INTEGER,
    file_name VARCHAR(100),
    FOREIGN KEY (category_id) REFERENCES categories(id)
 );
