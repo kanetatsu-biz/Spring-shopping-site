@@ -22,6 +22,34 @@
 					<span th:text="${category.name}"></span>
 				</a>
 			</nav>
+
+			<!--　検索項目　-->
+			<form action="/items" method="get">
+				<div class="column-center">
+					<div>
+						<div class="row-center">
+							<span>商品名：</span>
+							<input type="text" name="itemName" th:value="${itemName}">
+						</div>
+						<div class="row-space-around">
+							<!--文字列の検索条件-->
+		    				<th:block th:each="mp : ${matchPatterns}">
+			    				<input type="radio" name="matchPattern"
+			    					th:value="${mp.getKey()}"
+			    					th:checked="${mp.getKey().equals(matchPattern)}" />
+			    				<label for="${mp.getKey()}">[[${mp.getValue()}]]</label>
+							</th:block>
+						</div>
+					</div>
+					<div class="row-space-around">
+						<span>価格：</span>
+						<input type="number" name="minPrice" placeholder="下限なし" th:value="${minPrice}">
+						<span>～</span>
+						<input type="number" name="maxPrice" placeholder="上限なし" th:value="${maxPrice}">
+					</div>
+					<button>検索</button>
+				</div>
+			</form>
 	
 			<div th:each="item:${items}" class="item-container">
 				<form action="/cart/add" method="post">

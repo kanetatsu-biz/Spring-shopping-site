@@ -14,6 +14,7 @@ import com.example.demo.entity.Item;
 import com.example.demo.model.Cart;
 import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.ItemRepository;
+import com.example.demo.service.SearchService;
 
 @Controller
 public class ItemController {
@@ -31,19 +32,29 @@ public class ItemController {
 	@GetMapping("/items")
 	public String index(
 			@RequestParam(value = "categoryId", defaultValue = "") Integer categoryId,
+			@RequestParam(value = "itemName", defaultValue = "") String itemName,
+			@RequestParam(value = "matchPattern", defaultValue = "partial") String matchPattern,
+			@RequestParam(value = "minPrice", defaultValue = "") Integer minPrice,
+			@RequestParam(value = "maxPrice", defaultValue = "") Integer maxPrice,
 			Model model) {
-		//		全カテゴリーを取得
+
+		//	全カテゴリーを取得
 		List<Category> categories = categoryRepository.findAll();
 		model.addAttribute("categories", categories);
 
 		List<Item> items = null;
 
-		if (categoryId == null) {
-			//		全商品を取得
-			items = itemRepository.findAll();
-		} else {
-			//		カテゴリーで絞った商品を取得
+		//	カテゴリーが指定されていたら他の検索条件は無視
+		if (categoryId != null) {
+			//	カテゴリーで絞った商品を取得
 			items = itemRepository.findByCategoryId(categoryId);
+		} else {
+			//	入力値を文字列検索用に置き換え
+			String itemNameCriteria = SearchService.getValueWithWildcard(itemName, matchPattern);
+
+			//	指定された値をもとに検索した商品を取得
+			items = itemRepository.searchByCriteria(
+					itemNameCriteria, minPrice, maxPrice);
 		}
 
 		//すでにカートに入っている商品は在庫を変更
@@ -54,6 +65,15 @@ public class ItemController {
 		}
 
 		model.addAttribute("items", items);
+
+		//	商品名検索のマッチパターンを取得し、画面に渡す
+		model.addAttribute("matchPatterns", SearchService.stringMatchPatterns);
+
+		//	検索条件を保持
+		model.addAttribute("itemName", itemName);
+		model.addAttribute("matchPattern", matchPattern);
+		model.addAttribute("minPrice", minPrice);
+		model.addAttribute("maxPrice", maxPrice);
 
 		return "items";
 	}
