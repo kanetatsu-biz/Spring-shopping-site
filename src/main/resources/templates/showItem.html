@@ -8,12 +8,10 @@
 <body>
 	<header th:replace="header"></header>
 
-	<hr>
-
 	<main>
 		<div class="main-container column-center">
 			<div class="column-center item-container show-item"> 
-				<img th:src="@{'/img/' + ${item.fileName}}">
+				<img th:src="@{'/img/items/' + ${item.fileName}}">
 				<p>商品名：
 					<span th:text="${item.name}"></span>
 				</p>
@@ -45,8 +43,6 @@
 			</div>
 		</div>
 	</main>
-
-	<hr>
 
 	<footer th:replace="footer"></footer>
 </body>

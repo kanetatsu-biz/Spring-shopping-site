@@ -8,8 +8,6 @@
 <body>
 	<header th:replace="header"></header>
 
-	<hr>
-
 	<main>
 		<div class="main-container column-center">
 			<a href="/admin/order/histories">一覧画面に戻る</a>
@@ -52,7 +50,7 @@
 			<div class="column-center">
 				<div th:each="orderHistoryDetail:${orderHistoryDetailList}" class="item-container column-center cart-item">
 					<div class="img-title-container">
-						<img th:src="@{'/img/' + ${orderHistoryDetail.fileName}}">
+						<img th:src="@{'/img/items/' + ${orderHistoryDetail.fileName}}">
 						<span th:text="${orderHistoryDetail.itemName}"></span>
 					</div>
 					<div>
@@ -67,8 +65,6 @@
 			</div>
 		</div>
 	</main>
-
-	<hr>
 
 	<footer th:replace="footer"></footer>
 </body>
