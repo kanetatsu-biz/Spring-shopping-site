@@ -24,6 +24,7 @@ PC：1,280px〜
 	--main-color: rgb(43, 90, 65);
 	--sub-color: rgb(74, 122, 94);
 	--background-color: rgb(249, 238, 211);
+	--background-color-with-opacity: rgba(239, 228, 201, 0.6);
 }
 
 /* common */
@@ -163,6 +164,7 @@ header {
 
 /* 共通 */
 main {
+	align-items: center;
 	display: flex;
 	flex: 1;
 	justify-content: space-evenly;
@@ -198,15 +200,29 @@ main {
 	justify-content: space-around;
 }
 
+/* 入力フォーム */
 .input-form {
-	/* 入力フォーム */
 	align-items: center;
+	background-color: var(--background-color-with-opacity);
+	border-radius: 10px;
 	display: flex;
 	flex-flow: column;
 	gap: 20px 0;
 	justify-content: space-around;
-	padding: 25px 0;
-	width: 50%;
+	min-width: 40%;
+	padding: 10px;
+}
+
+.input-form div {
+	align-items: left;
+	display: flex;
+	flex-flow: column;
+	width: 100%;
+}
+
+.input-form input, input-form select {
+	box-sizing: border-box;
+	width: 100%;
 }
 
 .item-container {
