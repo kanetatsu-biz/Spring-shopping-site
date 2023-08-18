@@ -56,6 +56,15 @@ h2 {
 	font-size: 18px;
 }
 
+a {
+	opacity: 70%;
+    font-weight: bold;
+}
+
+a:hover {
+	opacity: 100%;
+}
+
 @media (min-width:750px) {
 	h1 {
 		font-size: 18px;
@@ -107,6 +116,7 @@ header {
 .header-menu-title a {
 	font-weight: bold;
 	text-decoration: none;
+	opacity: 100%;
 }
 
 .header-menu-container {
@@ -120,10 +130,6 @@ header {
 	width: fit-content;
 	margin: 0.83em 0 0 auto;
 	text-align: right;
-}
-
-.header-menu-container div a {
-	font-weight: bold;
 }
 
 .header-menu-login {
