@@ -17,7 +17,7 @@
 				<div>
 					<p>アカウント名：[[${orderInfo.acoountName}]]</p>
 					<p>注文日時：[[${orderInfo.orderedDatetime}]]</p>
-					<p>合計金額：[[${orderInfo.totalPrice}]]</p>
+					<p>合計金額：<span th:utext="${@formatService.getFormattedPrice(orderInfo.totalPrice)}"></span></p>
 				</div>
 			</div>
 
@@ -55,7 +55,7 @@
 					</div>
 					<div>
 						<span>価格</span>
-						<span th:text="${orderHistoryDetail.itemPrice}"></span>
+						<span th:utext="${@formatService.getFormattedPrice(orderHistoryDetail.itemPrice)}"></span>
 					</div>
 					<div>
 						<span>数量</span>

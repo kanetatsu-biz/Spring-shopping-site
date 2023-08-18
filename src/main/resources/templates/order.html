@@ -17,7 +17,7 @@
 				</div>
 				<div>
 					<span>価格</span>
-					<span th:text="${item.price}"></span>
+					<span th:utext="${@formatService.getFormattedPrice(item.price)}"></span>
 				</div>
 				<div>
 					<span>数量</span>
@@ -25,13 +25,13 @@
 				</div>
 				<div>
 					<span>小計</span>
-					<span th:text="${item.subTotalPrice}"></span>
+					<span th:utext="${@formatService.getFormattedPrice(item.subTotalPrice)}"></span>
 				</div>
 			</div>
 
 			<div>
 				<span>合計</span>
-				<span th:text="${@cart.totalPrice}"></span>
+				<span th:utext="${@formatService.getFormattedPrice(@cart.totalPrice)}"></span>
 			</div>
 
 			<!-- あて先入力欄 -->

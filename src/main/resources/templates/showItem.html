@@ -16,7 +16,7 @@
 					<span th:text="${item.name}"></span>
 				</p>
 				<p>価格：
-					<span th:text="${item.price}"></span>
+					<span th:utext="${@formatService.getFormattedPrice(item.price)}"></span>
 				</p>
 				<form action="/cart/add" method="post">
 					<span>数量：

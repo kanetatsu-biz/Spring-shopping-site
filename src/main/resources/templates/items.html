@@ -67,7 +67,7 @@
 							<a th:href="'/items/' + ${item.id}" class="item-name">
 								<span th:text="${item.name}"></span>								
 							</a>
-							<span th:text="${item.price}" class="item-price"></span>
+							<span th:utext="${@formatService.getFormattedPrice(item.price)}" class="item-price"></span>
 							<span class="item-quantity">数量：
 								<select name="quantity" th:if="${item.stock > 0}">
 									//在庫数分のoptionを表示

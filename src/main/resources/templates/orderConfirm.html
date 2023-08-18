@@ -12,7 +12,7 @@
 		<div class="main-container column-center">
 			<div class="column-center total-price-item">
 				<p>請求額</p>
-				<p class="total-price" th:text="${@cart.totalPrice}"></p>
+				<p class="total-price" th:utext="${@formatService.getFormattedPrice(@cart.totalPrice)}"></p>
 			</div>
 
 			<form action="/order"  method="post">
@@ -56,7 +56,7 @@
 					</div>
 					<div>
 						<span>価格</span>
-						<span th:text="${item.price}"></span>
+						<span th:utext="${@formatService.getFormattedPrice(item.price)}"></span>
 					</div>
 					<div>
 						<span>数量</span>

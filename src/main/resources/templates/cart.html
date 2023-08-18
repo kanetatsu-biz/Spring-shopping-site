@@ -17,7 +17,7 @@
 				</div>
 				<div>
 					<span>価格：</span>
-					<span th:text="${item.price}"></span>
+					<span th:utext="${@formatService.getFormattedPrice(item.price)}"></span>
 				</div>
 				<div>
 					<span>数量：</span>
@@ -29,7 +29,7 @@
 				</div>
 				<div>
 					<span>小計：</span>
-					<span class="sub-total-price" th:text="${item.subTotalPrice}"></span>
+					<span class="sub-total-price" th:utext="${@formatService.getFormattedPrice(item.subTotalPrice)}"></span>
 				</div>
 				<form action="/cart/delete" method="post">
 					<input type="hidden" name="itemId" th:value="${item.id}">
@@ -39,7 +39,7 @@
 
 			<div>
 				<span>合計：</span>
-				<span class="total-price"　th:text="${@cart.totalPrice}"></span>
+				<span class="total-price" th:utext="${@formatService.getFormattedPrice(@cart.totalPrice)}"></span>
 			</div>
 			<a href="/order">
 				<button>注文画面に進む</button>
