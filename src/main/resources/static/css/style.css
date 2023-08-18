@@ -22,6 +22,7 @@ PC：1,280px〜
 /* root */
 :root {
 	--main-color: rgb(43, 90, 65);
+	--main-color-with-opacity: rgba(43, 90, 65, 0.6);
 	--sub-color: rgb(74, 122, 94);
 	--background-color: rgb(249, 238, 211);
 	--background-color-with-opacity: rgba(239, 228, 201, 0.6);
@@ -67,6 +68,31 @@ a {
 
 a:hover {
 	opacity: 100%;
+}
+
+button {
+	width: 100%;
+	border: 1px solid var(--main-color);
+	border-radius: 0;
+	margin-top: 10px;
+	padding: 10px 0px;
+	background-color: var(--background-color);
+	font-size: 20px;
+	font-weight: bold;
+	color: var(--main-color);
+	transition: 0.3s;
+}
+
+button:hover {
+	color: var(--background-color);
+	background-color: var(--main-color);
+	transition: 0.3s;
+}
+
+button[disabled] {
+	background-color: var(--background-color-with-opacity);
+	color: var(--main-color-with-opacity);
+	pointer-events: none;
 }
 
 @media (min-width:750px) {
@@ -374,26 +400,6 @@ main {
 	font-size: 18px;
 	border-color: var(--main-color);
 }
-
-.item button {
-	width: 100%;
-	border: 1px solid var(--main-color);
-	border-radius: 0;
-	margin-top: 10px;
-	padding: 10px 0px;
-	background-color: var(--background-color);
-	font-size: 20px;
-	font-weight: bold;
-	color: var(--main-color);
-	transition: 0.3s;
-}
-
-.item button:hover {
-	color: var(--background-color);
-	background-color: var(--main-color);
-	transition: 0.3s;
-}
-
 
 /* 商品詳細 */
 .show-item {
