@@ -37,7 +37,7 @@
 			<!-- あて先入力欄 -->
 			<form action="/order/confirm" method="post" class="input-form">
 				<!-- エラーメッセージの表示 -->
-				<div class="err-mes" th:if="${errMes.length > 0}">[[${errMes}]]</div>
+				<div class="font-emphasize err-mes" th:if="${errMes.length > 0}">[[${errMes}]]</div>
 
 				<div class="one-form-container">
 					<label>郵便番号</label>

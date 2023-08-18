@@ -261,12 +261,17 @@ main {
 	margin-right: unset;
 }
 
+.font-emphasize {
+	font-weight: bold;
+    font-size: 18px;
+}
+
 .err-mes {
 	color: red;
 }
 
 .success-mes {
-	color: blue;
+	color: var(--main-color);
 }
 
 @media (min-width:750px) {

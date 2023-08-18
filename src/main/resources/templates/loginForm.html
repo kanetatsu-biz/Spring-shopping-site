@@ -12,8 +12,8 @@
 		<div class="main-container column-center">
 			<form action="/login" method="post" class="input-form">
 				<!-- エラー・成功メッセージの表示 -->
-				<p class="err-mes" th:if="${errMes.length > 0}">[[${errMes}]]</p>
-				<p class="success-mes" th:if="${successMes.length > 0}">[[${successMes}]]</p>
+				<p class="font-emphasize err-mes" th:if="${errMes.length > 0}">[[${errMes}]]</p>
+				<p class="font-emphasize success-mes" th:if="${successMes.length > 0}">[[${successMes}]]</p>
 
 				<div>
 					<span>メールアドレス</span>
