@@ -29,7 +29,10 @@ PC：1,280px〜
 /* common */
 body {
 	background-color: var(--background-color);
+	display: flex;
+	flex-direction: column;
 	margin: 0;
+	min-height: 100vh;
 }
 
 a {
@@ -161,6 +164,7 @@ header {
 /* 共通 */
 main {
 	display: flex;
+	flex: 1;
 	justify-content: space-evenly;
 }
 
@@ -452,11 +456,13 @@ main {
 
 /* フッター */
 footer {
-	text-align: center;
+	align-self: flex-end;
 	background-color: var(--main-color);
 	margin-top: 50px;
-	padding-top: 50px;
 	padding-bottom: 30px;
+	padding-top: 50px;
+	text-align: center;
+	width: 100%;
 }
 
 .footer-menu {
