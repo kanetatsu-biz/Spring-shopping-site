@@ -177,6 +177,17 @@ main {
 	gap: 20px 0;
 }
 
+.row-center {
+	/* 縦並び、中央寄せ */
+	display: flex;
+	justify-content: center;
+}
+.row-space-around {
+	/* 縦並び、均等配置と両端に間隔 */
+	display: flex;
+	justify-content: space-around;
+}
+
 .input-form {
 	/* 入力フォーム */
 	align-items: center;
@@ -281,9 +292,15 @@ main {
 	display: none;
 }
 
-
 .item-container form {
 	height: 100%;
+}
+
+.search-cotainer {
+	align-items: center;
+	display: flex;
+	flex-flow: column;
+	gap: 10px 0;
 }
 
 .item {
