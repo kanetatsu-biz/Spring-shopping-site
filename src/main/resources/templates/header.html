@@ -3,7 +3,7 @@
 		<div class="header-menu-title">
 			<a href="/items">使いやすいショッピングサイト</a>
 		</div>
-		<div class="header-menu-element">
+		<div class="header-menu-element" th:if="${@loginUser.isLogin() && @loginUser.isAdmin()}">
 			<a href="/admin">管理画面</a>
 		</div>
 		<div class="header-menu-element">
