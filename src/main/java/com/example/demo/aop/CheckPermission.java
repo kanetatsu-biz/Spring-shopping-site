@@ -27,9 +27,8 @@ public class CheckPermission {
 	@Around("adminPermissionPointcut()")
 	public Object checkAdminPermission(
 			ProceedingJoinPoint jp) throws Throwable {
-		// ログインしていない　または　ログインユーザーが管理権限を持っていない場合
-		if (!loginUser.isLogin() ||
-				!(loginUser.getRole().equals("admin") || loginUser.getRole().equals("system"))) {
+		// （ログインしている　かつ　ログインユーザーが管理権限を持っている）ではない場合
+		if (!(loginUser.isLogin() && loginUser.isAdmin())) {
 			// アクセス権限エラー画面にリダイレクト
 			return "redirect:/error403";
 		}
@@ -48,8 +47,7 @@ public class CheckPermission {
 	public Object checkGeneralLoginUserPermission(
 			ProceedingJoinPoint jp) throws Throwable {
 		// ログインしていない または　ログインユーザーが管理権限を持っている場合
-		if (!loginUser.isLogin() ||
-				loginUser.getRole().equals("admin") || loginUser.getRole().equals("system")) {
+		if (!loginUser.isLogin() || loginUser.isAdmin()) {
 			// アクセス権限エラー画面にリダイレクト
 			return "redirect:/error403";
 		}
