@@ -265,6 +265,25 @@ input-form select {
 	color: var(--main-color);
 }
 
+/* 点線 */
+.dots-line {
+	border-top: 3px dotted black;
+	margin-top: 20px;
+	width: 100%;
+}
+
+
+/* 一つ一つの商品の箱 */
+.item-container {
+	margin-top: 50px;
+	width: 100%;
+}
+
+.item-container img {
+	object-fit: fill;
+}
+
+
 /* 商品一覧（TOP） */
 .top-banner {
 	height: 500px;
@@ -360,18 +379,19 @@ input-form select {
 
 /* 商品詳細 */
 .show-item {
-	gap: 0;
-	padding: 25px;
+	height: 70vh;
+	display: flex;
+	gap: 25px;
+	align-items: center;
 }
 
 .show-item img {
-	width: 70%;
+	width: 50%;
+	max-height: 80%;
 }
 
-.show-item .dots-line {
-	border-top: 3px dotted black;
-	margin-top: 20px;
-	width: 100%;
+.show-item-right {
+	width: 50%;
 }
 
 /* カート一覧・注文・注文確認 */

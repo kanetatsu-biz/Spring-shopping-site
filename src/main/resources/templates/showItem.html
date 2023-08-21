@@ -10,36 +10,40 @@
 
 	<main>
 		<div class="main-container column-center">
-			<div class="column-center item-container show-item"> 
+			<div class="item-container show-item">
 				<img th:src="@{'/img/items/' + ${item.fileName}}">
-				<p>商品名：
-					<span th:text="${item.name}"></span>
-				</p>
-				<p>価格：
-					<span th:utext="${@formatService.getFormattedPrice(item.price)}"></span>
-				</p>
-				<form action="/cart/add" method="post">
-					<span>数量：
-						<select name="quantity" th:if="${item.stock > 0}">
-							//在庫数分のoptionを表示
-							<option
-								th:each="i : ${#numbers.sequence(1,item.stock)}"
-								th:value="${i}"
-								th:text="${i}"></option>
-						</select>
-						<span th:unless="${item.stock > 0}">在庫切れ</span>
-					</span>
-					<span>
-						<input type="hidden" name="itemId" th:value="${item.id}">
-						<button　th:disabled="${item.stock <= 0}">カートに追加</button>
-					</span>
-				</form>
+				<div class="show-item-right">
+					<p>商品名：
+						<span th:text="${item.name}"></span>
+					</p>
+					<p>価格：
+						<span th:utext="${@formatService.getFormattedPrice(item.price)}"></span>
+					</p>
 
-				<hr class="dots-line">
+					<p>説明文：
+						<span th:text="${item.description}"></span>
+					</p>
 
-				<p>説明文：
-					<span th:text="${item.description}"></span>
-				</p>
+					<hr class="dots-line">
+
+					<form action="/cart/add" method="post">
+						<span>数量：
+							<select name="quantity" th:if="${item.stock > 0}">
+								//在庫数分のoptionを表示
+								<option
+									th:each="i : ${#numbers.sequence(1,item.stock)}"
+									th:value="${i}"
+									th:text="${i}"></option>
+							</select>
+							<span th:unless="${item.stock > 0}">在庫切れ</span>
+						</span>
+						<span>
+							<input type="hidden" name="itemId" th:value="${item.id}">
+							<button　th:disabled="${item.stock <= 0}">カートに追加</button>
+						</span>
+					</form>
+	
+				</div>
 			</div>
 		</div>
 	</main>
