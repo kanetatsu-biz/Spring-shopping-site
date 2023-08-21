@@ -415,21 +415,12 @@ input-form select {
 	gap: 0;
 }
 
-/* 注文 */
-/* あて先入力 */
-.one-form-container {
-	display: flex;
-	flex-flow: column;
-}
-
 /* 注文完了 */
 .ordered-item {
-	padding: 25px;
-	width: 50%;
-}
-
-.ordered-item .order-id {
-	font-weight: bold;
+    display: flex;
+    justify-content: center;
+	height: 30vh;
+	margin-top: 50px;
 }
 
 /* フッター */

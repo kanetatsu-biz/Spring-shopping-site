@@ -34,11 +34,11 @@
 				<!-- エラーメッセージの表示 -->
 				<div class="font-emphasize err-mes" th:if="${errMes.length > 0}">[[${errMes}]]</div>
 
-				<div class="one-form-container">
+				<div>
 					<label>郵便番号</label>
 					<input type="text" name="postNum" th:value="${address.postNum}">
 				</div>
-				<div class="one-form-container">
+				<div>
 					<label>都道府県</label>
 					<select name="prefecture">
 						<option
@@ -49,15 +49,15 @@
 						</option>
 					</select>
 				</div>
-				<div class="one-form-container">
+				<div>
 					<label>市区町村</label>
 					<input type="text" name="municipality" th:value="${address.municipality}">
 				</div>
-				<div class="one-form-container">
+				<div>
 					<label>番地</label>
 					<input type="text" name="houseNum" th:value="${address.houseNum}">
 				</div>
-				<div class="one-form-container">
+				<div>
 					<label>建物名・部屋番号</label>
 					<input type="text" name="buildingNameRoomNum" th:value="${address.buildingNameRoomNum}">
 				</div>
