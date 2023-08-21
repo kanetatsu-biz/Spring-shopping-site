@@ -10,7 +10,7 @@
 	
 	<main>
 		<div class="main-container column-center">
-			<form action="/login" method="post" class="input-form">
+			<form action="/login" method="post" class="auth-container input-form">
 				<!-- エラー・成功メッセージの表示 -->
 				<p class="font-emphasize err-mes" th:if="${errMes.length > 0}">[[${errMes}]]</p>
 				<p class="font-emphasize success-mes" th:if="${successMes.length > 0}">[[${successMes}]]</p>
@@ -23,7 +23,7 @@
 					<span>パスワード</span>
 					<input type="password" name="password" th:value="${password}">					
 				</div>
-				<input type="submit" value="ログイン">
+				<button>新規登録</button>
 			</form>
 
 			<a href="/register">アカウントの新規作成</a>

@@ -234,7 +234,7 @@ main {
 	display: flex;
 	flex-flow: column;
 	gap: 20px 0;
-	justify-content: space-around;
+	justify-content: center;
 	min-width: 40%;
 	padding: 10px;
 }
@@ -272,7 +272,6 @@ input-form select {
 	width: 100%;
 }
 
-
 /* 一つ一つの商品の箱 */
 .item-container {
 	margin-top: 50px;
@@ -283,6 +282,11 @@ input-form select {
 	object-fit: fill;
 }
 
+/* ログイン・新規登録 */
+.auth-container {
+	margin-top: 50px;
+	height: 40vh;
+}
 
 /* 商品一覧（TOP） */
 .top-banner {
