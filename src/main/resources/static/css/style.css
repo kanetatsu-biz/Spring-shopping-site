@@ -396,10 +396,10 @@ input-form select {
 }
 
 /* 注文 */
-.order-buttons {
+.input-form .order-buttons {
 	display: flex;
 	flex-flow: row;
-	gap: 50px;
+	gap: 15px;
 }
 
 .total-price-item {

@@ -61,6 +61,12 @@
 					<label>建物名・部屋番号</label>
 					<input type="text" name="buildingNameRoomNum" th:value="${address.buildingNameRoomNum}">
 				</div>
+				<div class="order-buttons">
+					<a href="/cart">
+						<button>カートに戻る</button>
+					</a>
+					<button>注文内容を確認する</button>
+				</div>
 			</form>
 
 			<hr class="dots-line">
@@ -68,13 +74,6 @@
 			<div class="font-emphasize">
 				<span>合計：</span>
 				<span th:utext="${@formatService.getFormattedPrice(@cart.totalPrice)}"></span>
-			</div>
-
-			<div class="order-buttons">
-				<a href="/cart">
-					<button>カートに戻る</button>
-				</a>
-				<button>注文内容を確認する</button>
 			</div>
 		</div>
 	</main>
