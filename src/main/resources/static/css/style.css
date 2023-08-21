@@ -395,8 +395,10 @@ input-form select {
 	height: 70vh;
 }
 
+/* 注文 */
 .order-buttons {
 	display: flex;
+	flex-flow: row;
 	gap: 50px;
 }
 

@@ -10,28 +10,23 @@
 
 	<main>
 		<div class="main-container column-center">
-			<div th:each="item:${@cart.items}" class="item-container column-center cart-item">
-				<div class="img-title-container">
-					<img th:src="@{'/img/items/' + ${item.fileName}}">
-					<span th:text="${item.name}"></span>
+			<div th:each="item:${@cart.items}" class="item-container">
+				<img th:src="@{'/img/items/' + ${item.fileName}}">
+				<div class="item-container-right">
+					<span class="font-emphasize" th:text="${item.name}"></span>
+					<p>
+						<span>価格：</span>
+						<span th:utext="${@formatService.getFormattedPrice(item.price)}"></span>
+					</p>
+					<p>
+						<span>数量：</span>
+						<span th:text="${item.quantity}"></span>
+					</p>
+					<p>
+						<span>小計：</span>
+						<span th:utext="${@formatService.getFormattedPrice(item.subTotalPrice)}"></span>
+					</p>
 				</div>
-				<div>
-					<span>価格</span>
-					<span th:utext="${@formatService.getFormattedPrice(item.price)}"></span>
-				</div>
-				<div>
-					<span>数量</span>
-					<span th:text="${item.quantity}"></span>
-				</div>
-				<div>
-					<span>小計</span>
-					<span th:utext="${@formatService.getFormattedPrice(item.subTotalPrice)}"></span>
-				</div>
-			</div>
-
-			<div>
-				<span>合計</span>
-				<span th:utext="${@formatService.getFormattedPrice(@cart.totalPrice)}"></span>
 			</div>
 
 			<!-- あて先入力欄 -->
@@ -66,14 +61,21 @@
 					<label>建物名・部屋番号</label>
 					<input type="text" name="buildingNameRoomNum" th:value="${address.buildingNameRoomNum}">
 				</div>
-
-				<div class="order-buttons">
-					<a href="/cart">
-						<button>カートに戻る</button>
-					</a>
-					<button>注文内容を確認する</button>
-				</div>
 			</form>
+
+			<hr class="dots-line">
+
+			<div class="font-emphasize">
+				<span>合計：</span>
+				<span th:utext="${@formatService.getFormattedPrice(@cart.totalPrice)}"></span>
+			</div>
+
+			<div class="order-buttons">
+				<a href="/cart">
+					<button>カートに戻る</button>
+				</a>
+				<button>注文内容を確認する</button>
+			</div>
 		</div>
 	</main>
 	
