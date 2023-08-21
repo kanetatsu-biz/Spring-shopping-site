@@ -3,32 +3,17 @@
 		<div class="header-menu-title">
 			<h1><a href="/items">使いやすい<br class="sp">ショッピングサイト</a></h1>
 		</div>
-		<div class="header-menu-element" th:if="${@loginUser.isLogin() && @loginUser.isAdmin()}">
-			<a href="/admin">管理画面</a>
-		</div>
-		<div class="header-menu-element">
-			<th:block th:if="${@loginUser.isLogin()}">
-				[[${@loginUser.getName()}]]
-				<a th:if="${!@loginUser.isAdmin()}" href="/addresses">あて先リスト</a>
-				<a href="/logout">ログアウト</a>
-			</th:block>
-			<th:block th:unless="${@loginUser.isLogin()}">
-				<a href="/login">新規登録 &#047; ログイン</a>
-			</th:block>
-		</div>
-		<div class="header-menu-element">
-			<a href="/cart">&#128722;カート</a>
-		</div>
 		<span class="header-menu-container">
-			<div class="header-menu-element">
+			<div class="header-menu-element" th:if="${@loginUser.isLogin() && @loginUser.isAdmin()}">
 				<a href="/admin">管理画面</a>
 			</div>
 			<div class="header-menu-login">
-				<th:block th:if="${@loginUser.getName() != null}">
+				<th:block th:if="${@loginUser.isLogin()}">
 					[[${@loginUser.getName()}]]
+					<a th:if="${!@loginUser.isAdmin()}" href="/addresses">あて先リスト</a>
 					<a href="/logout">ログアウト</a>
 				</th:block>
-				<th:block th:unless="${@loginUser.getName() != null}">
+				<th:block th:unless="${@loginUser.isLogin()}">
 					<a href="/login">新規登録 &#047; ログイン</a>
 				</th:block>
 			</div>
