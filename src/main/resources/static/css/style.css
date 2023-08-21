@@ -305,11 +305,9 @@ input-form select {
 	border-bottom: 1px solid var(--main-color);
 }
 
-.search-cotainer {
-	align-items: center;
-	display: flex;
-	flex-flow: column;
-	gap: 10px 0;
+.search-container {
+    margin: 50px auto 0;
+	width: 70%;
 }
 
 .item-list-slider {

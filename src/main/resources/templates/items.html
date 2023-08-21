@@ -35,8 +35,8 @@
 			</nav>
 
 			<!-- 検索項目 -->
-			<form action="/items" method="get">
-				<div class="column-center">
+			<div class="search-container">
+				<form action="/items" method="get" class="column-center">
 					<div>
 						<div class="row-center">
 							<span>商品名：</span>
@@ -55,12 +55,12 @@
 					<div class="row-space-around">
 						<span>価格：</span>
 						<input type="number" name="minPrice" placeholder="下限なし" th:value="${minPrice}">
-						<span>～</span>
+						<span>&emsp;～&emsp;</span>
 						<input type="number" name="maxPrice" placeholder="上限なし" th:value="${maxPrice}">
 					</div>
 					<button>検索</button>
-				</div>
-			</form>
+				</form>
+			</div>
 
 			<!-- 商品一覧 -->
 			<div class="item-list-slider">
