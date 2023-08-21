@@ -274,12 +274,21 @@ input-form select {
 
 /* 一つ一つの商品の箱 */
 .item-container {
+	align-items: center;
+	display: flex;
+	gap: 25px;
 	margin-top: 50px;
 	width: 100%;
 }
 
 .item-container img {
+	max-height: 80%;
 	object-fit: fill;
+	width: 50%;
+}
+
+.item-container-right {
+	width: 50%;
 }
 
 /* ログイン・新規登録 */
@@ -384,42 +393,6 @@ input-form select {
 /* 商品詳細 */
 .show-item {
 	height: 70vh;
-	display: flex;
-	gap: 25px;
-	align-items: center;
-}
-
-.show-item img {
-	width: 50%;
-	max-height: 80%;
-}
-
-.show-item-right {
-	width: 50%;
-}
-
-/* カート一覧・注文・注文確認 */
-.cart-item {
-	padding: 25px;
-}
-
-.img-title-container {
-	align-items: center;
-	box-sizing: border-box;
-	display: flex;
-	gap: 25px;
-	justify-content: center;
-	width: 100%;
-}
-
-.img-title-container img {
-	width: 50%;
-}
-
-.img-title-container span {
-	font-weight: bold;
-	text-align: center;
-	width: 50%;
 }
 
 .order-buttons {

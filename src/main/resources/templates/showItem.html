@@ -12,10 +12,8 @@
 		<div class="main-container column-center">
 			<div class="item-container show-item">
 				<img th:src="@{'/img/items/' + ${item.fileName}}">
-				<div class="show-item-right">
-					<p>商品名：
-						<span th:text="${item.name}"></span>
-					</p>
+				<div class="item-container-right">
+					<span class="font-emphasize" th:text="${item.name}"></span>
 					<p>価格：
 						<span th:utext="${@formatService.getFormattedPrice(item.price)}"></span>
 					</p>
