@@ -62,12 +62,12 @@ h2 {
 }
 
 a {
-	opacity: 70%;
 	font-weight: bold;
+	opacity: 100%;
 }
 
 a:hover {
-	opacity: 100%;
+	opacity: 70%;
 }
 
 button {
