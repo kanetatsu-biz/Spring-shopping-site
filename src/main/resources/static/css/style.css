@@ -257,6 +257,10 @@ input-form select {
 	font-size: 18px;
 }
 
+.font-underline {
+	text-decoration: underline;
+}
+
 .err-mes {
 	color: red;
 }
@@ -402,17 +406,13 @@ input-form select {
 	gap: 15px;
 }
 
+/* 注文確認 */
+.order-confirm-container {
+    margin-top: 50px;
+}
+
 .total-price-item {
 	gap: 0;
-	width: 50%;
-}
-
-.total-price-item p {
-	font-size: 20px;
-}
-
-.total-price-item .total-price {
-	font-weight: bold;
 }
 
 /* 注文 */
