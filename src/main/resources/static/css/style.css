@@ -269,6 +269,10 @@ input-form select {
 	color: var(--main-color);
 }
 
+.margin-top-50 {
+	margin-top: 50px;
+}
+
 /* 点線 */
 .dots-line {
 	border-top: 3px dotted black;
@@ -468,9 +472,9 @@ footer small {
 	text-decoration: none;
 }
 
-/* 管理注文履歴一覧 */
+/* 【管理】注文履歴一覧 */
 .history-container {
-	background-color: rgb(255, 255, 255);
+	background-color: var(--background-color-with-opacity);
 	display: flex;
 	justify-content: center;
 	width: 80%;
