@@ -453,6 +453,9 @@ footer small {
 .admin-function-list {
 	display: flex;
 	justify-content: center;
+	margin-top: 50px;
+	height: 30vh;
+    align-items: center;
 }
 
 .round {
