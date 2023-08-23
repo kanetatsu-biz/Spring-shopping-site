@@ -1,18 +1,18 @@
 INSERT INTO categories(name) VALUES('本');
-INSERT INTO categories(name) VALUES('DVD');
-INSERT INTO categories(name) VALUES('ゲーム');
+INSERT INTO categories(name) VALUES('香り');
+INSERT INTO categories(name) VALUES('灯り');
 
-INSERT INTO items(category_id, name, price, description, stock, file_name) VALUES(1, '本１', 2500, '短い説明です', 10, 'sample_test1.jpg');
-INSERT INTO items(category_id, name, price, description, stock, file_name) VALUES(1, '本２　中間くらいの長さ', 980, '中間くらいの長さの説明です', 8, 'sample_test2.png');
-INSERT INTO items(category_id, name, price, description, stock, file_name) VALUES(1, '本３　結構長めのタイトルです結構長めのタイトルです結構長めのタイトルです結構長めのタイトルです', 1200, '結構長めの説明です結構長めの説明です結構長めの説明です結構長めの説明です結構長めの説明です結構長めの説明です結構長めの説明です結構長めの説明です結構長めの説明です結構長めの説明です', 6, 'sample_test3.jpg');
+INSERT INTO items(category_id, name, price, description, stock, file_name) VALUES(1, 'バラの本', 2500, 'バラの茎から作られた本です', 10, 'book1.jpg');
+INSERT INTO items(category_id, name, price, description, stock, file_name) VALUES(1, 'すぎの本　花粉不使用', 980, '杉の木を薄く刷った素材そのままの本です', 8, 'book2.jpg');
+INSERT INTO items(category_id, name, price, description, stock, file_name) VALUES(1, 'かすみ草とシロツメクサの本　かすみ草の花＋シロツメクサ＋ぺんぺん草の葉', 1200, 'かすみ草の花、シロツメクサ、ぺんぺん草の葉の三種類をブレンドして作られた本です', 6, 'book3.jpg');
 
-INSERT INTO items(category_id, name, price, description, stock, file_name) VALUES(2, 'DVD１', 2000, '短い説明です', 10, 'sample_test1.jpg');
-INSERT INTO items(category_id, name, price, description, stock, file_name) VALUES(2, 'DVD２　中間くらいの長さ', 1000, '中間くらいの長さの説明です', 8, 'sample_test2.png');
-INSERT INTO items(category_id, name, price, description, stock, file_name) VALUES(2, 'DVD３　結構長めのタイトルです結構長めのタイトルです結構長めのタイトルです結構長めのタイトルです', 1800, '結構長めの説明です結構長めの説明です結構長めの説明です結構長めの説明です結構長めの説明です結構長めの説明です結構長めの説明です結構長めの説明です結構長めの説明です結構長めの説明です', 6, 'sample_test3.jpg');
+INSERT INTO items(category_id, name, price, description, stock, file_name) VALUES(2, 'ハーブの香り', 2000, 'ハーブのみ使用したシンプルな香りです', 10, 'aroma1.jpg');
+INSERT INTO items(category_id, name, price, description, stock, file_name) VALUES(2, 'オレンジの香り　オレンジ＋カルダモン', 1000, 'オレンジとカルダモンをした、すっきりとした香りです', 8, 'aroma2.jpg');
+INSERT INTO items(category_id, name, price, description, stock, file_name) VALUES(2, 'ハーブシトラスの香り　オレンジ＋ライム＋ハーブ＋ローズマリー', 1800, 'オレンジ、ライムの二種類の柑橘系とハーブ、ローズマリーの二種類のハーブ系の香りを混ぜたリラックス効果のある香りです', 6, 'aroma3.jpg');
 
-INSERT INTO items(category_id, name, price, description, stock, file_name) VALUES(3, 'ゲーム１', 780, '短い説明です', 10, 'sample_test1.jpg');
-INSERT INTO items(category_id, name, price, description, stock, file_name) VALUES(3, 'ゲーム２　中間くらいの長さ', 3400, '中間くらいの長さの説明です', 8, 'sample_test2.png');
-INSERT INTO items(category_id, name, price, description, stock, file_name) VALUES(3, 'ゲーム３　結構長めのタイトルです結構長めのタイトルです結構長めのタイトルです結構長めのタイトルです', 2200, '結構長めの説明です結構長めの説明です結構長めの説明です結構長めの説明です結構長めの説明です結構長めの説明です結構長めの説明です結構長めの説明です結構長めの説明です結構長めの説明です', 6, 'sample_test3.jpg');
+INSERT INTO items(category_id, name, price, description, stock, file_name) VALUES(3, '白樺の灯り', 780, 'ふんわりとした灯りです', 10, 'light1.jpg');
+INSERT INTO items(category_id, name, price, description, stock, file_name) VALUES(3, 'オークの灯り　ブラックオーク', 3400, '夕方のような、ロートーンの灯りです', 8, 'light2.jpg');
+INSERT INTO items(category_id, name, price, description, stock, file_name) VALUES(3, 'マツの灯り　国産松＋アカマツ＋クロマツ', 2200, '三種類の松を使用した香り豊かなライトです。木漏れ日の中にいるような灯りです', 6, 'light3.jpg');
 
 INSERT INTO accounts(name, email, password) VALUES('test1', 'test1@example.com', 'password');
 INSERT INTO accounts(name, email, password) VALUES('test2', 'test2@example.com', 'password');

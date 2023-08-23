@@ -1,3 +1,25 @@
 <footer>
+	<nav class="footer-menu">
+		<div class="footer-menu-title">
+			<h1><a href="/items">使いやすいショッピングサイト</a></h1>
+		</div>
+		<span class="footer-nemu-container">
+			<div class="footer-menu-element">
+				<a href="/admin">管理画面</a>
+			</div>
+			<div class="footer-menu-login">
+				<th:block th:if="${@loginUser.getName() != null}">
+					[[${@loginUser.getName()}]]
+					<a href="/logout">ログアウト</a>
+				</th:block>
+				<th:block th:unless="${@loginUser.getName() != null}">
+					<a href="/login">新規登録 &#047; ログイン</a>
+				</th:block>
+			</div>
+			<div class="footer-menu-cart">
+				<a href="/cart">&#128722;カート</a>
+			</div>
+		</span>
+	</nav>
 	<small>&copy; KTショップ</small>
 </footer>

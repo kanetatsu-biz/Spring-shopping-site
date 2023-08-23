@@ -8,8 +8,6 @@
 <body>
 	<header th:replace="header"></header>
 
-	<hr>
-
 	<main>
 		<div class="main-container column-center">
 			<div th:each="order:${orderList}" class="history-container">
@@ -27,8 +25,6 @@
 			</div>
 		</div>
 	</main>
-
-	<hr>
 
 	<footer th:replace="footer"></footer>
 </body>

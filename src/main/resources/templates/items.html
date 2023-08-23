@@ -8,10 +8,16 @@
 <body>
 	<header th:replace="header"></header>
 
-	<hr>
-
+	<div class="top-banner">
+		<img th:src="@{/img/common/top.jpg}" alt="">
+		<span class="cover"></span>
+	</div>
 	<main>
-		<div class="main-container column-center">
+		<div class="main-container" id="top">
+			<p class="concept">
+				KTショップの商品は全て植物由来。素材の特徴、材質をそのまま活かす。だから自然と体に馴染む。植物本来の触り心地、リラックス効果のある香り、目にやさしいカラー、暖かみ。それらで包まれた空間まるで森の中で葉の揺らぎを眺めているかのよう。本が好きなあなたへ、ゆったりとした読書時間を。
+			</p>
+			<h2>商品</h2>
 			<!--カテゴリー表示-->
 			<nav class="category-list">
 				<a href="/items">全商品</a>
@@ -22,19 +28,47 @@
 					<span th:text="${category.name}"></span>
 				</a>
 			</nav>
-	
-			<div th:each="item:${items}" class="item-container">
-				<form action="/cart/add" method="post">
-					<div class="item">
-						<a th:href="'/items/' + ${item.id}" class="item-img">
-							<img th:src="@{'/img/' + ${item.fileName}}">
-						</a>
-						<div class="item-contents">
-							<a th:href="'/items/' + ${item.id}">
+
+			<!--　検索項目　-->
+			<form action="/items" method="get">
+				<div class="column-center">
+					<div>
+						<div class="row-center">
+							<span>商品名：</span>
+							<input type="text" name="itemName" th:value="${itemName}">
+						</div>
+						<div class="row-space-around">
+							<!--文字列の検索条件-->
+		    				<th:block th:each="mp : ${matchPatterns}">
+			    				<input type="radio" name="matchPattern"
+			    					th:value="${mp.getKey()}"
+			    					th:checked="${mp.getKey().equals(matchPattern)}" />
+			    				<label for="${mp.getKey()}">[[${mp.getValue()}]]</label>
+							</th:block>
+						</div>
+					</div>
+					<div class="row-space-around">
+						<span>価格：</span>
+						<input type="number" name="minPrice" placeholder="下限なし" th:value="${minPrice}">
+						<span>～</span>
+						<input type="number" name="maxPrice" placeholder="上限なし" th:value="${maxPrice}">
+					</div>
+					<button>検索</button>
+				</div>
+			</form>
+
+			<div class="item-list">	
+				<div th:each="item:${items}" class="item-container">
+					<form action="/cart/add" method="post">
+						<div class="item">
+							<a th:href="'/items/' + ${item.id}" class="item-img">
+								<img th:src="@{'/img/items/' + ${item.fileName}}">
+							</a>
+							<a th:href="'/items/' + ${item.id}" class="item-name">
 								<span th:text="${item.name}"></span>								
 							</a>
-							<span th:text="${item.price}"></span>
-							<span>数量：
+							<span th:text="${item.price}" class="item-price"></span>
+							<span class="item-quantity">数量：
 								<select name="quantity" th:if="${item.stock > 0}">
 									//在庫数分のoptionを表示
 									<option
@@ -44,19 +78,19 @@
 								</select>
 								<span th:unless="${item.stock > 0}">在庫切れ</span>
 							</span>
-							<span>
+							<span class="item-btn">
 								<input type="hidden" name="itemId" th:value="${item.id}">
-								<button　th:disabled="${item.stock <= 0}">カートに追加</button>
+								<button th:disabled="${item.stock <= 0}">カートに追加</button>
 							</span>
 						</div>
-					</div>
-				</form>
+					</form>
+				</div>
 			</div>
 		</div>
 	</main>
 
-	<hr>
-
 	<footer th:replace="footer"></footer>
+	
+	<script th:src="@{/js/common.js}"></script>
 </body>
 </html>
