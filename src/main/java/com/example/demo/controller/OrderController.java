@@ -2,9 +2,7 @@ package com.example.demo.controller;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -184,15 +182,9 @@ public class OrderController {
 
 		Integer customerId = loginUser.getId();
 
-		//　万が一のnullpointerexeption対策
-		if (customerId == null) {
-			return "redirect:/error403";
-		}
-
 		//	ログインしているユーザーの注文履歴を取得し、画面に渡す
-		Optional<List<VLoginUserOrderHistory>> loginUserOrderList = vLoginUserOrderHistoryRepository
+		List<VLoginUserOrderHistory> orderList = vLoginUserOrderHistoryRepository
 				.findByCustomerId(customerId);
-		List<VLoginUserOrderHistory> orderList = loginUserOrderList.orElse(Collections.emptyList());
 		model.addAttribute("loginUserOrderList", orderList);
 
 		return "loginUserOrderHistories";
