@@ -294,6 +294,7 @@ main {
 
 .item-container form {
 	height: 100%;
+	width: 100%;
 }
 
 .search-cotainer {
@@ -409,9 +410,10 @@ main {
 	width: 50%;
 }
 
-.order-buttons {
+/* ボタン横並び */
+.row-buttons {
 	display: flex;
-	gap: 50px;
+	gap: 25px;
 }
 
 .total-price-item {
@@ -493,4 +495,13 @@ footer small {
 	display: flex;
 	justify-content: center;
 	width: 80%;
+}
+
+/* 【管理】商品一覧 */
+.admin-item-list {
+	display: grid;
+	gap: 20px;
+	grid-template-columns: repeat(3, 1fr);
+	margin-top: 50px;
+	width: 100%;
 }

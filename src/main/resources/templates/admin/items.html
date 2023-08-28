@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>【管理】商品一覧</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+	<header th:replace="header"></header>
+
+	<main>
+		<div class="main-container">
+			<!--商品追加-->
+			<button>
+				<a href="/admin/items/add">追加</a>
+			</button>
+
+			<!--カテゴリー表示-->
+			<nav class="category-list">
+				<a href="/admin/items">全商品</a>
+				<a
+					th:each="category:${categories}"
+					th:href="'/admin/items?categoryId='+${category.id}"
+				>
+					<span th:text="${category.name}"></span>
+				</a>
+			</nav>
+
+			<!-- 検索項目 -->
+			<form action="/items" method="get">
+				<div class="column-center">
+					<div>
+						<div class="row-center">
+							<span>商品名：</span>
+							<input type="text" name="itemName" th:value="${itemName}">
+						</div>
+						<div class="row-space-around">
+							<!--文字列の検索条件-->
+		    				<th:block th:each="mp : ${matchPatterns}">
+			    				<input type="radio" th:id="${mp.getKey()}" name="matchPattern"
+			    					th:value="${mp.getKey()}"
+			    					th:checked="${mp.getKey().equals(matchPattern)}" />
+			    				<label th:for="${mp.getKey()}">[[${mp.getValue()}]]</label>
+							</th:block>
+						</div>
+					</div>
+					<div class="row-space-around">
+						<span>価格：</span>
+						<input type="number" name="minPrice" placeholder="下限なし" th:value="${minPrice}">
+						<span>～</span>
+						<input type="number" name="maxPrice" placeholder="上限なし" th:value="${maxPrice}">
+					</div>
+					<button>検索</button>
+				</div>
+			</form>
+
+			<div class="admin-item-list">	
+				<div th:each="item:${items}" class="item-container">
+					<div class="item">
+						<div class="item-img">
+							<img th:src="@{'/img/items/' + ${item.fileName}}">
+						</div>
+
+						<span class="item-name" th:text="${item.name}"></span>								
+
+						<span th:text="${item.price}" class="item-price"></span>
+
+						<p class="item-quantity">
+							在庫数：
+							<span th:if="${item.stock > 0}">[[${item.stock}]]</span>
+							<span th:unless="${item.stock > 0}">在庫切れ</span>
+						</p>
+
+						<p>説明文：
+							<span th:text="${item.description}"></span>
+						</p>
+
+						<div class="row-buttons">
+							<form th:action="'/addresses/' + ${item.id} + '/edit'" method="get">
+								<button>編集</button>
+							</form>
+							<form th:action="'/addresses/' + ${item.id} + '/delete'" method="post">
+								<button>削除</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer th:replace="footer"></footer>
+</body>
+</html>
