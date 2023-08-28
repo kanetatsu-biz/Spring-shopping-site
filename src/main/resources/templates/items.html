@@ -40,10 +40,10 @@
 						<div class="row-space-around">
 							<!--文字列の検索条件-->
 		    				<th:block th:each="mp : ${matchPatterns}">
-			    				<input type="radio" name="matchPattern"
+			    				<input type="radio" th:id="${mp.getKey()}" name="matchPattern"
 			    					th:value="${mp.getKey()}"
 			    					th:checked="${mp.getKey().equals(matchPattern)}" />
-			    				<label for="${mp.getKey()}">[[${mp.getValue()}]]</label>
+			    				<label th:for="${mp.getKey()}">[[${mp.getValue()}]]</label>
 							</th:block>
 						</div>
 					</div>
