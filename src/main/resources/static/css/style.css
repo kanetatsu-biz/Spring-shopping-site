@@ -471,6 +471,7 @@ footer small {
 /* 管理TOP */
 .admin-function-list {
 	display: flex;
+	gap: 25px;
 	justify-content: center;
 }
 
@@ -480,8 +481,10 @@ footer small {
 	border-radius: 50%;
 	display: flex;
 	height: 100px;
+    justify-content: center;
 	padding: 20px;
 	text-decoration: none;
+	width: 100px;
 }
 
 /* 管理注文履歴一覧 */
