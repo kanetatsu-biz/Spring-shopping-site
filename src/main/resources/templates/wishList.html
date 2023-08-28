@@ -1,21 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>ほしい物リスト一覧</title>
-<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<meta charset="UTF-8">
+	<title>ほしい物リスト一覧</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
+
 <body>
 	<header th:replace="header"></header>
-	
+
 	<main>
-		<div class="main-contqainer">
-			ほしい物リスト
+		<div class="main-container">
+			<h3>欲しいものリスト</h3>
+			<div class="wish-list" th:each="wishList: ${wishList}">
+				<span class="wish-list-img">
+					<img th:src="@{'/img/items/' + ${wishList.fileName}}">
+				</span>
+				<span class="wish-list-content">
+					<p th:text="${wishList.name}"></p>
+					<a th:href="'/items/' + ${wishList.itemId}">詳細へ</a>
+					<form action="/wishList/delete" method="post">
+						<input type="hidden" name="id" th:value="${wishList.id}">
+						<button>削除</button>
+					</form>
+				</span>
+			</div>
 		</div>
 	</main>
 
 	<footer th:replace="footer"></footer>
-	
+
 	<script th:src="@{/js/common.js}"></script>
 </body>
+
 </html>

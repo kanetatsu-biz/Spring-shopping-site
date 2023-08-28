@@ -491,3 +491,22 @@ footer small {
 	justify-content: center;
 	width: 80%;
 }
+
+/* 欲しいものリスト */
+.wish-list{
+	display: flex;
+	justify-content: space-between;
+}
+
+.wish-list-img{
+	display: block;
+	width: 50%;
+}
+
+.wish-list-img img{
+	width: 100%;
+}
+
+.wish-list-content{
+	width: 50%;
+}
