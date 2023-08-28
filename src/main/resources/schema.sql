@@ -1,10 +1,13 @@
 -- 各種ビュー削除
 DROP VIEW IF EXISTS v_order_history_details;
 DROP VIEW IF EXISTS v_order_histories;
+DROP VIEW IF EXISTS v_login_user_order_history_details;
+DROP VIEW IF EXISTS v_login_user_order_histories;
 
 -- 各種テーブル削除
 DROP TABLE IF EXISTS order_details;
 DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS wish_lists;
 DROP TABLE IF EXISTS addresses;
 DROP TABLE IF EXISTS accounts;
 DROP TABLE IF EXISTS items;
@@ -49,6 +52,18 @@ CREATE TABLE addresses
    municipality TEXT,
    house_num TEXT,
    building_name_room_num TEXT
+);
+
+-- ほしい物テーブル
+CREATE TABLE wish_lists
+(
+	id SERIAL PRIMARY KEY,
+	customer_id INTEGER,
+	item_id INTEGER,
+	name TEXT,
+   	file_name VARCHAR(100),
+	FOREIGN KEY (customer_id) REFERENCES accounts(id),
+	FOREIGN KEY (item_id) REFERENCES items(id)
 );
 
 -- 注文テーブル
