@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>商品詳細</title>
-<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<meta charset="UTF-8">
+	<title>商品詳細</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
+
 <body>
 	<header th:replace="header"></header>
 
 	<main>
 		<div class="main-container column-center">
-			<div class="column-center item-container show-item"> 
+			<div class="column-center item-container show-item">
 				<img th:src="@{'/img/items/' + ${item.fileName}}">
 				<p>商品名：
 					<span th:text="${item.name}"></span>
@@ -22,17 +24,19 @@
 					<span>数量：
 						<select name="quantity" th:if="${item.stock > 0}">
 							//在庫数分のoptionを表示
-							<option
-								th:each="i : ${#numbers.sequence(1,item.stock)}"
-								th:value="${i}"
-								th:text="${i}"></option>
+							<option th:each="i : ${#numbers.sequence(1,item.stock)}" th:value="${i}" th:text="${i}">
+							</option>
 						</select>
 						<span th:unless="${item.stock > 0}">在庫切れ</span>
 					</span>
 					<span>
 						<input type="hidden" name="itemId" th:value="${item.id}">
-						<button　th:disabled="${item.stock <= 0}">カートに追加</button>
+						<button　th:disabled="${item.stock <=0}">カートに追加</button>
 					</span>
+				</form>
+				<form action="/wishList/add" method="post">
+					<input type="hidden" name="itemId" th:value="${item.id}">
+					<button>ほしい</button>
 				</form>
 
 				<hr class="dots-line">
@@ -46,4 +50,5 @@
 
 	<footer th:replace="footer"></footer>
 </body>
+
 </html>
