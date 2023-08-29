@@ -67,8 +67,7 @@
 
 						<p class="item-quantity">
 							在庫数：
-							<span th:if="${item.stock > 0}">[[${item.stock}]]</span>
-							<span th:unless="${item.stock > 0}">在庫切れ</span>
+							<span th:text="${item.stock}"></span>
 						</p>
 
 						<p>説明文：
@@ -76,10 +75,10 @@
 						</p>
 
 						<div class="row-buttons">
-							<form th:action="'/addresses/' + ${item.id} + '/edit'" method="get">
+							<form th:action="'/admin/items/' + ${item.id} + '/edit'" method="get">
 								<button>編集</button>
 							</form>
-							<form th:action="'/addresses/' + ${item.id} + '/delete'" method="post">
+							<form th:action="'/admin/items/' + ${item.id} + '/delete'" method="post">
 								<button>削除</button>
 							</form>
 						</div>

@@ -155,4 +155,21 @@ public class ItemController {
 
 		return "admin/items";
 	}
+
+	// 【管理】商品詳細表示
+	@GetMapping("/admin/items/{itemId}/edit")
+	public String adminShow(
+			@PathVariable("itemId") Integer itemId,
+			Model model) {
+
+		//	全カテゴリーを取得
+		List<Category> categories = categoryRepository.findAll();
+		model.addAttribute("categories", categories);
+
+		//	商品IDをもとに商品を取得
+		Item item = itemRepository.findById(itemId).get();
+		model.addAttribute("item", item);
+
+		return "admin/editItem";
+	}
 }

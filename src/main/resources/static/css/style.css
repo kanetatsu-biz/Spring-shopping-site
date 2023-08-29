@@ -49,7 +49,8 @@ h5,
 p,
 a,
 span,
-input {
+input,
+textarea {
 	color: var(--main-color);
 }
 
@@ -247,7 +248,8 @@ main {
 }
 
 .input-form input,
-input-form select {
+input-form select,
+input-form textarea {
 	box-sizing: border-box;
 	width: 100%;
 }
