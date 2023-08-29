@@ -493,20 +493,52 @@ footer small {
 }
 
 /* 欲しいものリスト */
+#wish-list h3{
+	text-align: center;
+}
+
 .wish-list{
 	display: flex;
 	justify-content: space-between;
+	height: 250px;
+}
+
+.wish-list:not(:first-child){
+	margin-top: 20px;
 }
 
 .wish-list-img{
 	display: block;
-	width: 50%;
+	width: 20%;
 }
 
 .wish-list-img img{
 	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 .wish-list-content{
-	width: 50%;
+	width: 70%;
+}
+
+.wish-list-delete{
+	width: 10%;
+}
+
+.wish-list-delete form{
+	display: block;
+	width: 100%;
+	height: 100%;
+	margin:0;
+	padding: 0;
+}
+.wish-list-delete button{
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-color: var(--background-color);
+	box-shadow: none;
+	border:none;
+	
 }
