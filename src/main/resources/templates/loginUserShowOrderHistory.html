@@ -16,7 +16,7 @@
 			<div class="history-container">
 				<div>
 					<p>注文日時：[[${loginUserOrderInfo.orderedDatetime}]]</p>
-					<p>合計金額：[[${loginUserOrderInfo.totalPrice}]]</p>
+					<p>合計金額：<span th:utext="${@formatService.getFormattedPrice(loginUserOrderInfo.totalPrice)}"></span></p>
 				</div>
 			</div>
 
@@ -45,24 +45,22 @@
 				</div>
 			</div>
 
+			<hr class="dots-line">
+
 			<!-- 商品履歴詳細 -->
 			<div class="column-center">
-				<div th:each="orderHistoryDetail:${loginUserOrderHistoryDetailList}" class="item-container column-center cart-item">
-					<div class="img-title-container">
-						<img th:src="@{'/img/items/' + ${orderHistoryDetail.fileName}}">
-						<span th:text="${orderHistoryDetail.itemName}"></span>
-					</div>
-					<div>
-						<span>価格</span>
-						<span th:text="${orderHistoryDetail.itemPrice}"></span>
-					</div>
-					<div>
-						<span>数量</span>
-						<span th:text="${orderHistoryDetail.quantity}"></span>
-					</div>
-					<div>
-						<span>説明文</span>
-						<span th:text="${orderHistoryDetail.description}"></span>
+				<div th:each="orderHistoryDetail:${loginUserOrderHistoryDetailList}" class="item-container">
+					<img th:src="@{'/img/items/' + ${orderHistoryDetail.fileName}}">
+					<div class="item-container-right">
+						<span class="font-emphasize" th:text="${orderHistoryDetail.itemName}"></span>
+						<div>
+							<span>価格</span>
+							<span th:utext="${@formatService.getFormattedPrice(orderHistoryDetail.itemPrice)}"></span>
+						</div>
+						<div>
+							<span>数量</span>
+							<span th:text="${orderHistoryDetail.quantity}"></span>
+						</div>
 					</div>
 				</div>
 			</div>
