@@ -55,4 +55,27 @@ public class CheckPermission {
 		// 元のメソッドを実行する
 		return jp.proceed();
 	}
+
+	// 一般ログインユーザーでしか実行できないメソッド
+	@Pointcut("execution(* com.example.demo.controller.OrderController.loginUserOrderHistories(..)) ||"
+			+ "execution(* com.example.demo.controller.OrderController.loginUserShowHistory(..))")
+	public void loginUserPermissionPointcut() {
+	}
+
+	//	 一般ログインユーザーではない場合はアクセス権限エラー画面にリダイレクト
+	@Around("loginUserPermissionPointcut()")
+	public Object checkLoginUserPermission(
+			ProceedingJoinPoint jp) throws Throwable {
+
+		// ログインしていない また一般ログインユーザー以外のroleが付与されている場合
+		//　新規登録者にroleが付与されないので一旦nullの場合も弾く
+		if (loginUser.getId() == null || loginUser.getRole() == null ||
+				!(loginUser.getRole().equals("general"))) {
+			// アクセス権限エラー画面にリダイレクト
+			return "redirect:/error403";
+		}
+
+		// 元のメソッドを実行する
+		return jp.proceed();
+	}
 }
