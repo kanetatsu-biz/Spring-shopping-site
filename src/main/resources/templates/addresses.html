@@ -24,23 +24,23 @@
 				class="item-container input-form">
 				<h3>[[${accountAddress.addressName}]]</h3>
 				<div>
-					<spqn>郵便番号：</spqn>
+					<span>郵便番号：</span>
 					[[${accountAddress.address.postNum}]]
 				</div>
 				<div>
-					<spqn>都道府県：</spqn>
+					<span>都道府県：</span>
 					[[${accountAddress.address.prefecture}]]
 				</div>
 				<div>
-					<spqn>市区町村：</spqn>
+					<span>市区町村：</span>
 					[[${accountAddress.address.municipality}]]
 				</div>
 				<div>
-					<spqn>番地：</spqn>
+					<span>番地：</span>
 					[[${accountAddress.address.houseNum}]]
 				</div>
 				<div>
-					<spqn>建物名・部屋番号：</spqn>
+					<span>建物名・部屋番号：</span>
 					[[${accountAddress.address.buildingNameRoomNum}]]
 				</div>
 				<form th:action="'/addresses/' + ${accountAddress.addressId} + '/edit'" method="get">
