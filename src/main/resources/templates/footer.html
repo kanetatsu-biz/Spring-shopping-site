@@ -4,18 +4,30 @@
 			<h1><a href="/items">使いやすいショッピングサイト</a></h1>
 		</div>
 		<span class="footer-nemu-container">
-			<div class="footer-menu-element">
-				<a href="/admin">管理画面</a>
-			</div>
+			<th:block th:if="${@loginUser.isLogin()}">
+				<div th:if="${@loginUser.isAdmin()}">
+					<a href="/admin">管理画面</a>
+				</div>
+				<th:block th:if="${!@loginUser.isAdmin()}">
+		     		<div>
+						<a href="/loginUser/order/histories">注文履歴</a>
+				 	</div>
+					<div>
+						<a href="/addresses">あて先リスト</a>
+					</div>
+				</th:block>
+			</th:block>
+
 			<div class="footer-menu-login">
-				<th:block th:if="${@loginUser.getName() != null}">
+				<th:block th:if="${@loginUser.isLogin()}">
 					[[${@loginUser.getName()}]]
 					<a href="/logout">ログアウト</a>
 				</th:block>
-				<th:block th:unless="${@loginUser.getName() != null}">
+				<th:block th:unless="${@loginUser.isLogin()}">
 					<a href="/login">新規登録 &#047; ログイン</a>
 				</th:block>
 			</div>
+
 			<div class="footer-menu-cart">
 				<a href="/cart">&#128722;カート</a>
 			</div>

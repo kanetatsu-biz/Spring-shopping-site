@@ -27,9 +27,8 @@ public class CheckPermission {
 	@Around("adminPermissionPointcut()")
 	public Object checkAdminPermission(
 			ProceedingJoinPoint jp) throws Throwable {
-		// ログインしていない　または　ログインユーザーが管理権限を持っていない場合
-		if (loginUser.getId() == null ||
-				!(loginUser.getRole().equals("admin") || loginUser.getRole().equals("system"))) {
+		// （ログインしている　かつ　ログインユーザーが管理権限を持っている）ではない場合
+		if (!(loginUser.isLogin() && loginUser.isAdmin())) {
 			// アクセス権限エラー画面にリダイレクト
 			return "redirect:/error403";
 		}
@@ -40,19 +39,17 @@ public class CheckPermission {
 
 	// 一般ログインユーザーでしか実行できないメソッド
 	@Pointcut("execution(* com.example.demo.controller.OrderController.loginUserOrderHistories(..)) ||"
-			+ "execution(* com.example.demo.controller.OrderController.loginUserShowHistory(..))")
-	public void loginUserPermissionPointcut() {
+			+ "execution(* com.example.demo.controller.OrderController.loginUserShowHistory(..)) ||"
+			+ "execution(* com.example.demo.controller.AddressController.*(..))")
+	public void generalLoginUserPermissionPointcut() {
 	}
 
-	//	 一般ログインユーザーではない場合はアクセス権限エラー画面にリダイレクト
-	@Around("loginUserPermissionPointcut()")
-	public Object checkLoginUserPermission(
+	// 一般ログインユーザーではない場合はアクセス権限エラー画面にリダイレクト
+	@Around("generalLoginUserPermissionPointcut()")
+	public Object checkGeneralLoginUserPermission(
 			ProceedingJoinPoint jp) throws Throwable {
-
-		// ログインしていない また一般ログインユーザー以外のroleが付与されている場合
-		//　新規登録者にroleが付与されないので一旦nullの場合も弾く
-		if (loginUser.getId() == null || loginUser.getRole() == null ||
-				!(loginUser.getRole().equals("general"))) {
+		// ログインしていない または　ログインユーザーが管理権限を持っている場合
+		if (!loginUser.isLogin() || loginUser.isAdmin()) {
 			// アクセス権限エラー画面にリダイレクト
 			return "redirect:/error403";
 		}
