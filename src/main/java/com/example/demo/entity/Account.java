@@ -21,7 +21,7 @@ public class Account {
 
 	private String password; // パスワード
 
-	private String role; // ロール
+	private String role = "general"; // ロール
 
 	public Account() {
 	}
