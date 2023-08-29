@@ -40,7 +40,8 @@ public class CheckPermission {
 
 	// 一般ログインユーザーでしか実行できないメソッド
 	@Pointcut("execution(* com.example.demo.controller.OrderController.loginUserOrderHistories(..)) ||"
-			+ "execution(* com.example.demo.controller.OrderController.loginUserShowHistory(..))")
+			+ "execution(* com.example.demo.controller.OrderController.loginUserShowHistory(..)) ||"
+			+ "execution(* com.example.demo.controller.WishListController.*(..))")
 	public void loginUserPermissionPointcut() {
 	}
 
