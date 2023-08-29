@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>あて先リスト</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+	<header th:replace="header"></header>
+
+	<hr>
+
+	<main>
+		<div class="main-container column-center">
+			<!-- 成功メッセージの表示 -->
+			<p class="success-mes" th:if="${successMes.length > 0}">[[${successMes}]]</p>
+
+			<a href="/addresses/add">追加</a>
+
+			<!--あて先の表示-->
+			<div
+				th:unless="${accountAddressList.size() == 0}"
+				th:each="accountAddress : ${accountAddressList}"
+				class="item-container input-form">
+				<h3>[[${accountAddress.addressName}]]</h3>
+				<div>
+					<spqn>郵便番号：</spqn>
+					[[${accountAddress.address.postNum}]]
+				</div>
+				<div>
+					<spqn>都道府県：</spqn>
+					[[${accountAddress.address.prefecture}]]
+				</div>
+				<div>
+					<spqn>市区町村：</spqn>
+					[[${accountAddress.address.municipality}]]
+				</div>
+				<div>
+					<spqn>番地：</spqn>
+					[[${accountAddress.address.houseNum}]]
+				</div>
+				<div>
+					<spqn>建物名・部屋番号：</spqn>
+					[[${accountAddress.address.buildingNameRoomNum}]]
+				</div>
+				<form th:action="'/addresses/' + ${accountAddress.addressId} + '/edit'" method="get">
+					<button>編集</button>
+				</form>
+				<form th:action="'/addresses/' + ${accountAddress.addressId} + '/delete'" method="post">
+					<button>削除</button>
+				</form>
+			</div>
+			<!--あて先がない場合-->
+			<p th:if="${accountAddressList.size() == 0}">
+				未登録です
+			</p>
+		</div>
+	</main>
+
+	<hr>
+
+	<footer th:replace="footer"></footer>
+</body>
+</html>
