@@ -442,8 +442,7 @@ footer {
 	margin: 0 auto 80px
 }
 
-.footer-menu-login,
-.footer-menu-cart {
+.footer-menu-element {
 	margin-top: 20px;
 }
 
