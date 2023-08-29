@@ -16,7 +16,7 @@
 			</button>
 
 			<!--カテゴリー表示-->
-			<nav class="category-list">
+			<nav class="category-list margin-top-50">
 				<a href="/admin/items">全商品</a>
 				<a
 					th:each="category:${categories}"
@@ -27,8 +27,8 @@
 			</nav>
 
 			<!-- 検索項目 -->
-			<form action="/items" method="get">
-				<div class="column-center">
+			<div class="search-container">
+				<form action="/items" method="get" class="column-center">
 					<div>
 						<div class="row-center">
 							<span>商品名：</span>
@@ -47,12 +47,12 @@
 					<div class="row-space-around">
 						<span>価格：</span>
 						<input type="number" name="minPrice" placeholder="下限なし" th:value="${minPrice}">
-						<span>～</span>
+						<span>&emsp;～&emsp;</span>
 						<input type="number" name="maxPrice" placeholder="上限なし" th:value="${maxPrice}">
 					</div>
 					<button>検索</button>
-				</div>
-			</form>
+				</form>
+			</div>
 
 			<div class="admin-item-list">	
 				<div th:each="item:${items}" class="item-container">
