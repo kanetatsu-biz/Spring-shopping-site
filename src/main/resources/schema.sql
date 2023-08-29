@@ -8,6 +8,7 @@ DROP VIEW IF EXISTS v_login_user_order_histories;
 DROP TABLE IF EXISTS order_details;
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS wish_lists;
+DROP TABLE IF EXISTS account_addresses;
 DROP TABLE IF EXISTS addresses;
 DROP TABLE IF EXISTS accounts;
 DROP TABLE IF EXISTS items;
@@ -54,6 +55,17 @@ CREATE TABLE addresses
    building_name_room_num TEXT
 );
 
+-- あて先とアカウントの中間テーブル
+CREATE TABLE account_addresses
+(
+   account_id INTEGER,
+   address_id INTEGER,
+   address_name VARCHAR(100),
+   PRIMARY KEY (account_id, address_id),
+   FOREIGN KEY (account_id) REFERENCES accounts(id),
+   FOREIGN KEY (address_id) REFERENCES addresses(id)
+);
+
 -- ほしい物テーブル
 CREATE TABLE wish_lists
 (
@@ -61,10 +73,10 @@ CREATE TABLE wish_lists
 	customer_id INTEGER,
 	item_id INTEGER,
 	name TEXT,
-   	file_name VARCHAR(100),
+  file_name VARCHAR(100),
 	FOREIGN KEY (customer_id) REFERENCES accounts(id),
 	FOREIGN KEY (item_id) REFERENCES items(id)
-);
+ );
 
 -- 注文テーブル
 CREATE TABLE orders

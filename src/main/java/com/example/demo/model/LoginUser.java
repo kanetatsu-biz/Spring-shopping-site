@@ -36,4 +36,14 @@ public class LoginUser {
 	public void setRole(String role) {
 		this.role = role;
 	}
+
+	//	ログインしているかどうか
+	public boolean isLogin() {
+		return id != null;
+	}
+
+	//	ログインユーザーが管理ユーザーかどうか
+	public boolean isAdmin() {
+		return role.equals("admin") || role.equals("system");
+	}
 }

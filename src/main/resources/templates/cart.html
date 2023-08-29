@@ -4,43 +4,48 @@
 <meta charset="UTF-8">
 <title>カート一覧</title>
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script th:src="@{/js/common.js}"></script>
 </head>
 <body>
 	<header th:replace="header"></header>
 
 	<main>
 		<div id="cart-items" th:fragment="cart-items" class="main-container column-center">
-			<div th:each="item:${@cart.items}" class="item-container column-center cart-item">
-				<div class="img-title-container">
-					<img th:src="@{'/img/items/' + ${item.fileName}}">
-					<span th:text="${item.name}"></span>
+			<div th:each="item:${@cart.items}" class="item-container">
+				<img th:src="@{'/img/items/' + ${item.fileName}}">
+				<div class="item-container-right">
+					<p class="font-emphasize" th:text="${item.name}"></p>
+					<p>
+						<span>価格：</span>
+						<span th:utext="${@formatService.getFormattedPrice(item.price)}"></span>
+					</p>
+					<p>
+						<span>数量：</span>
+						<select name="quantity" th:onchange="'changeQuantity(' + ${item.id} + ', this.value)'">
+							//在庫数分のoptionを表示
+							//一覧・詳細から選択された数量を初期値に設定
+							<option th:each="i : ${#numbers.sequence(1,item.stock)}" th:selected="${i == item.quantity}"　th:value="${i}" th:text="${i}"></option>										
+						</select>
+					</p>
+					<p>
+						<span>小計：</span>
+						<span th:utext="${@formatService.getFormattedPrice(item.subTotalPrice)}"></span>
+					</p>
+					<form action="/cart/delete" method="post">
+						<input type="hidden" name="itemId" th:value="${item.id}">
+						<button>削除</button>
+					</form>
 				</div>
-				<div>
-					<span>価格：</span>
-					<span th:text="${item.price}"></span>
-				</div>
-				<div>
-					<span>数量：</span>
-					<select name="quantity" th:onchange="'changeQuantity(' + ${item.id} + ', this.value)'">
-						//在庫数分のoptionを表示
-						//一覧・詳細から選択された数量を初期値に設定
-						<option th:each="i : ${#numbers.sequence(1,item.stock)}" th:selected="${i == item.quantity}"　th:value="${i}" th:text="${i}"></option>										
-					</select>
-				</div>
-				<div>
-					<span>小計：</span>
-					<span class="sub-total-price" th:text="${item.subTotalPrice}"></span>
-				</div>
-				<form action="/cart/delete" method="post">
-					<input type="hidden" name="itemId" th:value="${item.id}">
-					<button>削除</button>
-				</form>
 			</div>
 
-			<div>
+			<hr class="dots-line">
+
+			<div class="font-emphasize">
 				<span>合計：</span>
-				<span class="total-price"　th:text="${@cart.totalPrice}"></span>
+				<span th:utext="${@formatService.getFormattedPrice(@cart.totalPrice)}"></span>
 			</div>
+
 			<a href="/order">
 				<button>注文画面に進む</button>
 			</a>
@@ -48,7 +53,5 @@
 	</main>
 
 	<footer th:replace="footer"></footer>
-	
-	<script th:src="@{/js/common.js}"></script>
 </body>
 </html>
