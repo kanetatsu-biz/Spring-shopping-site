@@ -45,3 +45,24 @@ $(document).ready(function() {
         swipeToSlide: true // スワイプでの移動も可
     });
 });
+
+//　指定されたあて先IDに紐づくあて先情報に書き換え
+function changeAddress(selected_address_id) {
+	const url = '/addresses/' +  selected_address_id + '/info';
+	const target = document.getElementById("address-form");
+
+	//変更された数量をpost形式で渡す
+    $.ajax({
+		method: 'GET',
+		data: {},
+		url: url
+	}).then(
+		//戻り値でhtmlを書き換え
+		function(data) {
+			target.outerHTML = data;
+		},
+		function() {
+			alert("error");
+		}
+	);
+}
