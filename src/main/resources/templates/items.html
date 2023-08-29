@@ -2,11 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<<<<<<< HEAD
-	<meta charset="UTF-8">
-	<title>商品一覧</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-=======
 <meta charset="UTF-8">
 <title>商品一覧</title>
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
@@ -15,7 +10,6 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
 <script th:src="@{/js/common.js}"></script>
->>>>>>> branch 'main' of git@github.com:kanetatsu-biz/Spring-shopping-site.git
 </head>
 
 <body>
@@ -66,77 +60,43 @@
 				</form>
 			</div>
 
-<<<<<<< HEAD
-			<div class="item-list">
-				<div th:each="item:${items}" class="item-container">
+			<!-- 商品一覧 -->
+			<div class="item-list-slider">
+        		<th:block th:each="item:${items}">
 					<form action="/cart/add" method="post">
 						<div class="item">
 							<a th:href="'/items/' + ${item.id}" class="item-img">
 								<img th:src="@{'/img/items/' + ${item.fileName}}">
 							</a>
 							<a th:href="'/items/' + ${item.id}" class="item-name">
-								<span th:text="${item.name}"></span>
+								<span th:text="${item.name}"></span>								
 							</a>
-							<span th:text="${item.price}" class="item-price"></span>
+							<span th:utext="${@formatService.getFormattedPrice(item.price)}"
+								class="item-price"></span>
 							<span class="item-quantity">数量：
 								<select name="quantity" th:if="${item.stock > 0}">
 									//在庫数分のoptionを表示
-									<option th:each="i : ${#numbers.sequence(1,item.stock)}" th:value="${i}"
+									<option
+										th:each="i : ${#numbers.sequence(1,item.stock)}"
+										th:value="${i}"
 										th:text="${i}"></option>
 								</select>
 								<span th:unless="${item.stock > 0}">在庫切れ</span>
 							</span>
-							<span class="item-btn">
-								<input type="hidden" name="itemId" th:value="${item.id}">
-								<button th:disabled="${item.stock <= 0}">カートに追加</button>
-							</span>
+							<input type="hidden" name="itemId" th:value="${item.id}">
+							<button th:disabled="${item.stock <= 0}">カートに追加</button>
 						</div>
 					</form>
-					<form action="/wishList/add" method="post">
+        			<form action="/wishList/add" method="post">
 						<input type="hidden" name="itemId" th:value="${item.id}">
 						<button>ほしい</button>
 					</form>
-				</div>
-=======
-			<!-- 商品一覧 -->
-			<div class="item-list-slider">
-				<form action="/cart/add" method="post" th:each="item:${items}">
-					<div class="item">
-						<a th:href="'/items/' + ${item.id}" class="item-img">
-							<img th:src="@{'/img/items/' + ${item.fileName}}">
-						</a>
-						<a th:href="'/items/' + ${item.id}" class="item-name">
-							<span th:text="${item.name}"></span>								
-						</a>
-						<span th:utext="${@formatService.getFormattedPrice(item.price)}"
-							class="item-price"></span>
-						<span class="item-quantity">数量：
-							<select name="quantity" th:if="${item.stock > 0}">
-								//在庫数分のoptionを表示
-								<option
-									th:each="i : ${#numbers.sequence(1,item.stock)}"
-									th:value="${i}"
-									th:text="${i}"></option>
-							</select>
-							<span th:unless="${item.stock > 0}">在庫切れ</span>
-						</span>
-						<input type="hidden" name="itemId" th:value="${item.id}">
-						<button th:disabled="${item.stock <= 0}">カートに追加</button>
-					</div>
-				</form>
->>>>>>> branch 'main' of git@github.com:kanetatsu-biz/Spring-shopping-site.git
+        		</th:block>
 			</div>
 		</div>
 	</main>
 
-	<footer th:replace="footer"></footer>
-<<<<<<< HEAD
-
-	<script th:src="@{/js/common.js}"></script>
-=======
-	
-	
->>>>>>> branch 'main' of git@github.com:kanetatsu-biz/Spring-shopping-site.git
+	<footer th:replace="footer"></footer>	
 </body>
 
 </html>

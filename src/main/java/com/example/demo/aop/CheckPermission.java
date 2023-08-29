@@ -43,6 +43,7 @@ public class CheckPermission {
 			+ "execution(* com.example.demo.controller.WishListController.*(..)) ||"
 			+ "execution(* com.example.demo.controller.AddressController.*(..))")
 	public void generalLoginUserPermissionPointcut() {
+
 	}
 
 	// 一般ログインユーザーではない場合はアクセス権限エラー画面にリダイレクト

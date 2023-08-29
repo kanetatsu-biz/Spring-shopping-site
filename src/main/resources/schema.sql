@@ -73,11 +73,11 @@ CREATE TABLE wish_lists
 	customer_id INTEGER,
 	item_id INTEGER,
 	name TEXT,
-   	file_name VARCHAR(100),
+  file_name VARCHAR(100),
 	FOREIGN KEY (customer_id) REFERENCES accounts(id),
 	FOREIGN KEY (item_id) REFERENCES items(id)
 );
-	
+
 -- 注文テーブル
 CREATE TABLE orders
 (
