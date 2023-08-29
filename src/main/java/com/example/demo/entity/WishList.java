@@ -69,4 +69,8 @@ public class WishList {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
+
+	public boolean isEmpty() {
+		return this.isEmpty();
+	}
 }
