@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>あて先編集画面</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+	<header th:replace="header"></header>
+
+	<hr>
+
+	<main>
+		<div class="main-container column-center">
+			<a href="/addresses">一覧画面に戻る</a>
+
+			<!--あて先入力欄-->
+			<form th:action="'/addresses/' + ${accountAddress.addressId} + '/update'" method="post" class="item-container input-form">
+				<!-- エラーメッセージの表示 -->
+				<p class="err-mes" th:if="${errMes.length > 0}">[[${errMes}]]</p>
+				
+				<div class="one-form-container">
+					<label>あて先名</label>
+					<input type="text" name="addressName" th:value="${accountAddress.addressName}">
+				</div>
+				<div class="one-form-container">
+					<label>郵便番号</label>
+					<input type="text" name="postNum" th:value="${accountAddress.address.postNum}">
+				</div>
+				<div class="one-form-container">
+					<label>都道府県</label>
+					<select name="prefecture">
+						<option
+							th:each="prefecture:${prefectureList}"
+							th:value="${prefecture}"
+							th:selected="${accountAddress.address.isPrefectureSet(prefecture)}">
+							[[${prefecture}]]
+						</option>
+					</select>
+				</div>
+				<div class="one-form-container">
+					<label>市区町村</label>
+					<input type="text" name="municipality" th:value="${accountAddress.address.municipality}">
+				</div>
+				<div class="one-form-container">
+					<label>番地</label>
+					<input type="text" name="houseNum" th:value="${accountAddress.address.houseNum}">
+				</div>
+				<div class="one-form-container">
+					<label>建物名・部屋番号</label>
+					<input type="text" name="buildingNameRoomNum" th:value="${accountAddress.address.buildingNameRoomNum}">
+				</div>
+
+				<button>更新</button>
+			</form>
+		</div>
+	</main>
+
+	<hr>
+
+	<footer th:replace="footer"></footer>
+</body>
+</html>

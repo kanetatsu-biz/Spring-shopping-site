@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 public class Account {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id; // 顧客ID
+	private Integer id; // アカウントID
 
 	private String name; // 名前
 
@@ -21,7 +21,7 @@ public class Account {
 
 	private String password; // パスワード
 
-	private String role; // ロール
+	private String role = "general"; // ロール
 
 	public Account() {
 	}

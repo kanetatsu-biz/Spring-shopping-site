@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <title>商品一覧</title>
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+<script th:src="@{/js/common.js}"></script>
 </head>
 <body>
 	<header th:replace="header"></header>
@@ -29,9 +34,9 @@
 				</a>
 			</nav>
 
-			<!--　検索項目　-->
-			<form action="/items" method="get">
-				<div class="column-center">
+			<!-- 検索項目 -->
+			<div class="search-container">
+				<form action="/items" method="get" class="column-center">
 					<div>
 						<div class="row-center">
 							<span>商品名：</span>
@@ -50,47 +55,45 @@
 					<div class="row-space-around">
 						<span>価格：</span>
 						<input type="number" name="minPrice" placeholder="下限なし" th:value="${minPrice}">
-						<span>～</span>
+						<span>&emsp;～&emsp;</span>
 						<input type="number" name="maxPrice" placeholder="上限なし" th:value="${maxPrice}">
 					</div>
 					<button>検索</button>
-				</div>
-			</form>
+				</form>
+			</div>
 
-			<div class="item-list">	
-				<div th:each="item:${items}" class="item-container">
-					<form action="/cart/add" method="post">
-						<div class="item">
-							<a th:href="'/items/' + ${item.id}" class="item-img">
-								<img th:src="@{'/img/items/' + ${item.fileName}}">
-							</a>
-							<a th:href="'/items/' + ${item.id}" class="item-name">
-								<span th:text="${item.name}"></span>								
-							</a>
-							<span th:text="${item.price}" class="item-price"></span>
-							<span class="item-quantity">数量：
-								<select name="quantity" th:if="${item.stock > 0}">
-									//在庫数分のoptionを表示
-									<option
-										th:each="i : ${#numbers.sequence(1,item.stock)}"
-										th:value="${i}"
-										th:text="${i}"></option>
-								</select>
-								<span th:unless="${item.stock > 0}">在庫切れ</span>
-							</span>
-							<span class="item-btn">
-								<input type="hidden" name="itemId" th:value="${item.id}">
-								<button th:disabled="${item.stock <= 0}">カートに追加</button>
-							</span>
-						</div>
-					</form>
-				</div>
+			<!-- 商品一覧 -->
+			<div class="item-list-slider">
+				<form action="/cart/add" method="post" th:each="item:${items}">
+					<div class="item">
+						<a th:href="'/items/' + ${item.id}" class="item-img">
+							<img th:src="@{'/img/items/' + ${item.fileName}}">
+						</a>
+						<a th:href="'/items/' + ${item.id}" class="item-name">
+							<span th:text="${item.name}"></span>								
+						</a>
+						<span th:utext="${@formatService.getFormattedPrice(item.price)}"
+							class="item-price"></span>
+						<span class="item-quantity">数量：
+							<select name="quantity" th:if="${item.stock > 0}">
+								//在庫数分のoptionを表示
+								<option
+									th:each="i : ${#numbers.sequence(1,item.stock)}"
+									th:value="${i}"
+									th:text="${i}"></option>
+							</select>
+							<span th:unless="${item.stock > 0}">在庫切れ</span>
+						</span>
+						<input type="hidden" name="itemId" th:value="${item.id}">
+						<button th:disabled="${item.stock <= 0}">カートに追加</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</main>
 
 	<footer th:replace="footer"></footer>
 	
-	<script th:src="@{/js/common.js}"></script>
+	
 </body>
 </html>

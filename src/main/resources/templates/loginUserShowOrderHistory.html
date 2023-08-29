@@ -10,14 +10,13 @@
 
 	<main>
 		<div class="main-container column-center">
-			<a href="/admin/order/histories" class="margin-top-50">一覧画面に戻る</a>
+			<a href="/loginUser/order/histories">一覧画面に戻る</a>
 
 			<!-- 注文履歴概要 -->
 			<div class="history-container">
 				<div>
-					<p>アカウント名：[[${orderInfo.acoountName}]]</p>
-					<p>注文日時：[[${orderInfo.orderedDatetime}]]</p>
-					<p>合計金額：<span th:utext="${@formatService.getFormattedPrice(orderInfo.totalPrice)}"></span></p>
+					<p>注文日時：[[${loginUserOrderInfo.orderedDatetime}]]</p>
+					<p>合計金額：<span th:utext="${@formatService.getFormattedPrice(loginUserOrderInfo.totalPrice)}"></span></p>
 				</div>
 			</div>
 
@@ -26,23 +25,23 @@
 				<strong>あて先</strong>
 				<div>
 					<spqn>郵便番号：</spqn>
-					[[${orderInfo.postNum}]]
+					[[${loginUserOrderInfo.postNum}]]
 				</div>
 				<div>
 					<spqn>都道府県：</spqn>
-					[[${orderInfo.prefecture}]]
+					[[${loginUserOrderInfo.prefecture}]]
 				</div>
 				<div>
 					<spqn>市区町村：</spqn>
-					[[${orderInfo.municipality}]]
+					[[${loginUserOrderInfo.municipality}]]
 				</div>
 				<div>
 					<spqn>番地：</spqn>
-					[[${orderInfo.houseNum}]]
+					[[${loginUserOrderInfo.houseNum}]]
 				</div>
 				<div>
 					<spqn>建物名・部屋番号：</spqn>
-					[[${orderInfo.buildingNameRoomNum}]]
+					[[${loginUserOrderInfo.buildingNameRoomNum}]]
 				</div>
 			</div>
 
@@ -50,7 +49,7 @@
 
 			<!-- 商品履歴詳細 -->
 			<div class="column-center">
-				<div th:each="orderHistoryDetail:${orderHistoryDetailList}" class="item-container">
+				<div th:each="orderHistoryDetail:${loginUserOrderHistoryDetailList}" class="item-container">
 					<img th:src="@{'/img/items/' + ${orderHistoryDetail.fileName}}">
 					<div class="item-container-right">
 						<span class="font-emphasize" th:text="${orderHistoryDetail.itemName}"></span>

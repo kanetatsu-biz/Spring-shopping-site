@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>商品一覧</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+	<header th:replace="header"></header>
+
+	<main>
+		<div class="main-container column-center">
+			<div class="account-name">
+				<p th:text="${@loginUser.name} + '様　ご注文履歴一覧'"></p>
+			</div>
+			<div th:if="${loginUserOrderList.isEmpty()}">
+				<p>注文履歴はございません</p>
+				<a href="/items">TOPに戻る</a>
+			</div>
+			<div th:unless="${loginUserOrderList.isEmpty()}" th:each="order:${loginUserOrderList}" class="history-container">
+				<div>
+					<p>注文日時：[[${order.orderedDatetime}]]</p>
+					<p>合計金額：[[${order.totalPrice}]]</p>
+					<p>あて先：[[${order.prefecture}]]</p>
+					<p class="column-center">
+						<a th:href="'/loginUser/order/history/' + ${order.id}">
+							詳細
+						</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer th:replace="footer"></footer>
+</body>
+</html>

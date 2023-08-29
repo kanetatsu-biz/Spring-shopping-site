@@ -10,57 +10,66 @@
 
 	<main>
 		<div class="main-container column-center">
-			<div class="column-center total-price-item">
-				<p>請求額</p>
-				<p class="total-price" th:text="${@cart.totalPrice}"></p>
-			</div>
+			<div class="column-center order-confirm-container">
+				<a href="/order">注文画面に戻る</a>
 
-			<form action="/order"  method="post">
-				<input type="hidden" name="postNum" th:value="${confirmedAddress.postNum}">
-				<input type="hidden" name="prefecture" th:value="${confirmedAddress.prefecture}">
-				<input type="hidden" name="municipality" th:value="${confirmedAddress.municipality}">
-				<input type="hidden" name="houseNum" th:value="${confirmedAddress.houseNum}">
-				<input type="hidden" name="buildingNameRoomNum" th:value="${confirmedAddress.buildingNameRoomNum}">
-				<button>この内容で注文</button>
-			</form>
+				<form action="/order" method="post">
+					<input type="hidden" name="postNum" th:value="${confirmedAddress.postNum}">
+					<input type="hidden" name="prefecture" th:value="${confirmedAddress.prefecture}">
+					<input type="hidden" name="municipality" th:value="${confirmedAddress.municipality}">
+					<input type="hidden" name="houseNum" th:value="${confirmedAddress.houseNum}">
+					<input type="hidden" name="buildingNameRoomNum" th:value="${confirmedAddress.buildingNameRoomNum}">
+					<button>この内容で注文</button>
+				</form>
+	
+				<div class="column-center total-price-item font-emphasize">
+					<p>請求額</p>
+					<p th:utext="${@formatService.getFormattedPrice(@cart.totalPrice)}"></p>
+				</div>
 
-			<!-- あて先表示 -->
-			<div class="input-form">
-				<div>
-					<spqn>郵便番号：</spqn>
-					[[${confirmedAddress.postNum}]]
-				</div>
-				<div>
-					<spqn>都道府県：</spqn>
-					[[${confirmedAddress.prefecture}]]
-				</div>
-				<div>
-					<spqn>市区町村：</spqn>
-					[[${confirmedAddress.municipality}]]
-				</div>
-				<div>
-					<spqn>番地：</spqn>
-					[[${confirmedAddress.houseNum}]]
-				</div>
-				<div>
-					<spqn>建物名・部屋番号：</spqn>
-					[[${confirmedAddress.buildingNameRoomNum}]]
-				</div>
-			</div>
+				<hr class="dots-line">
 
-			<div class="column-center">
-				<div th:each="item:${@cart.items}" class="item-container column-center cart-item">
-					<div class="img-title-container">
+				<!-- あて先表示 -->
+				<p class="font-emphasize font-underline">お届け先</p>
+				<div class="input-form">
+					<div>
+						<spqn>郵便番号：</spqn>
+						[[${confirmedAddress.postNum}]]
+					</div>
+					<div>
+						<spqn>都道府県：</spqn>
+						[[${confirmedAddress.prefecture}]]
+					</div>
+					<div>
+						<spqn>市区町村：</spqn>
+						[[${confirmedAddress.municipality}]]
+					</div>
+					<div>
+						<spqn>番地：</spqn>
+						[[${confirmedAddress.houseNum}]]
+					</div>
+					<div>
+						<spqn>建物名・部屋番号：</spqn>
+						[[${confirmedAddress.buildingNameRoomNum}]]
+					</div>
+				</div>
+
+				<hr class="dots-line">
+
+				<div class="column-center">
+					<div th:each="item:${@cart.items}" class="item-container">
 						<img th:src="@{'/img/items/' + ${item.fileName}}">
-						<span th:text="${item.name}"></span>
-					</div>
-					<div>
-						<span>価格</span>
-						<span th:text="${item.price}"></span>
-					</div>
-					<div>
-						<span>数量</span>
-						<span th:text="${item.quantity}"></span>
+						<div class="item-container-right">
+							<span class="font-emphasize" th:text="${item.name}"></span>
+							<p>
+								<span>価格</span>
+								<span th:utext="${@formatService.getFormattedPrice(item.price)}"></span>
+							</p>
+							<p>
+								<span>数量</span>
+								<span th:text="${item.quantity}"></span>
+							</p>
+						</div>
 					</div>
 				</div>
 			</div>
