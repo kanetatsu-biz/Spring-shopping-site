@@ -55,33 +55,36 @@
 			</div>
 
 			<div class="admin-item-list">	
-				<div th:each="item:${items}" class="item-container">
-					<div class="item">
-						<div class="item-img">
-							<img th:src="@{'/img/items/' + ${item.fileName}}">
-						</div>
+				<div th:each="item:${items}" class="admin-item-container">
+					<div class="admin-item-img">
+						<img th:src="@{'/img/items/' + ${item.fileName}}">
+					</div>
 
-						<span class="item-name" th:text="${item.name}"></span>								
+					<div class="admin-item-name">
+						<span th:text="${item.name}"></span>
+					</div>
 
-						<span th:text="${item.price}" class="item-price"></span>
+					<div class="item-price">
+						<span th:utext="${@formatService.getFormattedPrice(item.price)}"></span>
+					</div>
 
-						<p class="item-quantity">
-							在庫数：
-							<span th:text="${item.stock}"></span>
-						</p>
+					<div class="item-quantity">
+						<span>在庫数：</span>
+						<span th:text="${item.stock}"></span>
+					</div>
 
-						<p>説明文：
-							<span th:text="${item.description}"></span>
-						</p>
+					<div class="admin-item-description">
+						<span>説明文：</span>
+						<span th:text="${item.description}"></span>
+					</div>
 
-						<div class="row-buttons">
-							<form th:action="'/admin/items/' + ${item.id} + '/edit'" method="get">
-								<button>編集</button>
-							</form>
-							<form th:action="'/admin/items/' + ${item.id} + '/delete'" method="post">
-								<button>削除</button>
-							</form>
-						</div>
+					<div class="row-buttons">
+						<form th:action="'/admin/items/' + ${item.id} + '/edit'" method="get">
+							<button>編集</button>
+						</form>
+						<form th:action="'/admin/items/' + ${item.id} + '/delete'" method="post">
+							<button>削除</button>
+						</form>
 					</div>
 				</div>
 			</div>

@@ -14,17 +14,17 @@
 
 			<!--入力フォーム-->
 			<form th:action="'/admin/items/' + ${item.id} + '/update'"
-				method="post" class="input-form">
+				method="post" class="input-form" enctype="multipart/form-data">
 				<!-- エラーメッセージの表示 -->
-<!--				<p class="err-mes" th:if="${errMes.length > 0}">[[${errMes}]]</p>-->
+				<p class="err-mes" th:if="${errMes.length > 0}">[[${errMes}]]</p>
 
 				<div class="one-form-container">
 					<label>商品名</label>
-					<input type="text" name="itemName" th:value="${item.name}">
+					<input type="text" name="name" th:value="${item.name}">
 				</div>
 				<div class="one-form-container">
 					<label>カテゴリ―</label>
-					<select>
+					<select name="categoryId">
 						<option
 							th:if="${categories.size() != 0}"
 							th:each="category : ${categories}"

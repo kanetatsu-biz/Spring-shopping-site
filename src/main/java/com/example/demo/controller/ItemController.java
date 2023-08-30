@@ -1,13 +1,24 @@
 package com.example.demo.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Category;
 import com.example.demo.entity.Item;
@@ -158,8 +169,9 @@ public class ItemController {
 
 	// 【管理】商品詳細表示
 	@GetMapping("/admin/items/{itemId}/edit")
-	public String adminShow(
+	public String adminEditItem(
 			@PathVariable("itemId") Integer itemId,
+			@RequestParam(name = "errMes", defaultValue = "") String errMes,
 			Model model) {
 
 		//	全カテゴリーを取得
@@ -170,6 +182,80 @@ public class ItemController {
 		Item item = itemRepository.findById(itemId).get();
 		model.addAttribute("item", item);
 
+		model.addAttribute("errMes", errMes);
+
 		return "admin/editItem";
+	}
+
+	@Value("${upload.img.path}") // アップロード先ディレクトリのパスを環境変数から取得
+	private String uploadImgPath;
+
+	// 【管理】商品更新処理
+	@PostMapping("/admin/items/{itemId}/update")
+	@Transactional
+	public String adminUpdateItem(
+			@PathVariable("itemId") Integer itemId,
+			@RequestParam("name") String name,
+			@RequestParam("categoryId") Integer categoryId,
+			@RequestParam("price") Integer price,
+			@RequestParam("stock") Integer stock,
+			@RequestParam("description") String description,
+			@RequestParam("imgFile") MultipartFile imgFile,
+			RedirectAttributes redirectAttributes,
+			Model model) {
+
+		//	バリデーション
+		//		if(imgFile.isEmpty()) {
+		//			model.addAttribute("error", "ファイルを指定してください");
+		//			return "index";
+		//		}
+		//		if (!fileName.endsWith(".jpg") && !fileName.endsWith(".png")) {
+		//            // エラー処理
+		//        }
+
+		//	商品IDをもとに商品を取得
+		Item updateItem = itemRepository.findById(itemId).get();
+		//	ファイル名を取得
+		String imgFileName = imgFile.getOriginalFilename();
+
+		//	情報を更新
+		updateItem.setName(name);
+		updateItem.setCategoryId(categoryId);
+		updateItem.setPrice(price);
+		updateItem.setStock(stock);
+		updateItem.setDescription(description);
+		updateItem.setFileName(imgFileName);
+
+		try {
+			//	DBに保存
+			itemRepository.save(updateItem);
+
+			//	指定された画像ファイルと同じファイル名と、絶対パスを設定
+			Path targetFile = Paths.get(this.uploadImgPath).resolve(
+					Paths.get(imgFileName)).normalize().toAbsolutePath();
+
+			//	画像ファイルの中身をコピー
+			try (InputStream inputStream = imgFile.getInputStream()) {
+				//	対象のファイルを作成しそこに書き込み（既存のファイルがある場合は上書き）
+				Files.copy(inputStream, targetFile,
+						StandardCopyOption.REPLACE_EXISTING);
+
+			} catch (IOException e) {
+				//	画像ファイルのアップロードがうまくいかなかった場合
+				e.printStackTrace();
+				// エラーメッセージを渡してリダイレクト
+				redirectAttributes.addAttribute("errMes", "画像ファイルが保存できませんでした。");
+				return "redirect:/admin/items/" + itemId + "/edit";
+			}
+
+		} catch (Exception e) {
+			//	DBの更新がうまくいかなかった場合
+			e.printStackTrace();
+			// エラーメッセージを渡してリダイレクト
+			redirectAttributes.addAttribute("errMes", "商品の更新ができませんでした。");
+			return "redirect:/admin/items/" + itemId + "/edit";
+		}
+
+		return "redirect:/admin/items";
 	}
 }

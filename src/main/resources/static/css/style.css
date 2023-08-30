@@ -419,8 +419,9 @@ input-form textarea {
 /* 注文 */
 /* ボタン横並び */
 .row-buttons {
-	display: flex;
-	gap: 25px;
+	display: grid;
+    gap: 25px;
+    grid-template-columns: 1fr 1fr;
 }
 
 /* 注文確認 */
@@ -501,4 +502,27 @@ footer small {
 	gap: 20px;
 	grid-template-columns: repeat(3, calc(100% / 3));
 	margin: 50px 0;
+}
+
+.admin-item-container {
+	display: grid;
+	grid-template-rows: 250px 61px 35px 25px 75px 65px;
+	gap: 10px;
+	height: 566px;
+	margin: 10px 0;
+}
+
+.admin-item-img img {
+	height: 100%;
+	object-fit: fill;
+	width: 100%;
+}
+
+.admin-item-name {
+	font-size: 20px;
+	overflow: auto;
+}
+
+.admin-item-description {
+	overflow: auto;
 }
