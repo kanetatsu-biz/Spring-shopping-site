@@ -57,7 +57,10 @@
 			<div class="admin-item-list">	
 				<div th:each="item:${items}" class="admin-item-container">
 					<div class="admin-item-img">
-						<img th:src="@{'/img/items/' + ${item.fileName}}">
+						<img th:if="${item.fileName.equals('')}"
+							th:src="@{/img/common/no_image.jpg}">
+						<img th:unless="${item.fileName.equals('')}"
+							th:src="@{'/img/items/' + ${item.fileName}}">
 					</div>
 
 					<div class="admin-item-name">

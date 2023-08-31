@@ -42,13 +42,12 @@
 				</div>
 				<div class="one-form-container">
 					<label>説明文</label>
-					<textarea name="description">
-						[[${item.description}]]
-					</textarea>
+					<textarea name="description">[[${item.description}]]</textarea>
 				</div>
 				<div class="one-form-container">
 					<label>画像</label>
-					<input type="file" name="imgFile" th:value="${item.fileName}">
+					<input type="file" name="imgFile" accept=".png, .jpg, jpeg">
+					<span>※変更する場合のみ指定してください。</span>
 				</div>
 
 				<button>更新</button>

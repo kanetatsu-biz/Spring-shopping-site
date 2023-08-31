@@ -25,7 +25,7 @@ CREATE TABLE items
 (
    id SERIAL PRIMARY KEY,
    category_id INTEGER,
-   name TEXT,
+   name TEXT UNIQUE,
    price INTEGER,
    description TEXT,
    stock INTEGER,

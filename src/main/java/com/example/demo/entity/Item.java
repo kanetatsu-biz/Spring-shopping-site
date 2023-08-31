@@ -19,6 +19,7 @@ public class Item {
 	@Column(name = "category_id")
 	private Integer categoryId; // カテゴリーID
 
+	@Column(unique = true)
 	private String name; // 商品名
 
 	private Integer price; // 価格
@@ -35,6 +36,18 @@ public class Item {
 
 	@Transient
 	private Integer subTotalPrice; // 小計（カートの処理で使用）
+
+	public Item() {
+	};
+
+	//	バリデーション用のコンストラクタ
+	public Item(Integer categoryId, String name, Integer price, String description, Integer stock) {
+		this.categoryId = categoryId;
+		this.name = name;
+		this.price = price;
+		this.description = description;
+		this.stock = stock;
+	}
 
 	public Integer getId() {
 		return id;

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +27,7 @@ import com.example.demo.model.Cart;
 import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.ItemRepository;
 import com.example.demo.service.SearchService;
+import com.example.demo.service.validation.ItemValidationService;
 
 @Controller
 public class ItemController {
@@ -58,7 +60,7 @@ public class ItemController {
 		//	カテゴリーが指定されていたら他の検索条件は無視
 		if (categoryId != null) {
 			//	カテゴリーで絞った商品を取得
-			items = itemRepository.findByCategoryId(categoryId);
+			items = itemRepository.findByCategoryIdOrderById(categoryId);
 		} else {
 			//	入力値を文字列検索用に置き換え
 			String itemNameCriteria = SearchService.getValueWithWildcard(itemName, matchPattern);
@@ -136,7 +138,7 @@ public class ItemController {
 		//	カテゴリーが指定されていたら他の検索条件は無視
 		if (categoryId != null) {
 			//	カテゴリーで絞った商品を取得
-			items = itemRepository.findByCategoryId(categoryId);
+			items = itemRepository.findByCategoryIdOrderById(categoryId);
 		} else {
 			//	入力値を文字列検索用に置き換え
 			String itemNameCriteria = SearchService.getValueWithWildcard(itemName, matchPattern);
@@ -172,14 +174,15 @@ public class ItemController {
 	public String adminEditItem(
 			@PathVariable("itemId") Integer itemId,
 			@RequestParam(name = "errMes", defaultValue = "") String errMes,
+			@ModelAttribute("inputItem") Item inputItem,
 			Model model) {
 
 		//	全カテゴリーを取得
 		List<Category> categories = categoryRepository.findAll();
 		model.addAttribute("categories", categories);
 
-		//	商品IDをもとに商品を取得
-		Item item = itemRepository.findById(itemId).get();
+		//	商品IDをもとに商品を取得（エラーがある場合は前回の入力値を代入）
+		Item item = !errMes.equals("") ? inputItem : itemRepository.findById(itemId).get();
 		model.addAttribute("item", item);
 
 		model.addAttribute("errMes", errMes);
@@ -195,28 +198,43 @@ public class ItemController {
 	@Transactional
 	public String adminUpdateItem(
 			@PathVariable("itemId") Integer itemId,
-			@RequestParam("name") String name,
+			@RequestParam(value = "name", defaultValue = "") String name,
 			@RequestParam("categoryId") Integer categoryId,
-			@RequestParam("price") Integer price,
-			@RequestParam("stock") Integer stock,
-			@RequestParam("description") String description,
-			@RequestParam("imgFile") MultipartFile imgFile,
+			@RequestParam(value = "price", defaultValue = "") Integer price,
+			@RequestParam(value = "stock", defaultValue = "") Integer stock,
+			@RequestParam(value = "description", defaultValue = "") String description,
+			@RequestParam(value = "imgFile", defaultValue = "null") MultipartFile imgFile,
 			RedirectAttributes redirectAttributes,
 			Model model) {
 
-		//	バリデーション
-		//		if(imgFile.isEmpty()) {
-		//			model.addAttribute("error", "ファイルを指定してください");
-		//			return "index";
-		//		}
-		//		if (!fileName.endsWith(".jpg") && !fileName.endsWith(".png")) {
-		//            // エラー処理
-		//        }
+		String errMes = ""; // エラーメッセージ
+		Item inputItem = new Item(categoryId, name, price, description, stock); // 商品の入力値
+
+		//	ファイル名を取得
+		String imgFileName = imgFile.getOriginalFilename();
+
+		//	１－１，必須のバリデーション
+		if (ItemValidationService.validateRequiredFields(inputItem)) {
+			errMes = "「商品名」「価格」「在庫数」は必須項目です。";
+		}
+		//	１－２，商品名の重複のバリデーション
+		else if (itemRepository.existsByNameAndIdNot(name, itemId)) {
+			errMes = "この商品名は既に他で登録済みです。";
+		}
+		//	１－３，画像ファイルの拡張子のバリデーション(png, jpg, jpegのみ可)
+		if (ItemValidationService.validateFileExtension(imgFile, imgFileName)) {
+			errMes = "ファイルの拡張子は「,png」「.jpg」「.jpeg」のいずれかを指定してください。";
+		}
+		//	１－４，バリデーションにはじかれた場合
+		if (!errMes.equals("")) {
+			//	入力値とエラーメッセージをリダイレクト先に送る
+			redirectAttributes.addFlashAttribute("inputItem", inputItem);
+			redirectAttributes.addAttribute("errMes", errMes);
+			return "redirect:/admin/items/" + itemId + "/edit";
+		}
 
 		//	商品IDをもとに商品を取得
 		Item updateItem = itemRepository.findById(itemId).get();
-		//	ファイル名を取得
-		String imgFileName = imgFile.getOriginalFilename();
 
 		//	情報を更新
 		updateItem.setName(name);
@@ -224,30 +242,35 @@ public class ItemController {
 		updateItem.setPrice(price);
 		updateItem.setStock(stock);
 		updateItem.setDescription(description);
-		updateItem.setFileName(imgFileName);
+		//	画像ファイルが指定されていない場合は変更しない
+		if (!imgFile.isEmpty()) {
+			updateItem.setFileName(imgFileName);
+		}
 
 		try {
 			//	DBに保存
 			itemRepository.save(updateItem);
 
-			//	指定された画像ファイルと同じファイル名と、絶対パスを設定
-			Path targetFile = Paths.get(this.uploadImgPath).resolve(
-					Paths.get(imgFileName)).normalize().toAbsolutePath();
+			//	画像ファイルが指定されていた場合
+			if (!imgFile.isEmpty()) {
+				//	指定された画像ファイルと同じファイル名と、絶対パスを設定
+				Path targetFile = Paths.get(this.uploadImgPath).resolve(
+						Paths.get(imgFileName)).normalize().toAbsolutePath();
 
-			//	画像ファイルの中身をコピー
-			try (InputStream inputStream = imgFile.getInputStream()) {
-				//	対象のファイルを作成しそこに書き込み（既存のファイルがある場合は上書き）
-				Files.copy(inputStream, targetFile,
-						StandardCopyOption.REPLACE_EXISTING);
+				//	画像ファイルの中身をコピー
+				try (InputStream inputStream = imgFile.getInputStream()) {
+					//	対象のファイルを作成しそこに書き込み（既存のファイルがある場合は上書き）
+					Files.copy(inputStream, targetFile,
+							StandardCopyOption.REPLACE_EXISTING);
 
-			} catch (IOException e) {
-				//	画像ファイルのアップロードがうまくいかなかった場合
-				e.printStackTrace();
-				// エラーメッセージを渡してリダイレクト
-				redirectAttributes.addAttribute("errMes", "画像ファイルが保存できませんでした。");
-				return "redirect:/admin/items/" + itemId + "/edit";
+				} catch (IOException e) {
+					//	画像ファイルのアップロードがうまくいかなかった場合
+					e.printStackTrace();
+					// エラーメッセージを渡してリダイレクト
+					redirectAttributes.addAttribute("errMes", "画像ファイルが保存できませんでした。");
+					return "redirect:/admin/items/" + itemId + "/edit";
+				}
 			}
-
 		} catch (Exception e) {
 			//	DBの更新がうまくいかなかった場合
 			e.printStackTrace();
