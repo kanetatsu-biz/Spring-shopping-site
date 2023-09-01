@@ -28,7 +28,7 @@ public class Item {
 	private String description; // 説明
 
 	@Column(name = "file_name")
-	private String fileName; // 画像ファイル名
+	private String fileName = ""; // 画像ファイル名
 
 	@Transient
 	private Integer quantity; // 数量（カートの処理で使用）

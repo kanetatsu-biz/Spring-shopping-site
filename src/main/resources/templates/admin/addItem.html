@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>【管理】商品編集画面</title>
+<title>【管理】商品追加画面</title>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
@@ -13,17 +13,11 @@
 			<a href="/admin/items" class="margin-top-50">一覧画面に戻る</a>
 
 			<!--入力フォーム-->
-			<form th:action="'/admin/items/' + ${item.id} + '/update'"
+			<form action="/admin/items/create"
 				method="post" class="input-form" enctype="multipart/form-data">
 				<!-- エラーメッセージの表示 -->
 				<p class="err-mes" th:if="${errMes.length > 0}">[[${errMes}]]</p>
 
-				<div class="one-form-container">
-					<img th:if="${item.fileName.equals('')}"
-						th:src="@{/img/common/no_image.jpg}">
-					<img th:unless="${item.fileName.equals('')}"
-						th:src="@{'/img/items/' + ${item.fileName}}">
-				</div>
 				<div class="one-form-container">
 					<label>商品名</label>
 					<input type="text" name="name" th:value="${item.name}">
@@ -53,10 +47,9 @@
 				<div class="one-form-container">
 					<label>画像</label>
 					<input type="file" name="imgFile" accept=".png, .jpg, jpeg">
-					<span>※変更する場合のみ指定してください。</span>
 				</div>
 
-				<button>更新</button>
+				<button>新規登録</button>
 			</form>
 		</div>
 	</main>

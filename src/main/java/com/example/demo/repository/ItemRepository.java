@@ -25,4 +25,7 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 
 	//	SELECT EXISTS (SELECT 1 FROM item WHERE item_name = ? AND id != ?);
 	boolean existsByNameAndIdNot(String name, Integer id);
+
+	//	SELECT EXISTS (SELECT 1 FROM item WHERE item_name = ?);
+	boolean existsByName(String name);
 }

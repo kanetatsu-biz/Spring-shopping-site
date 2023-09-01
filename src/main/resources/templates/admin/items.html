@@ -10,10 +10,15 @@
 
 	<main>
 		<div class="main-container">
+			<!-- 成功メッセージの表示 -->
+			<div class="admin-item-top-container margin-top-50">
+				<p class="success-mes" th:if="${successMes.length > 0}">[[${successMes}]]</p>
+			</div>
+
 			<!--商品追加-->
-			<button>
-				<a href="/admin/items/add">追加</a>
-			</button>
+			<form action="/admin/items/add" method="get">
+				<button>追加</button>
+			</form>
 
 			<!--カテゴリー表示-->
 			<nav class="category-list margin-top-50">

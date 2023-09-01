@@ -511,6 +511,10 @@ footer small {
 	margin: 50px 0;
 }
 
+.admin-item-top-container {
+	text-align: center;
+}
+
 .admin-item-container {
 	display: grid;
 	grid-template-rows: 250px 61px 35px 25px 75px 65px;
