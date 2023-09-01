@@ -212,7 +212,7 @@ public class ItemController {
 			Model model) {
 
 		String errMes = ""; // エラーメッセージ
-		Item inputItem = new Item(categoryId, name, price, description, fileName, stock); // 商品の入力値
+		Item inputItem = new Item(itemId, categoryId, name, price, description, fileName, stock); // 商品の入力値
 
 		//	ファイル名を取得
 		String imgFileName = imgFile.getOriginalFilename();

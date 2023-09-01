@@ -46,7 +46,9 @@ public class Item {
 	};
 
 	//	バリデーション用のコンストラクタ
-	public Item(Integer categoryId, String name, Integer price, String description, String fileName, Integer stock) {
+	public Item(Integer id, Integer categoryId, String name, Integer price, String description, String fileName,
+			Integer stock) {
+		this.id = id;
 		this.categoryId = categoryId;
 		this.name = name;
 		this.price = price;
