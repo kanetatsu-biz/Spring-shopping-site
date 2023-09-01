@@ -24,11 +24,11 @@ CREATE TABLE categories
 CREATE TABLE items
 (
    id SERIAL PRIMARY KEY,
-   category_id INTEGER,
-   name TEXT UNIQUE,
-   price INTEGER,
+   category_id INTEGER NOT NULL,
+   name TEXT UNIQUE NOT NULL,
+   price INTEGER NOT NULL,
    description TEXT,
-   stock INTEGER,
+   stock INTEGER NOT NULL,
    file_name VARCHAR(100),
    FOREIGN KEY (category_id) REFERENCES categories(id)
 );
@@ -47,10 +47,10 @@ CREATE TABLE accounts
 CREATE TABLE addresses
 (
    id SERIAL PRIMARY KEY,
-   post_num TEXT,
-   prefecture TEXT,
-   municipality TEXT,
-   house_num TEXT,
+   post_num TEXT NOT NULL,
+   prefecture TEXT NOT NULL,
+   municipality TEXT NOT NULL,
+   house_num TEXT NOT NULL,
    building_name_room_num TEXT
 );
 

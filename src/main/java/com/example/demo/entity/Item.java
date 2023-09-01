@@ -16,12 +16,13 @@ public class Item {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id; // 商品ID
 
-	@Column(name = "category_id")
+	@Column(name = "category_id", nullable = false)
 	private Integer categoryId; // カテゴリーID
 
-	@Column(unique = true)
+	@Column(unique = true, nullable = false)
 	private String name; // 商品名
 
+	@Column(nullable = false)
 	private Integer price; // 価格
 
 	private String description; // 説明
@@ -32,6 +33,7 @@ public class Item {
 	@Transient
 	private Integer quantity; // 数量（カートの処理で使用）
 
+	@Column(nullable = false)
 	private Integer stock; // 在庫数（カートの処理で使用）
 
 	@Transient
