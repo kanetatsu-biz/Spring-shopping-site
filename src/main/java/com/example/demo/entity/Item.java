@@ -39,15 +39,19 @@ public class Item {
 	@Transient
 	private Integer subTotalPrice; // 小計（カートの処理で使用）
 
+	@Column(name = "is_deleted")
+	private boolean isDeleted = false; // ソフトデリート用のフラグ
+
 	public Item() {
 	};
 
 	//	バリデーション用のコンストラクタ
-	public Item(Integer categoryId, String name, Integer price, String description, Integer stock) {
+	public Item(Integer categoryId, String name, Integer price, String description, String fileName, Integer stock) {
 		this.categoryId = categoryId;
 		this.name = name;
 		this.price = price;
 		this.description = description;
+		this.fileName = fileName;
 		this.stock = stock;
 	}
 
@@ -116,4 +120,11 @@ public class Item {
 		return price * quantity;
 	}
 
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
 }

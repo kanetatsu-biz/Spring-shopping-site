@@ -10,15 +10,32 @@ import com.example.demo.entity.Item;
 
 public interface ItemRepository extends JpaRepository<Item, Integer> {
 	// SELECT * FROM items WHERE category_id = ? ORDER BY id
+	//	※削除済み含む
 	List<Item> findByCategoryIdOrderById(Integer categoryId);
+
+	// SELECT * FROM items WHERE category_id = ? AND is_deleted = false ORDER BY id
+	List<Item> findByCategoryIdAndIsDeletedFalseOrderById(Integer categoryId);
+
+	//	商品名、価格の下限・上限をもとにクエリを作成
+	//	※削除済み含む
+	@Query("SELECT i FROM Item i WHERE " +
+			"(:name = '' OR i.name ILIKE :name) " +
+			"AND (:minPrice IS NULL OR i.price >= :minPrice) " +
+			"AND (:maxPrice IS NULL OR i.price <= :maxPrice) " +
+			"ORDER BY i.id")
+	List<Item> searchByCriteria(
+			@Param("name") String name,
+			@Param("minPrice") Integer minPrice,
+			@Param("maxPrice") Integer maxPrice);
 
 	//	商品名、価格の下限・上限をもとにクエリを作成
 	@Query("SELECT i FROM Item i WHERE " +
-			"(:name = '' OR i.name ILIKE :name)" +
-			"AND (:minPrice IS NULL OR i.price >= :minPrice)" +
-			"AND (:maxPrice IS NULL OR i.price <= :maxPrice)" +
+			"(:name = '' OR i.name ILIKE :name) " +
+			"AND (:minPrice IS NULL OR i.price >= :minPrice) " +
+			"AND (:maxPrice IS NULL OR i.price <= :maxPrice) " +
+			"AND isDeleted = false " +
 			"ORDER BY i.id")
-	List<Item> searchByCriteria(
+	List<Item> searchByCriteriaIsDeletedFalse(
 			@Param("name") String name,
 			@Param("minPrice") Integer minPrice,
 			@Param("maxPrice") Integer maxPrice);

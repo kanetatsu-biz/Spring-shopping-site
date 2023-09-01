@@ -521,6 +521,17 @@ footer small {
 	gap: 10px;
 	height: 566px;
 	margin: 10px 0;
+	position: relative;
+}
+
+.delete-flag {
+	background-color: var(--background-color);
+	color: var(--main-color);
+	font-weight: bold;
+	left: 10px;
+	position: absolute;
+	top: 10px;
+	z-index: 1;
 }
 
 .admin-item-img img {

@@ -61,6 +61,8 @@
 
 			<div class="admin-item-list">	
 				<div th:each="item:${items}" class="admin-item-container">
+					<span th:if="${item.isDeleted}" class="delete-flag">削除済み</span>
+
 					<div class="admin-item-img">
 						<img th:if="${item.fileName.equals('')}"
 							th:src="@{/img/common/no_image.jpg}">
@@ -88,10 +90,10 @@
 
 					<div class="row-buttons">
 						<form th:action="'/admin/items/' + ${item.id} + '/edit'" method="get">
-							<button>編集</button>
+							<button th:disabled="${item.isDeleted}">編集</button>
 						</form>
 						<form th:action="'/admin/items/' + ${item.id} + '/delete'" method="post">
-							<button>削除</button>
+							<button th:disabled="${item.isDeleted}">削除</button>
 						</form>
 					</div>
 				</div>

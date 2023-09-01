@@ -54,6 +54,7 @@
 					<label>画像</label>
 					<input type="file" name="imgFile" accept=".png, .jpg, jpeg">
 					<span>※変更する場合のみ指定してください。</span>
+					<input type="hidden" name="fileName" th:value="${item.fileName}">
 				</div>
 
 				<button>更新</button>

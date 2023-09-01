@@ -60,13 +60,13 @@ public class ItemController {
 		//	カテゴリーが指定されていたら他の検索条件は無視
 		if (categoryId != null) {
 			//	カテゴリーで絞った商品を取得
-			items = itemRepository.findByCategoryIdOrderById(categoryId);
+			items = itemRepository.findByCategoryIdAndIsDeletedFalseOrderById(categoryId);
 		} else {
 			//	入力値を文字列検索用に置き換え
 			String itemNameCriteria = SearchService.getValueWithWildcard(itemName, matchPattern);
 
 			//	指定された値をもとに検索した商品を取得
-			items = itemRepository.searchByCriteria(
+			items = itemRepository.searchByCriteriaIsDeletedFalse(
 					itemNameCriteria, minPrice, maxPrice);
 		}
 
@@ -206,12 +206,13 @@ public class ItemController {
 			@RequestParam(value = "price", defaultValue = "") Integer price,
 			@RequestParam(value = "stock", defaultValue = "") Integer stock,
 			@RequestParam(value = "description", defaultValue = "") String description,
+			@RequestParam(value = "fileName", defaultValue = "") String fileName,
 			@RequestParam(value = "imgFile", defaultValue = "null") MultipartFile imgFile,
 			RedirectAttributes redirectAttributes,
 			Model model) {
 
 		String errMes = ""; // エラーメッセージ
-		Item inputItem = new Item(categoryId, name, price, description, stock); // 商品の入力値
+		Item inputItem = new Item(categoryId, name, price, description, fileName, stock); // 商品の入力値
 
 		//	ファイル名を取得
 		String imgFileName = imgFile.getOriginalFilename();
@@ -228,16 +229,21 @@ public class ItemController {
 		if (ItemValidationService.validateFileExtension(imgFile, imgFileName)) {
 			errMes = "ファイルの拡張子は「,png」「.jpg」「.jpeg」のいずれかを指定してください。";
 		}
-		//	１－４，バリデーションにはじかれた場合
+
+		//	商品IDをもとに商品を取得
+		Item updateItem = itemRepository.findById(itemId).get();
+
+		//	１－４，削除済みかのバリデーション
+		if (updateItem.isDeleted()) {
+			errMes = "この商品は既に削除されています。";
+		}
+		//	１－５，バリデーションにはじかれた場合
 		if (!errMes.equals("")) {
 			//	入力値とエラーメッセージをリダイレクト先に送る
 			redirectAttributes.addFlashAttribute("inputItem", inputItem);
 			redirectAttributes.addAttribute("errMes", errMes);
 			return "redirect:/admin/items/" + itemId + "/edit";
 		}
-
-		//	商品IDをもとに商品を取得
-		Item updateItem = itemRepository.findById(itemId).get();
 
 		//	情報を更新
 		updateItem.setName(name);
@@ -378,6 +384,24 @@ public class ItemController {
 
 		//	登録が完了した旨を一覧画面に送る
 		redirectAttributes.addAttribute("successMes", "商品の新規登録が完了しました。");
+
+		return "redirect:/admin/items";
+	}
+
+	// 【管理】商品削除処理
+	@PostMapping("/admin/items/{itemId}/delete")
+	public String adminDeleteItem(
+			@PathVariable("itemId") Integer itemId,
+			RedirectAttributes redirectAttributes) {
+
+		//	論理削除処理（データは消さないが消したことにする）
+		//	※注文履歴で参照されるため
+		Item softDeleteItem = itemRepository.findById(itemId).get();
+		softDeleteItem.setDeleted(true);
+		itemRepository.save(softDeleteItem);
+
+		//	削除が完了した旨を一覧画面に送る
+		redirectAttributes.addAttribute("successMes", "商品の削除が完了しました。");
 
 		return "redirect:/admin/items";
 	}

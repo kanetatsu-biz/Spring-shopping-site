@@ -30,6 +30,7 @@ CREATE TABLE items
    description TEXT,
    stock INTEGER NOT NULL,
    file_name VARCHAR(100),
+   is_deleted BOOLEAN,
    FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 
