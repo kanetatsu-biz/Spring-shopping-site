@@ -249,9 +249,16 @@ main {
 
 .input-form input,
 input-form select,
-input-form textarea {
+input-form textarea,
+input-form img {
 	box-sizing: border-box;
 	width: 100%;
+}
+
+.input-form img {
+    height: 300px;
+    object-fit: fill;
+	width: 400px;
 }
 
 .font-emphasize {
