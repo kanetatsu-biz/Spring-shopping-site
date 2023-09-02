@@ -227,6 +227,14 @@ main {
 	justify-content: space-around;
 }
 
+/* インライン要素をそろえる */
+.inline-center {
+	text-align: center;	
+}
+.inline-right {
+    text-align: right;
+}
+
 /* 入力フォーム */
 .input-form {
 	align-items: center;
@@ -236,15 +244,19 @@ main {
 	flex-flow: column;
 	gap: 20px 0;
 	justify-content: center;
+	margin-top: 20px;
 	min-width: 40%;
-	padding: 10px;
+	padding: 20px 70px;
 }
 
 .input-form div {
-	align-items: left;
 	display: flex;
 	flex-flow: column;
 	width: 100%;
+}
+
+.input-form label {
+	font-weight: bold;
 }
 
 .input-form input,
@@ -261,9 +273,31 @@ input-form img {
 	width: 400px;
 }
 
+/* 入力値表示フォーム */
+.output-form {
+	background-color: var(--background-color-with-opacity);
+	border-radius: 10px;
+	display: flex;
+	flex-flow: column;
+	gap: 10px 0;
+	justify-content: center;
+	margin-top: 30px;
+	padding: 20px;
+}
+
+.grid-1-1 {
+	display: grid;
+	gap: 10px;
+	grid-template-columns: 1fr 1fr;
+}
+
 .font-emphasize {
 	font-weight: bold;
 	font-size: 18px;
+}
+
+.font-bold {
+	font-weight: bold;
 }
 
 .font-underline {
@@ -272,10 +306,12 @@ input-form img {
 
 .err-mes {
 	color: red;
+	font-weight: bold;
 }
 
 .success-mes {
 	color: var(--main-color);
+	font-weight: bold;
 }
 
 .margin-top-50 {
@@ -547,4 +583,11 @@ footer small {
 
 .admin-item-description {
 	overflow: auto;
+}
+
+/* レスポンシブ用の幅調整 */
+@media (min-width:750px) {
+	.width-half {
+		width: 50%;
+	}
 }

@@ -11,23 +11,23 @@
 	<hr>
 
 	<main>
-		<div class="main-container column-center">
+		<div class="main-container width-half">
 			<a href="/addresses">一覧画面に戻る</a>
 
 			<!--あて先入力欄-->
-			<form action="/addresses/create" method="post" class="item-container input-form">
+			<form action="/addresses/create" method="post" class="input-form">
 				<!-- エラーメッセージの表示 -->
 				<p class="err-mes" th:if="${errMes.length > 0}">[[${errMes}]]</p>
-				
-				<div class="one-form-container">
+
+				<div>
 					<label>あて先名</label>
 					<input type="text" name="addressName" th:value="${addressName}">
 				</div>
-				<div class="one-form-container">
+				<div>
 					<label>郵便番号</label>
 					<input type="text" name="postNum" th:value="${address.postNum}">
 				</div>
-				<div class="one-form-container">
+				<div>
 					<label>都道府県</label>
 					<select name="prefecture">
 						<option
@@ -38,15 +38,15 @@
 						</option>
 					</select>
 				</div>
-				<div class="one-form-container">
+				<div>
 					<label>市区町村</label>
 					<input type="text" name="municipality" th:value="${address.municipality}">
 				</div>
-				<div class="one-form-container">
+				<div>
 					<label>番地</label>
 					<input type="text" name="houseNum" th:value="${address.houseNum}">
 				</div>
-				<div class="one-form-container">
+				<div>
 					<label>建物名・部屋番号</label>
 					<input type="text" name="buildingNameRoomNum" th:value="${address.buildingNameRoomNum}">
 				</div>
