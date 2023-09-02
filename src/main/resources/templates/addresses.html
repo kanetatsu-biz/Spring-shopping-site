@@ -61,9 +61,10 @@
 				</div>
 			</div>
 			<!--あて先がない場合-->
-			<p th:if="${accountAddressList.size() == 0}">
-				未登録です
-			</p>
+			<div th:if="${accountAddressList.size() == 0}" class="inline-center">
+				<p>あて先リストは未登録です。</p>
+				<a href="/items">商品一覧に戻る</a>
+			</div>
 		</div>
 	</main>
 

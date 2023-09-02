@@ -8,9 +8,11 @@
 <body>
 	<header th:replace="header"></header>
 
+	<hr>
+
 	<main>
-		<div class="main-container column-center">
-			<a href="/admin/items" class="margin-top-50">一覧画面に戻る</a>
+		<div class="main-container width-half">
+			<a href="/admin/items">一覧画面に戻る</a>
 
 			<!--入力フォーム-->
 			<form th:action="'/admin/items/' + ${item.id} + '/update'"
@@ -18,17 +20,17 @@
 				<!-- エラーメッセージの表示 -->
 				<p class="err-mes" th:if="${errMes.length > 0}">[[${errMes}]]</p>
 
-				<div class="one-form-container">
+				<div class="column-center">
 					<img th:if="${item.fileName.equals('')}"
 						th:src="@{/img/common/no_image.jpg}">
 					<img th:unless="${item.fileName.equals('')}"
 						th:src="@{'/img/items/' + ${item.fileName}}">
 				</div>
-				<div class="one-form-container">
+				<div>
 					<label>商品名</label>
 					<input type="text" name="name" th:value="${item.name}">
 				</div>
-				<div class="one-form-container">
+				<div>
 					<label>カテゴリ―</label>
 					<select name="categoryId">
 						<option
@@ -38,19 +40,19 @@
 							th:value="${category.id}" th:text="${category.name}"></option>										
 					</select>
 				</div>
-				<div class="one-form-container">
+				<div>
 					<label>価格</label>
 					<input type="number" name="price" th:value="${item.price}">
 				</div>
-				<div class="one-form-container">
+				<div>
 					<label>在庫数</label>
 					<input type="number" name="stock" th:value="${item.stock}">
 				</div>
-				<div class="one-form-container">
+				<div>
 					<label>説明文</label>
 					<textarea name="description">[[${item.description}]]</textarea>
 				</div>
-				<div class="one-form-container">
+				<div>
 					<label>画像</label>
 					<input type="file" name="imgFile" accept=".png, .jpg, jpeg">
 					<span>※変更する場合のみ指定してください。</span>
@@ -61,6 +63,8 @@
 			</form>
 		</div>
 	</main>
+
+	<hr>
 
 	<footer th:replace="footer"></footer>
 </body>

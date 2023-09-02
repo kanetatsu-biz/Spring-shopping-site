@@ -10,6 +10,8 @@
 <body>
 	<header th:replace="header"></header>
 
+	<hr>
+
 	<main>
 		<div class="main-container column-center">
 			<div th:each="item:${@cart.items}" class="item-container">
@@ -49,7 +51,7 @@
 						th:value="${address.addressId}" th:text="${stat.count} + '. ' + ${address.addressName}"></option>										
 				</select>
 
-				<div class="one-form-container">
+				<div>
 					<label>郵便番号</label>
 					<input type="text" name="postNum" th:value="${address.postNum}"
 						th:disabled="${selectedAddressId != 0}">
@@ -103,9 +105,11 @@
 
 			<a href="/cart">カートに戻る</a>
 
-    </div>
+    	</div>
 	</main>
-	
+
+	<hr>
+
 	<footer th:replace="footer"></footer>
 </body>
 </html>

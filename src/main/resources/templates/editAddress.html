@@ -15,7 +15,8 @@
 			<a href="/addresses">一覧画面に戻る</a>
 
 			<!--あて先入力欄-->
-			<form th:action="'/addresses/' + ${accountAddress.addressId} + '/update'" method="post" class="input-form">
+			<form th:action="'/addresses/' + ${accountAddress.addressId} + '/update'"
+				method="post" class="input-form">
 				<!-- エラーメッセージの表示 -->
 				<p class="err-mes" th:if="${errMes.length > 0}">[[${errMes}]]</p>
 				

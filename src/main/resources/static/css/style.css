@@ -216,7 +216,7 @@ main {
 }
 
 .row-center {
-	/* 縦並び、中央寄せ */
+	/* 横並び、中央寄せ */
 	display: flex;
 	justify-content: center;
 }
@@ -227,7 +227,7 @@ main {
 	justify-content: space-around;
 }
 
-/* インライン要素をそろえる */
+/* インライン要素の配置をそろえる */
 .inline-center {
 	text-align: center;	
 }
@@ -240,6 +240,7 @@ main {
 	align-items: center;
 	background-color: var(--background-color-with-opacity);
 	border-radius: 10px;
+    box-sizing: border-box;
 	display: flex;
 	flex-flow: column;
 	gap: 20px 0;
@@ -247,6 +248,7 @@ main {
 	margin-top: 20px;
 	min-width: 40%;
 	padding: 20px 70px;
+	width: 100%;
 }
 
 .input-form div {
@@ -273,22 +275,24 @@ input-form img {
 	width: 400px;
 }
 
-/* 入力値表示フォーム */
+/* 表示フォーム */
 .output-form {
 	background-color: var(--background-color-with-opacity);
 	border-radius: 10px;
+    box-sizing: border-box;
 	display: flex;
 	flex-flow: column;
 	gap: 10px 0;
 	justify-content: center;
 	margin-top: 30px;
 	padding: 20px;
+	width: 100%;
 }
 
 .grid-1-1 {
 	display: grid;
 	gap: 10px;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 50% 50%;
 }
 
 .font-emphasize {
@@ -531,24 +535,12 @@ footer small {
 	width: 100px;
 }
 
-/* 【管理】注文履歴一覧 */
-.history-container {
-	background-color: var(--background-color-with-opacity);
-	display: flex;
-	justify-content: center;
-	width: 80%;
-}
-
 /* 【管理】商品一覧 */
 .admin-item-list {
 	display: grid;
 	gap: 20px;
 	grid-template-columns: repeat(3, calc(100% / 3));
 	margin: 50px 0;
-}
-
-.admin-item-top-container {
-	text-align: center;
 }
 
 .admin-item-container {
