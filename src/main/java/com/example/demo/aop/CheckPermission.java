@@ -19,7 +19,8 @@ public class CheckPermission {
 	// 管理ユーザーでしか実行できないメソッド
 	@Pointcut("execution(* com.example.demo.controller.AdminController.*(..)) ||"
 			+ "execution(* com.example.demo.controller.OrderController.histories(..)) ||"
-			+ "execution(* com.example.demo.controller.OrderController.showHistory(..))")
+			+ "execution(* com.example.demo.controller.OrderController.showHistory(..)) ||"
+			+ "execution(* com.example.demo.controller.ItemController.admin*(..))")
 	public void adminPermissionPointcut() {
 	}
 

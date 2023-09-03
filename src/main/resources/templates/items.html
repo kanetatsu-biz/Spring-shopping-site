@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>商品一覧</title>
+<title>商品一覧画面</title>
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css">
@@ -45,10 +45,10 @@
 						<div class="row-space-around">
 							<!--文字列の検索条件-->
 		    				<th:block th:each="mp : ${matchPatterns}">
-			    				<input type="radio" name="matchPattern"
+			    				<input type="radio" th:id="${mp.getKey()}" name="matchPattern"
 			    					th:value="${mp.getKey()}"
 			    					th:checked="${mp.getKey().equals(matchPattern)}" />
-			    				<label for="${mp.getKey()}">[[${mp.getValue()}]]</label>
+			    				<label th:for="${mp.getKey()}">[[${mp.getValue()}]]</label>
 							</th:block>
 						</div>
 					</div>
@@ -67,14 +67,18 @@
 				<form action="/cart/add" method="post" th:each="item:${items}">
 					<div class="item">
 						<a th:href="'/items/' + ${item.id}" class="item-img">
-							<img th:src="@{'/img/items/' + ${item.fileName}}">
+							<img th:if="${item.fileName.equals('')}"
+								th:src="@{/img/common/no_image.jpg}">
+							<img th:unless="${item.fileName.equals('')}"
+								th:src="@{'/img/items/' + ${item.fileName}}">
 						</a>
 						<a th:href="'/items/' + ${item.id}" class="item-name">
 							<span th:text="${item.name}"></span>								
 						</a>
 						<span th:utext="${@formatService.getFormattedPrice(item.price)}"
 							class="item-price"></span>
-						<span class="item-quantity">数量：
+						<span class="item-quantity">
+							数量：
 							<select name="quantity" th:if="${item.stock > 0}">
 								//在庫数分のoptionを表示
 								<option
@@ -92,8 +96,9 @@
 		</div>
 	</main>
 
+	<hr>
+
 	<footer th:replace="footer"></footer>
-	
 	
 </body>
 </html>

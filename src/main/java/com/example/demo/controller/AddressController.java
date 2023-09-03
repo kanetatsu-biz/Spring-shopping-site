@@ -154,7 +154,7 @@ public class AddressController {
 				.withStringMatcher(StringMatcher.EXACT);
 		Example<AccountAddress> inputAccountAddressExample = Example.of(inputAccountAddress, exactMatcher);
 
-		//	あて先名とあて先の内容（Query by Exampleを用いて確認）が変更されている場合は更新処理をスルー
+		//	あて先名とあて先の内容（Query by Exampleを用いて確認）が変更されていない場合は更新処理をスルー
 		if (!accountAddressRepository.exists(inputAccountAddressExample)) {
 
 			String errMes = ""; // エラーメッセージ

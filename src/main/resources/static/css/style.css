@@ -35,6 +35,7 @@ body {
 	flex-direction: column;
 	margin: 0;
 	min-height: 100vh;
+	font-family: cursive;
 }
 
 a {
@@ -49,7 +50,8 @@ h5,
 p,
 a,
 span,
-input {
+input,
+textarea {
 	color: var(--main-color);
 }
 
@@ -68,6 +70,10 @@ a {
 
 a:hover {
 	opacity: 70%;
+}
+
+form {
+	width: 100%;
 }
 
 button {
@@ -215,7 +221,7 @@ main {
 }
 
 .row-center {
-	/* 縦並び、中央寄せ */
+	/* 横並び、中央寄せ */
 	display: flex;
 	justify-content: center;
 }
@@ -226,35 +232,88 @@ main {
 	justify-content: space-around;
 }
 
+/* インライン要素の配置をそろえる */
+.inline-center {
+	text-align: center;
+}
+
+.inline-right {
+	text-align: right;
+}
+
 /* 入力フォーム */
 .input-form {
 	align-items: center;
 	background-color: var(--background-color-with-opacity);
 	border-radius: 10px;
+	box-sizing: border-box;
 	display: flex;
 	flex-flow: column;
 	gap: 20px 0;
 	justify-content: center;
+	margin-top: 20px;
 	min-width: 40%;
-	padding: 10px;
+	padding: 20px 70px;
+	width: 100%;
 }
 
 .input-form div {
-	align-items: left;
 	display: flex;
 	flex-flow: column;
 	width: 100%;
 }
 
+.input-form label {
+	font-weight: bold;
+}
+
 .input-form input,
-input-form select {
+input-form select,
+input-form textarea,
+input-form img {
 	box-sizing: border-box;
 	width: 100%;
+}
+
+.input-form img {
+	height: 300px;
+	object-fit: fill;
+	width: 400px;
+}
+
+/* 表示フォーム */
+.output-form {
+	background-color: var(--background-color-with-opacity);
+	border-radius: 10px;
+	box-sizing: border-box;
+	display: flex;
+	flex-flow: column;
+	gap: 10px 0;
+	justify-content: center;
+	margin-top: 30px;
+	padding: 20px;
+	width: 100%;
+}
+
+.grid-1-1 {
+	display: grid;
+	gap: 10px;
+	grid-template-columns: 50% 50%;
+}
+
+.grid-1-4 {
+	display: grid;
+	gap: 10px;
+	grid-template-columns: 20% 80%;
 }
 
 .font-emphasize {
 	font-weight: bold;
 	font-size: 18px;
+}
+
+.font-bold {
+	font-weight: bold;
 }
 
 .font-underline {
@@ -263,14 +322,23 @@ input-form select {
 
 .err-mes {
 	color: red;
+	font-weight: bold;
 }
 
 .success-mes {
 	color: var(--main-color);
+	font-weight: bold;
 }
 
 .margin-top-50 {
 	margin-top: 50px;
+}
+
+/* 必須マーク(右横) */
+.required::after {
+	color: red;
+	content: "※必須";
+	margin-left: 5px;
 }
 
 /* 点線 */
@@ -282,27 +350,24 @@ input-form select {
 
 /* 一つ一つの商品の箱 */
 .item-container {
-	align-items: center;
-	display: flex;
+	display: grid;
 	gap: 25px;
-	margin-top: 50px;
+	grid-template-columns: 60% 40%;
+	grid-template-rows: 40vh;
+	margin-top: 25px;
 	width: 100%;
 }
 
 .item-container img {
-	max-height: 80%;
+	height: 100%;
 	object-fit: fill;
-	width: 50%;
+	width: 100%;
 }
 
 .item-container-right {
-	width: 50%;
-}
-
-/* ログイン・新規登録 */
-.auth-container {
-	margin-top: 50px;
-	height: 40vh;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-evenly;
 }
 
 /* 商品一覧（TOP） */
@@ -314,8 +379,9 @@ input-form select {
 
 .top-banner img {
 	height: 100%;
-	width: 100%;
 	object-fit: cover;
+	opacity: 50%;
+	width: 100%;
 }
 
 .top-banner .cover {
@@ -346,8 +412,13 @@ input-form select {
 }
 
 .search-container {
-    margin: 50px auto 0;
+	margin: 50px auto 0;
 	width: 70%;
+}
+
+.item-list-slider {
+	margin-top: 50px;
+	padding-bottom: 30px;
 }
 
 .item-list-slider {
@@ -359,7 +430,8 @@ input-form select {
 	display: flex;
 	flex-direction: column;
 	height: 65vh;
-    margin: 10px;
+	margin: 10px;
+	max-width: 100%;
 	text-decoration: none;
 }
 
@@ -382,7 +454,7 @@ input-form select {
 	font-size: 20px;
 	overflow: hidden;
 	text-overflow: ellipsis;
-    white-space: nowrap;
+	white-space: nowrap;
 }
 
 .item-price {
@@ -400,31 +472,23 @@ input-form select {
 
 /* 商品詳細 */
 .show-item {
-	height: 70vh;
+	grid-template-rows: 60vh;
+	width: 80%;
 }
 
 /* 注文 */
-.input-form .order-buttons {
-	display: flex;
-	flex-flow: row;
-	gap: 15px;
-}
-
-/* 注文確認 */
-.order-confirm-container {
-    margin-top: 50px;
-}
-
-.total-price-item {
-	gap: 0;
+/* ボタン横並び */
+.row-buttons {
+	display: grid;
+	gap: 25px;
+	grid-template-columns: 1fr 1fr;
 }
 
 /* 注文完了 */
 .ordered-item {
-    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
 	height: 30vh;
-	margin-top: 50px;
 }
 
 /* フッター */
@@ -455,10 +519,11 @@ footer small {
 /* 管理TOP */
 .admin-function-list {
 	display: flex;
+	gap: 25px;
 	justify-content: center;
 	margin-top: 50px;
 	height: 30vh;
-    align-items: center;
+	align-items: center;
 }
 
 .round {
@@ -467,14 +532,57 @@ footer small {
 	border-radius: 50%;
 	display: flex;
 	height: 100px;
+	justify-content: center;
 	padding: 20px;
 	text-decoration: none;
+	width: 100px;
 }
 
-/* 【管理】注文履歴一覧 */
-.history-container {
-	background-color: var(--background-color-with-opacity);
-	display: flex;
-	justify-content: center;
-	width: 80%;
+/* 【管理】商品一覧 */
+.admin-item-list {
+	display: grid;
+	gap: 20px;
+	grid-template-columns: repeat(3, calc(100% / 3));
+	margin: 50px 0;
+}
+
+.admin-item-container {
+	display: grid;
+	grid-template-rows: 250px 61px 35px 25px 75px 65px;
+	gap: 10px;
+	height: 566px;
+	margin: 10px 0;
+	position: relative;
+}
+
+.delete-flag {
+	background-color: var(--background-color);
+	color: var(--main-color);
+	font-weight: bold;
+	left: 10px;
+	position: absolute;
+	top: 10px;
+	z-index: 1;
+}
+
+.admin-item-img img {
+	height: 100%;
+	object-fit: fill;
+	width: 100%;
+}
+
+.admin-item-name {
+	font-size: 20px;
+	overflow: auto;
+}
+
+.admin-item-description {
+	overflow: auto;
+}
+
+/* レスポンシブ用の幅調整 */
+@media (min-width:750px) {
+	.width-half {
+		width: 50%;
+	}
 }

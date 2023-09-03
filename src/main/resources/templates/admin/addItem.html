@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>【管理】商品追加画面</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+	<header th:replace="header"></header>
+
+	<main>
+		<div class="main-container width-half">
+			<a href="/admin/items">＜ 一覧画面に戻る</a>
+
+			<!--入力フォーム-->
+			<form action="/admin/items/create"
+				method="post" class="input-form" enctype="multipart/form-data">
+				<!-- エラーメッセージの表示 -->
+				<p class="err-mes" th:if="${errMes.length > 0}">[[${errMes}]]</p>
+
+				<div>
+					<label class="required">商品名</label>
+					<input type="text" name="name" th:value="${item.name}">
+				</div>
+				<div>
+					<label class="required">カテゴリ―</label>
+					<select name="categoryId">
+						<option
+							th:if="${categories.size() != 0}"
+							th:each="category : ${categories}"
+							th:selected="${item.categoryId == category.id}"
+							th:value="${category.id}" th:text="${category.name}"></option>										
+					</select>
+				</div>
+				<div>
+					<label class="required">価格</label>
+					<input type="number" name="price" th:value="${item.price}">
+				</div>
+				<div>
+					<label class="required">在庫数</label>
+					<input type="number" name="stock" th:value="${item.stock}">
+				</div>
+				<div>
+					<label>説明文</label>
+					<textarea name="description">[[${item.description}]]</textarea>
+				</div>
+				<div>
+					<label>画像</label>
+					<input type="file" name="imgFile" accept=".png, .jpg, jpeg">
+				</div>
+
+				<button>新規登録</button>
+			</form>
+		</div>
+	</main>
+
+	<hr>
+
+	<footer th:replace="footer"></footer>
+</body>
+</html>

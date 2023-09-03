@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>カート一覧</title>
+<title>カート一覧画面</title>
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script th:src="@{/js/common.js}"></script>
@@ -10,28 +10,34 @@
 <body>
 	<header th:replace="header"></header>
 
+	<hr>
+
 	<main>
-		<div id="cart-items" th:fragment="cart-items" class="main-container column-center">
+		<div id="cart-items" th:fragment="cart-items" class="main-container column-center width-half">
 			<div th:each="item:${@cart.items}" class="item-container">
-				<img th:src="@{'/img/items/' + ${item.fileName}}">
+				<img th:if="${item.fileName.equals('')}"
+					th:src="@{/img/common/no_image.jpg}">
+				<img th:unless="${item.fileName.equals('')}"
+					th:src="@{'/img/items/' + ${item.fileName}}">
+
 				<div class="item-container-right">
-					<p class="font-emphasize" th:text="${item.name}"></p>
-					<p>
+					<span class="font-emphasize" th:text="${item.name}"></span>
+					<span>
 						<span>価格：</span>
 						<span th:utext="${@formatService.getFormattedPrice(item.price)}"></span>
-					</p>
-					<p>
+					</span>
+					<span>
 						<span>数量：</span>
 						<select name="quantity" th:onchange="'changeQuantity(' + ${item.id} + ', this.value)'">
 							//在庫数分のoptionを表示
 							//一覧・詳細から選択された数量を初期値に設定
 							<option th:each="i : ${#numbers.sequence(1,item.stock)}" th:selected="${i == item.quantity}"　th:value="${i}" th:text="${i}"></option>										
 						</select>
-					</p>
-					<p>
+					</span>
+					<span>
 						<span>小計：</span>
 						<span th:utext="${@formatService.getFormattedPrice(item.subTotalPrice)}"></span>
-					</p>
+					</span>
 					<form action="/cart/delete" method="post">
 						<input type="hidden" name="itemId" th:value="${item.id}">
 						<button>削除</button>
@@ -46,11 +52,15 @@
 				<span th:utext="${@formatService.getFormattedPrice(@cart.totalPrice)}"></span>
 			</div>
 
-			<a href="/order">
+			<form action="/order" method="get">
 				<button>注文画面に進む</button>
-			</a>
+			</form>
+<!--			<a href="/order">-->
+<!--			</a>-->
 		</div>
 	</main>
+
+	<hr>
 
 	<footer th:replace="footer"></footer>
 </body>
