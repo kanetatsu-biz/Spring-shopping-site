@@ -22,19 +22,15 @@
 				th:each="order:${loginUserOrderList}" class="output-form">
 				<div class="grid-1-1">
 					<span class="font-bold inline-right">注文日時：</span>
-					[[${order.orderedDatetime}]]
+					[[${@formatService.getFormattedDateTime(order.orderedDatetime)}]]
 				</div>
 				<div class="grid-1-1">
 					<span class="font-bold inline-right">合計金額：</span>
-					[[${order.totalPrice}]]
+					<span th:utext="${@formatService.getFormattedPrice(order.totalPrice)}"></span>
 				</div>
 				<div class="grid-1-1">
 					<span class="font-bold inline-right">あて先：</span>
 					[[${order.prefecture}]]
-				</div>
-				<div class="grid-1-1">
-					<span class="font-bold inline-right">注文日時：</span>
-					[[${order.orderedDatetime}]]
 				</div>
 				<div class="inline-center">
 					<a th:href="'/loginUser/order/history/' + ${order.id}">

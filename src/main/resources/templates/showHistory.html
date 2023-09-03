@@ -22,7 +22,7 @@
 				</div>
 				<div class="grid-1-1">
 					<span class="font-bold inline-right">注文日時：</span>
-					[[${orderInfo.orderedDatetime}]]
+					[[${@formatService.getFormattedDateTime(orderInfo.orderedDatetime)}]]
 				</div>
 				<div class="grid-1-1">
 					<span class="font-bold inline-right">合計金額：</span>

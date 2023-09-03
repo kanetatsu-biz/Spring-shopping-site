@@ -18,7 +18,7 @@
 			<div class="output-form">
 				<div class="grid-1-1">
 					<span class="font-bold inline-right">注文日時：</span>
-					[[${loginUserOrderInfo.orderedDatetime}]]
+					[[${@formatService.getFormattedDateTime(loginUserOrderInfo.orderedDatetime)}]]
 				</div>
 				<div class="grid-1-1">
 					<span class="font-bold inline-right">合計金額：</span>
