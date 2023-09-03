@@ -67,14 +67,18 @@
 				<form action="/cart/add" method="post" th:each="item:${items}">
 					<div class="item">
 						<a th:href="'/items/' + ${item.id}" class="item-img">
-							<img th:src="@{'/img/items/' + ${item.fileName}}">
+							<img th:if="${item.fileName.equals('')}"
+								th:src="@{/img/common/no_image.jpg}">
+							<img th:unless="${item.fileName.equals('')}"
+								th:src="@{'/img/items/' + ${item.fileName}}">
 						</a>
 						<a th:href="'/items/' + ${item.id}" class="item-name">
 							<span th:text="${item.name}"></span>								
 						</a>
 						<span th:utext="${@formatService.getFormattedPrice(item.price)}"
 							class="item-price"></span>
-						<span class="item-quantity">数量：
+						<span class="item-quantity">
+							数量：
 							<select name="quantity" th:if="${item.stock > 0}">
 								//在庫数分のoptionを表示
 								<option

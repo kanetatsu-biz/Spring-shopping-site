@@ -11,10 +11,10 @@
 	<hr>
 
 	<main>
-		<div class="main-container column-center">
-			<div class="column-center order-confirm-container">
-				<a href="/order">注文画面に戻る</a>
+		<div class="main-container width-half">
+			<a href="/order">注文画面に戻る</a>
 
+			<div class="column-center">
 				<form action="/order" method="post">
 					<input type="hidden" name="postNum" th:value="${confirmedAddress.postNum}">
 					<input type="hidden" name="prefecture" th:value="${confirmedAddress.prefecture}">
@@ -24,34 +24,34 @@
 					<button>この内容で注文</button>
 				</form>
 	
-				<div class="column-center total-price-item font-emphasize">
-					<p>請求額</p>
+				<div class="inline-center font-emphasize">
+					<p class="font-underline">請求額</p>
 					<p th:utext="${@formatService.getFormattedPrice(@cart.totalPrice)}"></p>
 				</div>
 
 				<hr class="dots-line">
 
 				<!-- あて先表示 -->
-				<p class="font-emphasize font-underline">お届け先</p>
-				<div class="input-form">
-					<div>
-						<span>郵便番号：</span>
+				<span class="font-emphasize font-underline">お届け先</span>
+				<div class="output-form">
+					<div class="grid-1-1">
+						<span class="font-bold inline-right">郵便番号：</span>
 						[[${confirmedAddress.postNum}]]
 					</div>
-					<div>
-						<span>都道府県：</span>
+					<div class="grid-1-1">
+						<span class="font-bold inline-right">都道府県：</span>
 						[[${confirmedAddress.prefecture}]]
 					</div>
-					<div>
-						<span>市区町村：</span>
+					<div class="grid-1-1">
+						<span class="font-bold inline-right">市区町村：</span>
 						[[${confirmedAddress.municipality}]]
 					</div>
-					<div>
-						<span>番地：</span>
+					<div class="grid-1-1">
+						<span class="font-bold inline-right">番地：</span>
 						[[${confirmedAddress.houseNum}]]
 					</div>
-					<div>
-						<span>建物名・部屋番号：</span>
+					<div class="grid-1-1">
+						<span class="font-bold inline-right">建物名・部屋番号：</span>
 						[[${confirmedAddress.buildingNameRoomNum}]]
 					</div>
 				</div>
@@ -60,7 +60,11 @@
 
 				<div class="column-center">
 					<div th:each="item:${@cart.items}" class="item-container">
-						<img th:src="@{'/img/items/' + ${item.fileName}}">
+						<img th:if="${item.fileName.equals('')}"
+							th:src="@{/img/common/no_image.jpg}">
+						<img th:unless="${item.fileName.equals('')}"
+							th:src="@{'/img/items/' + ${item.fileName}}">
+
 						<div class="item-container-right">
 							<span class="font-emphasize" th:text="${item.name}"></span>
 							<p>

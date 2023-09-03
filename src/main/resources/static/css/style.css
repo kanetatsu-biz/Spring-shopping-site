@@ -71,6 +71,10 @@ a:hover {
 	opacity: 70%;
 }
 
+form {
+	width: 100%;
+}
+
 button {
 	width: 100%;
 	border: 1px solid var(--main-color);
@@ -294,6 +298,11 @@ input-form img {
 	gap: 10px;
 	grid-template-columns: 50% 50%;
 }
+.grid-1-4 {
+	display: grid;
+	gap: 10px;
+	grid-template-columns: 20% 80%;
+}
 
 .font-emphasize {
 	font-weight: bold;
@@ -322,6 +331,13 @@ input-form img {
 	margin-top: 50px;
 }
 
+/* 必須マーク(右横) */
+.required::after {
+    color: red;
+	content: "※必須";
+    margin-left: 5px;
+}
+
 /* 点線 */
 .dots-line {
 	border-top: 3px dotted black;
@@ -331,32 +347,24 @@ input-form img {
 
 /* 一つ一つの商品の箱 */
 .item-container {
-	align-items: center;
-	display: flex;
+    display: grid;
 	gap: 25px;
-	margin-top: 50px;
+    grid-template-columns: 60% 40%;;
+	grid-template-rows: 40vh;
+	margin-top: 25px;
 	width: 100%;
 }
 
 .item-container img {
-	max-height: 80%;
-	object-fit: fill;
-	width: 50%;
-}
-
-.item-container form {
 	height: 100%;
+	object-fit: fill;
 	width: 100%;
 }
 
 .item-container-right {
-	width: 50%;
-}
-
-/* ログイン・新規登録 */
-.auth-container {
-	margin-top: 50px;
-	height: 40vh;
+	display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
 }
 
 /* 商品一覧（TOP） */
@@ -460,7 +468,8 @@ input-form img {
 
 /* 商品詳細 */
 .show-item {
-	height: 70vh;
+	grid-template-rows: 60vh;
+	width: 80%;
 }
 
 /* 注文 */
@@ -471,21 +480,11 @@ input-form img {
     grid-template-columns: 1fr 1fr;
 }
 
-/* 注文確認 */
-.order-confirm-container {
-    margin-top: 50px;
-}
-
-.total-price-item {
-	gap: 0;
-}
-
 /* 注文完了 */
 .ordered-item {
     display: flex;
     justify-content: center;
 	height: 30vh;
-	margin-top: 50px;
 }
 
 /* フッター */

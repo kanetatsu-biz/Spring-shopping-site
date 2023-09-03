@@ -11,21 +11,21 @@
 	<hr>
 
 	<main>
-		<div class="main-container column-center">
-			<form action="/register" method="post" class="auth-container input-form">
+		<div class="main-container width-half">
+			<form action="/register" method="post" class="input-form">
 				<!-- エラーメッセージの表示 -->
-				<p class="font-emphasize err-mes" th:if="${errMes.length > 0}">[[${errMes}]]</p>
+				<p class="err-mes" th:if="${errMes.length > 0}">[[${errMes}]]</p>
 
 				<div>
-					<span>名前</span>
+					<label class="required">名前</label>
 					<input type="text" name="name" th:value="${name}">					
 				</div>
 				<div>
-					<span>メールアドレス</span>
+					<label class="required">メールアドレス</label>
 					<input type="email" name="email" th:value="${email}">					
 				</div>
 				<div>
-					<span>パスワード</span>
+					<label class="required">パスワード</label>
 					<input type="password" name="password" th:value="${password}">					
 				</div>
 				<button>新規登録</button>

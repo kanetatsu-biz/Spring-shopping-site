@@ -27,11 +27,11 @@
 						th:src="@{'/img/items/' + ${item.fileName}}">
 				</div>
 				<div>
-					<label>商品名</label>
+					<label class="required">商品名</label>
 					<input type="text" name="name" th:value="${item.name}">
 				</div>
 				<div>
-					<label>カテゴリ―</label>
+					<label class="required">カテゴリ―</label>
 					<select name="categoryId">
 						<option
 							th:if="${categories.size() != 0}"
@@ -41,11 +41,11 @@
 					</select>
 				</div>
 				<div>
-					<label>価格</label>
+					<label class="required">価格</label>
 					<input type="number" name="price" th:value="${item.price}">
 				</div>
 				<div>
-					<label>在庫数</label>
+					<label class="required">在庫数</label>
 					<input type="number" name="stock" th:value="${item.stock}">
 				</div>
 				<div>

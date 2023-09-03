@@ -20,15 +20,15 @@
 				<p class="err-mes" th:if="${errMes.length > 0}">[[${errMes}]]</p>
 
 				<div>
-					<label>あて先名</label>
+					<label class="required">あて先名</label>
 					<input type="text" name="addressName" th:value="${addressName}">
 				</div>
 				<div>
-					<label>郵便番号</label>
+					<label class="required">郵便番号</label>
 					<input type="text" name="postNum" th:value="${address.postNum}">
 				</div>
 				<div>
-					<label>都道府県</label>
+					<label class="required">都道府県</label>
 					<select name="prefecture">
 						<option
 							th:each="prefecture:${prefectureList}"
@@ -39,11 +39,11 @@
 					</select>
 				</div>
 				<div>
-					<label>市区町村</label>
+					<label class="required">市区町村</label>
 					<input type="text" name="municipality" th:value="${address.municipality}">
 				</div>
 				<div>
-					<label>番地</label>
+					<label class="required">番地</label>
 					<input type="text" name="houseNum" th:value="${address.houseNum}">
 				</div>
 				<div>
