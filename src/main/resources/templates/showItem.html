@@ -8,10 +8,16 @@
 <body>
 	<header th:replace="header"></header>
 
+	<hr>
+
 	<main>
 		<div class="main-container column-center">
 			<div class="item-container show-item">
-				<img th:src="@{'/img/items/' + ${item.fileName}}">
+				<img th:if="${item.fileName.equals('')}"
+					th:src="@{/img/common/no_image.jpg}">
+				<img th:unless="${item.fileName.equals('')}"
+					th:src="@{'/img/items/' + ${item.fileName}}">
+
 				<div class="item-container-right">
 					<span class="font-emphasize" th:text="${item.name}"></span>
 					<p>価格：
@@ -25,7 +31,8 @@
 					<hr class="dots-line">
 
 					<form action="/cart/add" method="post">
-						<span>数量：
+						<span class="grid-1-4">
+							数量：
 							<select name="quantity" th:if="${item.stock > 0}">
 								//在庫数分のoptionを表示
 								<option
@@ -37,14 +44,15 @@
 						</span>
 						<span>
 							<input type="hidden" name="itemId" th:value="${item.id}">
-							<button　th:disabled="${item.stock <= 0}">カートに追加</button>
+							<button th:disabled="${item.stock <= 0}">カートに追加</button>
 						</span>
 					</form>
-	
 				</div>
 			</div>
 		</div>
 	</main>
+
+	<hr>
 
 	<footer th:replace="footer"></footer>
 </body>

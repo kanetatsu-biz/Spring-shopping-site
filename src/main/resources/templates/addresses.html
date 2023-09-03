@@ -11,49 +11,60 @@
 	<hr>
 
 	<main>
-		<div class="main-container column-center">
+		<div class="main-container width-half">
 			<!-- 成功メッセージの表示 -->
-			<p class="success-mes" th:if="${successMes.length > 0}">[[${successMes}]]</p>
+			<div class="inline-center">
+				<p class="success-mes" th:if="${successMes.length > 0}">
+					[[${successMes}]]
+				</p>
+			</div>
 
-			<a href="/addresses/add">追加</a>
+			<form action="/addresses/add" method="get">
+				<button>追加</button>
+			</form>
 
 			<!--あて先の表示-->
 			<div
 				th:unless="${accountAddressList.size() == 0}"
 				th:each="accountAddress : ${accountAddressList}"
-				class="item-container input-form">
-				<h3>[[${accountAddress.addressName}]]</h3>
-				<div>
-					<span>郵便番号：</span>
+				class="output-form">
+				<div class="inline-center">
+					<h3>[[${accountAddress.addressName}]]</h3>
+				</div>
+				<div class="grid-1-1">
+					<span class="font-bold inline-right">郵便番号：</span>
 					[[${accountAddress.address.postNum}]]
 				</div>
-				<div>
-					<span>都道府県：</span>
+				<div class="grid-1-1">
+					<span class="font-bold inline-right">都道府県：</span>
 					[[${accountAddress.address.prefecture}]]
 				</div>
-				<div>
-					<span>市区町村：</span>
+				<div class="grid-1-1">
+					<span class="font-bold inline-right">市区町村：</span>
 					[[${accountAddress.address.municipality}]]
 				</div>
-				<div>
-					<span>番地：</span>
+				<div class="grid-1-1">
+					<span class="font-bold inline-right">番地：</span>
 					[[${accountAddress.address.houseNum}]]
 				</div>
-				<div>
-					<span>建物名・部屋番号：</span>
+				<div class="grid-1-1">
+					<span class="font-bold inline-right">建物名・部屋番号：</span>
 					[[${accountAddress.address.buildingNameRoomNum}]]
 				</div>
-				<form th:action="'/addresses/' + ${accountAddress.addressId} + '/edit'" method="get">
-					<button>編集</button>
-				</form>
-				<form th:action="'/addresses/' + ${accountAddress.addressId} + '/delete'" method="post">
-					<button>削除</button>
-				</form>
+				<div class="row-buttons">
+					<form th:action="'/addresses/' + ${accountAddress.addressId} + '/edit'" method="get">
+						<button>編集</button>
+					</form>
+					<form th:action="'/addresses/' + ${accountAddress.addressId} + '/delete'" method="post">
+						<button>削除</button>
+					</form>
+				</div>
 			</div>
 			<!--あて先がない場合-->
-			<p th:if="${accountAddressList.size() == 0}">
-				未登録です
-			</p>
+			<div th:if="${accountAddressList.size() == 0}" class="inline-center">
+				<p>あて先リストは未登録です。</p>
+				<a href="/items">商品一覧に戻る</a>
+			</div>
 		</div>
 	</main>
 

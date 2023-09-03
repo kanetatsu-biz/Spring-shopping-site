@@ -35,6 +35,7 @@ body {
 	flex-direction: column;
 	margin: 0;
 	min-height: 100vh;
+	font-family: cursive;
 }
 
 a {
@@ -69,6 +70,10 @@ a {
 
 a:hover {
 	opacity: 70%;
+}
+
+form {
+	width: 100%;
 }
 
 button {
@@ -216,7 +221,7 @@ main {
 }
 
 .row-center {
-	/* 縦並び、中央寄せ */
+	/* 横並び、中央寄せ */
 	display: flex;
 	justify-content: center;
 }
@@ -227,24 +232,39 @@ main {
 	justify-content: space-around;
 }
 
+/* インライン要素の配置をそろえる */
+.inline-center {
+	text-align: center;
+}
+
+.inline-right {
+	text-align: right;
+}
+
 /* 入力フォーム */
 .input-form {
 	align-items: center;
 	background-color: var(--background-color-with-opacity);
 	border-radius: 10px;
+	box-sizing: border-box;
 	display: flex;
 	flex-flow: column;
 	gap: 20px 0;
 	justify-content: center;
+	margin-top: 20px;
 	min-width: 40%;
-	padding: 10px;
+	padding: 20px 70px;
+	width: 100%;
 }
 
 .input-form div {
-	align-items: left;
 	display: flex;
 	flex-flow: column;
 	width: 100%;
+}
+
+.input-form label {
+	font-weight: bold;
 }
 
 .input-form input,
@@ -256,14 +276,44 @@ input-form img {
 }
 
 .input-form img {
-    height: 300px;
-    object-fit: fill;
+	height: 300px;
+	object-fit: fill;
 	width: 400px;
+}
+
+/* 表示フォーム */
+.output-form {
+	background-color: var(--background-color-with-opacity);
+	border-radius: 10px;
+	box-sizing: border-box;
+	display: flex;
+	flex-flow: column;
+	gap: 10px 0;
+	justify-content: center;
+	margin-top: 30px;
+	padding: 20px;
+	width: 100%;
+}
+
+.grid-1-1 {
+	display: grid;
+	gap: 10px;
+	grid-template-columns: 50% 50%;
+}
+
+.grid-1-4 {
+	display: grid;
+	gap: 10px;
+	grid-template-columns: 20% 80%;
 }
 
 .font-emphasize {
 	font-weight: bold;
 	font-size: 18px;
+}
+
+.font-bold {
+	font-weight: bold;
 }
 
 .font-underline {
@@ -272,14 +322,23 @@ input-form img {
 
 .err-mes {
 	color: red;
+	font-weight: bold;
 }
 
 .success-mes {
 	color: var(--main-color);
+	font-weight: bold;
 }
 
 .margin-top-50 {
 	margin-top: 50px;
+}
+
+/* 必須マーク(右横) */
+.required::after {
+	color: red;
+	content: "※必須";
+	margin-left: 5px;
 }
 
 /* 点線 */
@@ -291,32 +350,24 @@ input-form img {
 
 /* 一つ一つの商品の箱 */
 .item-container {
-	align-items: center;
-	display: flex;
+	display: grid;
 	gap: 25px;
-	margin-top: 50px;
+	grid-template-columns: 60% 40%;
+	grid-template-rows: 40vh;
+	margin-top: 25px;
 	width: 100%;
 }
 
 .item-container img {
-	max-height: 80%;
-	object-fit: fill;
-	width: 50%;
-}
-
-.item-container form {
 	height: 100%;
+	object-fit: fill;
 	width: 100%;
 }
 
 .item-container-right {
-	width: 50%;
-}
-
-/* ログイン・新規登録 */
-.auth-container {
-	margin-top: 50px;
-	height: 40vh;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-evenly;
 }
 
 /* 商品一覧（TOP） */
@@ -328,8 +379,9 @@ input-form img {
 
 .top-banner img {
 	height: 100%;
-	width: 100%;
 	object-fit: cover;
+	opacity: 50%;
+	width: 100%;
 }
 
 .top-banner .cover {
@@ -360,7 +412,7 @@ input-form img {
 }
 
 .search-container {
-  margin: 50px auto 0;
+	margin: 50px auto 0;
 	width: 70%;
 }
 
@@ -378,8 +430,8 @@ input-form img {
 	display: flex;
 	flex-direction: column;
 	height: 65vh;
-    margin: 10px;
-    max-width: 100%;
+	margin: 10px;
+	max-width: 100%;
 	text-decoration: none;
 }
 
@@ -402,7 +454,7 @@ input-form img {
 	font-size: 20px;
 	overflow: hidden;
 	text-overflow: ellipsis;
-    white-space: nowrap;
+	white-space: nowrap;
 }
 
 .item-price {
@@ -420,32 +472,23 @@ input-form img {
 
 /* 商品詳細 */
 .show-item {
-	height: 70vh;
+	grid-template-rows: 60vh;
+	width: 80%;
 }
 
 /* 注文 */
 /* ボタン横並び */
 .row-buttons {
 	display: grid;
-    gap: 25px;
-    grid-template-columns: 1fr 1fr;
-}
-
-/* 注文確認 */
-.order-confirm-container {
-    margin-top: 50px;
-}
-
-.total-price-item {
-	gap: 0;
+	gap: 25px;
+	grid-template-columns: 1fr 1fr;
 }
 
 /* 注文完了 */
 .ordered-item {
-    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
 	height: 30vh;
-	margin-top: 50px;
 }
 
 /* フッター */
@@ -480,7 +523,7 @@ footer small {
 	justify-content: center;
 	margin-top: 50px;
 	height: 30vh;
-    align-items: center;
+	align-items: center;
 }
 
 .round {
@@ -489,18 +532,10 @@ footer small {
 	border-radius: 50%;
 	display: flex;
 	height: 100px;
-    justify-content: center;
+	justify-content: center;
 	padding: 20px;
 	text-decoration: none;
 	width: 100px;
-}
-
-/* 【管理】注文履歴一覧 */
-.history-container {
-	background-color: var(--background-color-with-opacity);
-	display: flex;
-	justify-content: center;
-	width: 80%;
 }
 
 /* 【管理】商品一覧 */
@@ -509,10 +544,6 @@ footer small {
 	gap: 20px;
 	grid-template-columns: repeat(3, calc(100% / 3));
 	margin: 50px 0;
-}
-
-.admin-item-top-container {
-	text-align: center;
 }
 
 .admin-item-container {
@@ -547,4 +578,11 @@ footer small {
 
 .admin-item-description {
 	overflow: auto;
+}
+
+/* レスポンシブ用の幅調整 */
+@media (min-width:750px) {
+	.width-half {
+		width: 50%;
+	}
 }

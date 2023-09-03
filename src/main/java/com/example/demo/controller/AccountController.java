@@ -56,7 +56,7 @@ public class AccountController {
 		if (email.length() == 0 || password.length() == 0) {
 			//	入力値はそのままにし、エラーメッセージをリダイレクト先に渡す
 			redirectAttributes.addAttribute("email", email);
-			redirectAttributes.addAttribute("errMes", "どちらも必須項目です。");
+			redirectAttributes.addAttribute("errMes", "未入力の項目があります。");
 
 			return "redirect:/login";
 		}
@@ -133,7 +133,7 @@ public class AccountController {
 			//	入力値はそのままにし、エラーメッセージをリダイレクト先に渡す
 			redirectAttributes.addAttribute("name", name);
 			redirectAttributes.addAttribute("email", email);
-			redirectAttributes.addAttribute("errMes", "全て必須項目です。");
+			redirectAttributes.addAttribute("errMes", "未入力の項目があります。");
 
 			return "redirect:/register";
 		}
