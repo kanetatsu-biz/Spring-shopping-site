@@ -234,10 +234,11 @@ main {
 
 /* インライン要素の配置をそろえる */
 .inline-center {
-	text-align: center;	
+	text-align: center;
 }
+
 .inline-right {
-    text-align: right;
+	text-align: right;
 }
 
 /* 入力フォーム */
@@ -245,7 +246,7 @@ main {
 	align-items: center;
 	background-color: var(--background-color-with-opacity);
 	border-radius: 10px;
-    box-sizing: border-box;
+	box-sizing: border-box;
 	display: flex;
 	flex-flow: column;
 	gap: 20px 0;
@@ -275,8 +276,8 @@ input-form img {
 }
 
 .input-form img {
-    height: 300px;
-    object-fit: fill;
+	height: 300px;
+	object-fit: fill;
 	width: 400px;
 }
 
@@ -284,7 +285,7 @@ input-form img {
 .output-form {
 	background-color: var(--background-color-with-opacity);
 	border-radius: 10px;
-    box-sizing: border-box;
+	box-sizing: border-box;
 	display: flex;
 	flex-flow: column;
 	gap: 10px 0;
@@ -299,6 +300,7 @@ input-form img {
 	gap: 10px;
 	grid-template-columns: 50% 50%;
 }
+
 .grid-1-4 {
 	display: grid;
 	gap: 10px;
@@ -334,9 +336,9 @@ input-form img {
 
 /* 必須マーク(右横) */
 .required::after {
-    color: red;
+	color: red;
 	content: "※必須";
-    margin-left: 5px;
+	margin-left: 5px;
 }
 
 /* 点線 */
@@ -348,9 +350,9 @@ input-form img {
 
 /* 一つ一つの商品の箱 */
 .item-container {
-    display: grid;
+	display: grid;
 	gap: 25px;
-    grid-template-columns: 60% 40%;;
+	grid-template-columns: 60% 40%;
 	grid-template-rows: 40vh;
 	margin-top: 25px;
 	width: 100%;
@@ -364,8 +366,8 @@ input-form img {
 
 .item-container-right {
 	display: flex;
-    flex-flow: column;
-    justify-content: space-evenly;
+	flex-flow: column;
+	justify-content: space-evenly;
 }
 
 /* 商品一覧（TOP） */
@@ -410,7 +412,7 @@ input-form img {
 }
 
 .search-container {
-  margin: 50px auto 0;
+	margin: 50px auto 0;
 	width: 70%;
 }
 
@@ -428,8 +430,8 @@ input-form img {
 	display: flex;
 	flex-direction: column;
 	height: 65vh;
-    margin: 10px;
-    max-width: 100%;
+	margin: 10px;
+	max-width: 100%;
 	text-decoration: none;
 }
 
@@ -452,7 +454,7 @@ input-form img {
 	font-size: 20px;
 	overflow: hidden;
 	text-overflow: ellipsis;
-    white-space: nowrap;
+	white-space: nowrap;
 }
 
 .item-price {
@@ -478,14 +480,14 @@ input-form img {
 /* ボタン横並び */
 .row-buttons {
 	display: grid;
-    gap: 25px;
-    grid-template-columns: 1fr 1fr;
+	gap: 25px;
+	grid-template-columns: 1fr 1fr;
 }
 
 /* 注文完了 */
 .ordered-item {
-    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
 	height: 30vh;
 }
 
@@ -521,7 +523,7 @@ footer small {
 	justify-content: center;
 	margin-top: 50px;
 	height: 30vh;
-    align-items: center;
+	align-items: center;
 }
 
 .round {
@@ -530,7 +532,7 @@ footer small {
 	border-radius: 50%;
 	display: flex;
 	height: 100px;
-    justify-content: center;
+	justify-content: center;
 	padding: 20px;
 	text-decoration: none;
 	width: 100px;
