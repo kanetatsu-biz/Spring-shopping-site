@@ -44,7 +44,7 @@
 				<form action="/order/confirm" method="post" class="input-form"
 					id="address-form" th:fragment="address-form">
 					<!-- エラーメッセージの表示 -->
-					<div class="font-emphasize err-mes" th:if="${errMes.length > 0}">[[${errMes}]]</div>
+					<p class="err-mes" th:if="${errMes.length > 0}">[[${errMes}]]</p>
 	
 					<!-- あて先リストの表示 -->
 					<select onchange="changeAddress(this.value)">

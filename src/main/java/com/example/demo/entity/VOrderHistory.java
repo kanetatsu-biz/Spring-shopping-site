@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,7 +21,7 @@ public class VOrderHistory {
 	private String acoountName; // アカウント名
 
 	@Column(name = "ordered_datetime")
-	private String orderedDatetime; // 注文日時
+	private LocalDateTime orderedDatetime; // 注文日時
 
 	@Column(name = "total_price")
 	private Integer totalPrice; // 合計金額
@@ -44,7 +46,7 @@ public class VOrderHistory {
 		return acoountName;
 	}
 
-	public String getOrderedDatetime() {
+	public LocalDateTime getOrderedDatetime() {
 		return orderedDatetime;
 	}
 
