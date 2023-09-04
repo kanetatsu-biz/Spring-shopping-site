@@ -47,12 +47,11 @@ DB管理ツール|pgAdmin4
 1. Eclipseのインストール
 2. PostgreSQLのインストール（必要であれば**pgAdmin4**も同時にインストール）
 3. プロジェクト用のDBの作成
-4. Eclipseで新規プロジェクトの作成
-ー＞Spring新規スターター・プロジェクトで、以下の依存関係を追加
-　　Spring Web / Thymeleaf / Spring Data JPA / PostgreSQL Driver / Spring Boot DevTools / Lombok
-5. Ecilpse上でGitHubが接続できるようにし、このプロジェクトをクローンする
-6. **application.properties**の中身は自身の環境に合わせて変更（この時に3で作成したDBと紐づける）
-7. サーバーが問題なく起動できれば準備完了
+4. Eclipseで新規プロジェクトの作成<br>
+ー＞Spring新規スターター・プロジェクトで、対象の依存関係(Spring Web / Thymeleaf / Spring Data JPA / PostgreSQL Driver / Spring Boot DevTools / Lombok)を追加
+6. Ecilpse上でGitHubと連携できるようにし、このプロジェクトをクローンする
+7. **application.properties**の中身は自身の環境に合わせて変更（この時に3で作成したDBと紐づける）
+8. サーバーが問題なく起動できれば準備完了
 
 ## 今後の展望
  - 今回は学習目的で開発しましたが、次回はプロジェクトを本番環境にデプロイしたいと考えています。また、ログ出力やDBのバックアップ等に関しては今回触れていないため、特にセキュリティ、運用、保守などに焦点を当てた設計を心がけます。
