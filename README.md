@@ -1,43 +1,34 @@
 # Spring-shopping-site
+**Spring Shopping**というショッピングサイトを**Spring Boot**を用いて開発しました。
 
-※[設計資料](https://drive.google.com/drive/folders/1ymE40u6TIUJ3l7Xovj8CqWwCYwrb8XFI?usp=sharing)はgoogle drive上にまとめました。
+※[設計資料](https://drive.google.com/drive/folders/1ymE40u6TIUJ3l7Xovj8CqWwCYwrb8XFI?usp=sharing)は**Google ドライブ**上にまとめています。
 
-## 概要説明
-<img width="488" alt="スクリーンショット 2023-06-18 16 55 23" src="https://github.com/kanetatsu-biz/Spring-shopping-site/assets/77796726/0ce2e183-06f0-42d6-b351-5bf5eb163079">
+## アピールポイント
+ - Javaでの開発は初めての[kanetatsu-biz](https://github.com/kanetatsu-biz)と[kakeru2960](https://github.com/kakeru2960)の2人が協力して開発しました。
+ - ユーザーが使いやすいようなシンプルなUIを意識しつつ、ユーザーが使いたいと思えるような機能の設計にも力を入れました。
+ - 単純なCRUD処理の実装に限らず、バリデーションエラーの処理やアクセス制御など、セキュリティに重要な要素を実装しました。
+ - 定期的なコードレビューやSlackでのコミュニケーションを通して、バグの発生を最小限に抑えました。
+ - 開発スケジュール、DB設計、APIマッピングなど、変更が多い資料に関しては、柔軟にアップデートし、システムの保守性を確保しました。
+ - 再利用可能な共通部品の開発に注力し、可用性を高めるための工夫をしました。
 
-## 機能一覧
-### 基本機能
-#### 一般ユーザ
- - アカウントの新規登録、ログイン機能
- - 商品の一覧表示、カテゴリーでの検索
- - 全画面でアカウント名の表示（セッション）
- - カートに追加、削除
- - カートから注文
-### 追加機能
-#### 全般
- - デザインの適用
-#### 一般ユーザー
- - ログインユーザーの注文履歴一覧、詳細表示、検索
- - 商品一覧の検索
- - ゲストログイン
- - 欲しいものリストの表示、編集、追加、削除
- - レビュー投稿機能
- - 購入後にポイントを付与、表示
- - 購入時にポイントを使えるようにする
- - ファーストビューのレイアウト検討、表示
- - 注文のあて先リストの作成
-#### 管理ユーザー
- - 商品の一覧表示、追加、編集、削除
- - アカウント一覧
- - 注文履歴一覧、詳細表示
- - 注文履歴の検索
- - 顧客ごとの注文履歴の検索の追加
+## システムのテーマ
+<p align="center">
+<img width="488" alt="システムのテーマ" src="https://github.com/kanetatsu-biz/Spring-shopping-site/assets/77796726/0ce2e183-06f0-42d6-b351-5bf5eb163079">
+</p>
+
+## デモ動画（2023/09/04時点）
+https://github.com/kanetatsu-biz/Spring-shopping-site/assets/123366737/d3126bb7-c50f-48ba-bbfc-7f186ac48507
+
+※GitHubへのアップロードの都合上、画質が粗くなっております。オリジナルやそれぞれの機能ごとのデモ動画は[こちら](https://drive.google.com/drive/folders/1ssPcmUMliLz-Szi0fN12-vsT1NiY9n2N?usp=sharing)をご確認ください。
 
 ## 使用環境
 ### システム構成
-<img width="486" alt="スクリーンショット 2023-06-18 16 59 22" src="https://github.com/kanetatsu-biz/Spring-shopping-site/assets/77796726/6ea9c5f9-0b9d-4f09-a3cf-e0fa7d6a0513">
+<p align="center">
+<img width="486" alt="システム構成" src="https://github.com/kanetatsu-biz/Spring-shopping-site/assets/77796726/6ea9c5f9-0b9d-4f09-a3cf-e0fa7d6a0513">
+</p>
 
 ### 使用ツール
+<div align="center">
 
 対象|ツール名
 ----|---- 
@@ -45,55 +36,25 @@ IDE|Eclipse
 Viewテンプレート|Thymeleaf  
 バージョン管理|Git  
 DB管理ツール|pgAdmin4  
+コミュニケーションツール|Slack  
+設計資料等の管理|Google ドライブ  
 
-## デモ動画
-##### 新規登録　＞　ログイン　＞　商品一覧　＞　商品詳細　＞　カート　＞　注文　＞　ログアウト　までの一連の動きをデモ
-https://github.com/kanetatsu-biz/Spring-shopping-site/assets/123366737/d21090fa-0fa0-45c6-9e8a-538dc48cc3f9
+</div>
 
 
-## 環境構築やること
+## 環境構築手順
 
- - Eclipseのインストール
- - PostgreSQLのインストール（その時の最新版ver_15.3をインストール）
+1. Eclipseのインストール
+2. PostgreSQLのインストール（必要であれば**pgAdmin4**も同時にインストール）
+3. プロジェクト用のDBの作成
+4. Eclipseで新規プロジェクトの作成
+ー＞Spring新規スターター・プロジェクトで、以下の依存関係を追加
+　　Spring Web / Thymeleaf / Spring Data JPA / PostgreSQL Driver / Spring Boot DevTools / Lombok
+5. Ecilpse上でGitHubが接続できるようにし、このプロジェクトをクローンする
+6. **application.properties**の中身は自身の環境に合わせて変更（この時に3で作成したDBと紐づける）
+7. サーバーが問題なく起動できれば準備完了
 
-　　ー＞インストールしただけでは、PowerShellでアクセスできなかったので環境変数を編集
-
-　　（参考：https://dattesar.com/powershell-psql/ ）
- - pgAdmin4のインストール（PostgreSQLインストール時に一緒にインストールできた）
- - Eclipseで新規プロジェクトの作成
-
-　　ー＞Spring新規スターター・プロジェクトで、以下の依存関係を追加
-
-　　　Spring Web / Thymeleaf / Spring Data JPA / PostgreSQL Driver / Spring Boot DevTools / Lombok
- - GitHubで新規リポジトリの作成
- - EcilpseとGitHubとの接続
-
-　　ー＞SSH接続できるように設定し、GitHubからプロジェクトへクローン
-
-　　（参考：https://itsakura.com/eclipse-github-clone-push ）
- - プロジェクト作成時に追加されたファイルらをリモートへPUSH
-
-　　ー＞プロジェクトを右クリック「チームの共有」から進めていき、全ファイルをステージングし、メッセージを入力し、「コミットおよびプッシュ」
-
-　　　ー＞リモートに反映されていればOK
- - このプロジェクト用のDBとユーザをPostgreSQLに用意する
-
-　　ー＞powerShellにて、以下を実行
-
-　　　1. 「psql -U postgres」で、デフォルトのpostgresにアクセス
-
-　　　2. 下記のコマンドをそれぞれ実行（「admin」というユーザと「spring_shopping」というDBを作成）
-
-　　　　　CREATE USER admin WITH PASSWORD 'admin';
-
-　　　　　CREATE DATABASE spring_shopping OWNER admin ENCODING 'UTF8';
-
-　　　3. 「\du」でユーザ、「\l」でプロジェクト用のDBが追加されていることを確認
- - プロジェクトとPostgreSQLを接続できるように設定
- 
-　　ー＞作成したプロジェクトの「src/main/resources/application.properties」に以下URL先の「application.properties」の記述を丸々コピペ
-
-　　https://drive.google.com/drive/folders/1TsrKXWroa_q89CATuWDiTvkvErqUjfap?usp=sharing
-
-　　　ー＞サーバーが問題なく起動できればOK
-
+## 今後の展望
+ - 今回は学習目的で開発しましたが、次回はプロジェクトを本番環境にデプロイしたいと考えています。また、ログ出力やDBのバックアップ等に関しては今回触れていないため、特にセキュリティ、運用、保守などに焦点を当てた設計を心がけます。
+ - フロントエンドに関しては、フレームワークを使用し、コンポーネントの共通化を実現する予定です。また、トレンドであるCSSフレームワーク「Tailwind CSS」や「SCSS」を導入し、開発を効率化していきたいです。
+ - テストコードの導入や、マージ前のテストの実施の自動化など、品質保証に関する取り組みを行っていきたいです。
