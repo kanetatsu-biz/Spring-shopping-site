@@ -4,7 +4,7 @@
 ※[設計資料](https://drive.google.com/drive/folders/1ymE40u6TIUJ3l7Xovj8CqWwCYwrb8XFI?usp=sharing)は**Google ドライブ**上にまとめています。
 
 ## アピールポイント
- - Javaでの開発は初めての[kanetatsu-biz](https://github.com/kanetatsu-biz)と[kakeru2960](https://github.com/kakeru2960)の2人が協力して開発しました。
+ - Javaでの開発は初めての[kanetatsu-biz](https://github.com/kanetatsu-biz)と[kakeru2960](https://github.com/kakeru2960)の2人が協力して開発しました。プログラミング経験者である[kanetatsu-biz](https://github.com/kanetatsu-biz)が設計や実装などの開発工程を主導し、[kakeru2960](https://github.com/kakeru2960)はデザインやユーザビリティに関して主導しながら進めました。
  - ユーザーが使いやすいようなシンプルなUIを意識しつつ、ユーザーが使いたいと思えるような機能の設計にも力を入れました。
  - 単純なCRUD処理の実装に限らず、バリデーションエラーの処理やアクセス制御など、セキュリティに重要な要素を実装しました。
  - 定期的なコードレビューやSlackでのコミュニケーションを通して、バグの発生を最小限に抑えました。
