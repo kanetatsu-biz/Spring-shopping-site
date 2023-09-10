@@ -7,7 +7,7 @@ DROP VIEW IF EXISTS v_login_user_order_histories;
 -- 各種テーブル削除
 DROP TABLE IF EXISTS order_details;
 DROP TABLE IF EXISTS orders;
-DROP TABLE IF EXISTS wish_lists;
+DROP TABLE IF EXISTS wishes;
 DROP TABLE IF EXISTS account_addresses;
 DROP TABLE IF EXISTS addresses;
 DROP TABLE IF EXISTS accounts;
@@ -67,13 +67,10 @@ CREATE TABLE account_addresses
 );
 
 -- ほしい物テーブル
-CREATE TABLE wish_lists
+CREATE TABLE wishes
 (
-	id SERIAL PRIMARY KEY,
 	customer_id INTEGER,
 	item_id INTEGER,
-	name TEXT,
-  file_name VARCHAR(100),
 	FOREIGN KEY (customer_id) REFERENCES accounts(id),
 	FOREIGN KEY (item_id) REFERENCES items(id)
 );
