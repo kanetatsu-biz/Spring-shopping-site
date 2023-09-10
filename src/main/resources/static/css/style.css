@@ -424,6 +424,10 @@ input-form img {
 	padding-bottom: 30px;
 }
 
+.slick-slide{
+	margin: 0px 10px;
+}
+
 .item {
 	position: relative;
 }
@@ -432,19 +436,18 @@ input-form img {
 	height: 65vh;
 	max-width: 100%;
 	display: flex;
-	margin:10px;
 	flex-direction: column;
 	text-decoration: none;
 }
 
 .item form:nth-child(2) {
 	position: absolute;
-	right: 10%;
-	top: 32vh;
+	right: 6%;
+	top: 45%;
+	width: fit-content;
 }
 
 button.wish {
-	width: fit-content;
 	padding: 10px;
 	border-radius: 50%;
 	border: 3px solid var(--main-color);
