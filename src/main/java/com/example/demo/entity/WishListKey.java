@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class WishListKey {
-	private Integer customerId; // アカウントID
+	private Integer customerId; // ユーザーID
 
-	private Integer itemId; // あて先ID
+	private Integer itemId; // 商品ID
 }
