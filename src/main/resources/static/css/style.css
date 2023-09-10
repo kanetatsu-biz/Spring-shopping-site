@@ -26,6 +26,7 @@ PC：1,280px〜
 	--sub-color: rgb(74, 122, 94);
 	--background-color: rgb(249, 238, 211);
 	--background-color-with-opacity: rgba(239, 228, 201, 0.6);
+	--accent-color: rgb(255, 167, 16);
 }
 
 /* common */
@@ -70,7 +71,8 @@ a:hover {
 	opacity: 70%;
 }
 
-button {
+button,
+.showmore {
 	width: 100%;
 	border: 1px solid var(--main-color);
 	border-radius: 0;
@@ -83,7 +85,8 @@ button {
 	transition: 0.3s;
 }
 
-button:hover {
+button:hover,
+.showmore:hover {
 	color: var(--background-color);
 	background-color: var(--main-color);
 	transition: 0.3s;
@@ -346,7 +349,7 @@ input-form select {
 }
 
 .search-container {
-    margin: 50px auto 0;
+	margin: 50px auto 0;
 	width: 70%;
 }
 
@@ -356,15 +359,46 @@ input-form select {
 }
 
 .item {
+	position: relative;
+}
+
+.item form:not(:nth-child(2)) {
+	height: 65vh;
 	display: flex;
 	flex-direction: column;
-	height: 65vh;
-    margin: 10px;
+	margin: 10px;
 	text-decoration: none;
 }
 
-.item>* {
-	height: 10%;
+.item form:nth-child(2) {
+	position: absolute;
+	right: 10%;
+	top: 32vh;
+}
+
+button.wish {
+	padding: 10px;
+	border-radius: 50%;
+	border: 3px solid var(--main-color);
+	margin-top: unset;
+	background-color: var(--main-color);
+	transition: 0.3s;
+}
+
+button.wish:hover {
+	opacity: 0.8;
+	transition: 0.3s;
+}
+
+button.wish i {
+	font-size: 25px;
+	vertical-align: middle;
+	color: var(--background-color);
+}
+
+button.wish.active i {
+	vertical-align: middle;
+	color: var(--accent-color);
 }
 
 .item-img {
@@ -374,7 +408,7 @@ input-form select {
 
 .item-img img {
 	height: 100%;
-	object-fit: fill;
+	object-fit: cover;
 	width: 100%;
 }
 
@@ -382,7 +416,8 @@ input-form select {
 	font-size: 20px;
 	overflow: hidden;
 	text-overflow: ellipsis;
-    white-space: nowrap;
+	white-space: nowrap;
+	flex-grow: 1;
 }
 
 .item-price {
@@ -412,7 +447,7 @@ input-form select {
 
 /* 注文確認 */
 .order-confirm-container {
-    margin-top: 50px;
+	margin-top: 50px;
 }
 
 .total-price-item {
@@ -421,8 +456,8 @@ input-form select {
 
 /* 注文完了 */
 .ordered-item {
-    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
 	height: 30vh;
 	margin-top: 50px;
 }
@@ -458,7 +493,7 @@ footer small {
 	justify-content: center;
 	margin-top: 50px;
 	height: 30vh;
-    align-items: center;
+	align-items: center;
 }
 
 .round {
@@ -480,52 +515,120 @@ footer small {
 }
 
 /* 欲しいものリスト */
-#wish-list h3{
+#wish-list h3 {
 	text-align: center;
 }
 
-.wish-list{
+.wish-list {
 	display: flex;
+	flex-direction: column;
 	justify-content: space-between;
-	height: 250px;
 }
 
-.wish-list:not(:first-child){
+.wish-list:not(:first-child) {
 	margin-top: 20px;
 }
 
-.wish-list-img{
+.wish-list-img {
 	display: block;
-	width: 20%;
+	width: 100%;
+	height: 400px;
 }
 
-.wish-list-img img{
+.wish-list-img img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 }
 
-.wish-list-content{
-	width: 70%;
+.wish-list-content {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
 }
 
-.wish-list-delete{
+.wish-list-content p.font-emphasize {
+	font-size: 25px;
+}
+
+.wish-list-content a {
+	display: block;
+	text-align: center;
+	width: 100%;
+	margin-top: auto;
+	margin-bottom: 0;
+}
+
+.wish-list-delete {
+	width: 100%;
+}
+
+.wish-list-delete form {
+	display: block;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.wish-list-delete .delete {
+	display: block;
+	width: 100%;
+	height: 50px;
+	padding: unset;
+	margin: unset;
+	margin-top: 20px;
+	background-color: var(--background-color-with-opacity);
+	box-shadow: none;
+	border: 1px solid var(--main-color);
+	position: relative;
+	transition:0.3s;
+}
+
+.wish-list-delete .delete i {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.wish-list-delete .delete:hover {
+	background-color: var(--accent-color);
+	transition:0.3s;
+}
+
+.no-wish{
+	text-align: center;
+}
+
+@media (min-width:750px) {
+	
+.wish-list {
+	flex-direction: row;
+	height: 250px;
+}
+.wish-list-img {
+	width: 25%;
+	height: 100%;
+}
+
+.wish-list-content {
+	width: 65%;
+	margin-top: unset;
+	margin-left: 20px;
+}
+
+.wish-list-content a {
+	width: 60%;
+}
+
+.wish-list-delete {
 	width: 10%;
 }
 
-.wish-list-delete form{
-	display: block;
-	width: 100%;
+.wish-list-delete .delete {
 	height: 100%;
-	margin:0;
-	padding: 0;
+	margin-top: unset;
+	border: unset;
 }
-.wish-list-delete button{
-	display: block;
-	width: 100%;
-	height: 100%;
-	background-color: var(--background-color);
-	box-shadow: none;
-	border:none;
-	
 }
