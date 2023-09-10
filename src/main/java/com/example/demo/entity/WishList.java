@@ -4,39 +4,30 @@ import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Component
 @Entity
-@Table(name = "wish_lists")
+@Table(name = "wishes")
+@IdClass(value = WishListKey.class)
 public class WishList {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	//　itemテーブルをitemのidとitem_idを元にjoin
+	@ManyToOne
+	@JoinColumn(name = "item_id", insertable = false, updatable = false)
+	private Item item;
 
+	@Id
 	@Column(name = "customer_id")
 	private Integer customerId;
 
+	@Id
 	@Column(name = "item_id")
 	private Integer itemId;
-
-	@Column(name = "name")
-	private String name;
-
-	@Column(name = "file_name")
-	private String fileName; // 画像ファイル名
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public Integer getCustomerId() {
 		return customerId;
@@ -54,23 +45,17 @@ public class WishList {
 		this.itemId = itemId;
 	}
 
-	public String getName() {
-		return name;
+	//データを詰める
+	public WishList() {
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public WishList(Integer customer_id, Integer item_id) {
+		this.customerId = customer_id;
+		this.itemId = item_id;
 	}
 
-	public String getFileName() {
-		return fileName;
+	public Item getItem() {
+		return item;
 	}
 
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
-	public boolean isEmpty() {
-		return this.isEmpty();
-	}
 }
