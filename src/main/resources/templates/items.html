@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <script th:src="@{/js/common.js}"></script>
 </head>
 
@@ -63,8 +64,8 @@
 			<!-- 商品一覧 -->
 			<div class="item-list-slider">
         		<th:block th:each="item:${items}">
-					<form action="/cart/add" method="post">
-						<div class="item">
+					<div class="item">
+						<form action="/cart/add" method="post">
 							<a th:href="'/items/' + ${item.id}" class="item-img">
 								<img th:src="@{'/img/items/' + ${item.fileName}}">
 							</a>
@@ -85,12 +86,12 @@
 							</span>
 							<input type="hidden" name="itemId" th:value="${item.id}">
 							<button th:disabled="${item.stock <= 0}">カートに追加</button>
-						</div>
-					</form>
-        			<form action="/wishList/add" method="post">
-						<input type="hidden" name="itemId" th:value="${item.id}">
-						<button>ほしい</button>
-					</form>
+						</form>
+						<form action="/wishList/add" method="post">
+							<input type="hidden" name="itemId" th:value="${item.id}">
+							<button class="wish"><i class="fa-solid fa-heart"></i></button>
+						</form>
+					</div>
         		</th:block>
 			</div>
 		</div>
