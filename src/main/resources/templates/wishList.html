@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<title>ほしい物リスト一覧</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body>
@@ -12,23 +13,24 @@
 
 	<main>
 		<div class="main-container" id="wish-list">
-			<h3 class="text-emphasize">欲しいものリスト一覧</h3>
-			<div th:if="${wishList.isEmpty()}">
-				<p>欲しいものリストはございません。</p>
-				<a href="/items">TOPに戻る</a>
+			<h3 class="font-emphasize">ほしい物リスト一覧</h3>
+			<p class="err-mes" th:if="${errMes.length > 0}">[[${errMes}]]</p>
+			<div th:unless="${wishList.size() > 0}" class="no-wish">
+				<p>ほしいものリストはございません。</p>
+				<a href="/items"> ＜ TOPに戻る</a>
 			</div>
-			<div class="wish-list" th:each="wishList: ${wishList}">
+			<div class="wish-list" th:if="${wishList.size() > 0}" th:each="wish: ${wishList}">
 				<span class="wish-list-img">
-					<img th:src="@{'/img/items/' + ${wishList.fileName}}">
+					<img th:src="@{'/img/items/' + ${wish.item.fileName}}">
 				</span>
 				<span class="wish-list-content">
-					<p th:text="${wishList.name}" class="text-emphasize"></p>
-					<a th:href="'/items/' + ${wishList.itemId}">詳細へ</a>
+					<p th:text="${wish.item.name}" class="font-emphasize"></p>
+					<a th:href="'/items/' + ${wish.itemId}" class="showmore">詳細へ</a>
 				</span>
 				<span class="wish-list-delete">
 					<form action="/wishList/delete" method="post">
-						<input type="hidden" name="id" th:value="${wishList.id}">
-						<button>削除</button>
+						<input type="hidden" name="itemId" th:value="${wish.itemId}">
+						<button class="delete"><i class="fa-solid fa-trash-can"></i></button>
 					</form>
 				</span>
 			</div>
