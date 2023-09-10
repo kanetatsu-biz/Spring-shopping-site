@@ -16,25 +16,46 @@ public class Item {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id; // 商品ID
 
-	@Column(name = "category_id")
+	@Column(name = "category_id", nullable = false)
 	private Integer categoryId; // カテゴリーID
 
+	@Column(unique = true, nullable = false)
 	private String name; // 商品名
 
+	@Column(nullable = false)
 	private Integer price; // 価格
 
 	private String description; // 説明
 
 	@Column(name = "file_name")
-	private String fileName; // 画像ファイル名
+	private String fileName = ""; // 画像ファイル名
 
 	@Transient
 	private Integer quantity; // 数量（カートの処理で使用）
 
+	@Column(nullable = false)
 	private Integer stock; // 在庫数（カートの処理で使用）
 
 	@Transient
 	private Integer subTotalPrice; // 小計（カートの処理で使用）
+
+	@Column(name = "is_deleted")
+	private boolean isDeleted = false; // ソフトデリート用のフラグ
+
+	public Item() {
+	};
+
+	//	バリデーション用のコンストラクタ
+	public Item(Integer id, Integer categoryId, String name, Integer price, String description, String fileName,
+			Integer stock) {
+		this.id = id;
+		this.categoryId = categoryId;
+		this.name = name;
+		this.price = price;
+		this.description = description;
+		this.fileName = fileName;
+		this.stock = stock;
+	}
 
 	public Integer getId() {
 		return id;
@@ -44,20 +65,40 @@ public class Item {
 		return categoryId;
 	}
 
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+	}
+
 	public String getName() {
 		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Integer getPrice() {
 		return price;
 	}
 
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
+
 	public String getDescription() {
 		return description;
 	}
 
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public String getFileName() {
 		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	public Integer getQuantity() {
@@ -81,4 +122,11 @@ public class Item {
 		return price * quantity;
 	}
 
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
 }

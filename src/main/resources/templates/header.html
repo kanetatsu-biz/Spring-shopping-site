@@ -1,7 +1,7 @@
 <header>
 	<nav class="header-menu">
 		<div class="header-menu-title">
-			<h1><a href="/items">使いやすい<br class="sp">ショッピングサイト</a></h1>
+			<h1><a href="/items">Spring <br class="sp">Shopping</a></h1>
 		</div>
 		<span class="header-menu-container">
 			<th:block th:if="${@loginUser.isLogin()}">
@@ -23,7 +23,7 @@
 
 			<div class="header-menu-login">
 				<th:block th:if="${@loginUser.isLogin()}">
-					[[${@loginUser.getName()}]]
+					[[${@loginUser.getName()}]]様
 					<a href="/logout">ログアウト</a>
 				</th:block>
 				<th:block th:unless="${@loginUser.isLogin()}">

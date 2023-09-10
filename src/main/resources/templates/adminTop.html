@@ -2,20 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>管理TOP</title>
+<title>【管理】TOP画面</title>
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
 	<header th:replace="header"></header>
-	
+
+	<hr>
+
 	<main>
 		<div class="main-container">
 			<!-- 機能一覧 -->
 			<div class="admin-function-list">
 				<a href="/admin/order/histories" class="round">注文履歴一覧</a>
+				<a href="/admin/items" class="round">商品一覧</a>
 			</div>
 		</div>
 	</main>
+
+	<hr>
 
 	<footer th:replace="footer"></footer>
 </body>

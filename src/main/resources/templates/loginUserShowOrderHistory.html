@@ -8,39 +8,47 @@
 <body>
 	<header th:replace="header"></header>
 
+	<hr>
+
 	<main>
-		<div class="main-container column-center">
-			<a href="/loginUser/order/histories">一覧画面に戻る</a>
+		<div class="main-container width-half">
+			<a href="/loginUser/order/histories">＜ 一覧画面に戻る</a>
 
 			<!-- 注文履歴概要 -->
-			<div class="history-container">
-				<div>
-					<p>注文日時：[[${loginUserOrderInfo.orderedDatetime}]]</p>
-					<p>合計金額：<span th:utext="${@formatService.getFormattedPrice(loginUserOrderInfo.totalPrice)}"></span></p>
+			<div class="output-form">
+				<div class="grid-1-1">
+					<span class="font-bold inline-right">注文日時：</span>
+					[[${@formatService.getFormattedDateTime(loginUserOrderInfo.orderedDatetime)}]]
+				</div>
+				<div class="grid-1-1">
+					<span class="font-bold inline-right">合計金額：</span>
+					<span th:utext="${@formatService.getFormattedPrice(loginUserOrderInfo.totalPrice)}"></span>
 				</div>
 			</div>
 
 			<!-- あて先表示 -->
-			<div class="input-form">
-				<strong>あて先</strong>
-				<div>
-					<spqn>郵便番号：</spqn>
+			<div class="output-form">
+				<div class="inline-center">
+					<h3>あて先</h3>
+				</div>
+				<div class="grid-1-1">
+					<span class="font-bold inline-right">郵便番号：</span>
 					[[${loginUserOrderInfo.postNum}]]
 				</div>
-				<div>
-					<spqn>都道府県：</spqn>
+				<div class="grid-1-1">
+					<span class="font-bold inline-right">都道府県：</span>
 					[[${loginUserOrderInfo.prefecture}]]
 				</div>
-				<div>
-					<spqn>市区町村：</spqn>
+				<div class="grid-1-1">
+					<span class="font-bold inline-right">市区町村：</span>
 					[[${loginUserOrderInfo.municipality}]]
 				</div>
-				<div>
-					<spqn>番地：</spqn>
+				<div class="grid-1-1">
+					<span class="font-bold inline-right">番地：</span>
 					[[${loginUserOrderInfo.houseNum}]]
 				</div>
-				<div>
-					<spqn>建物名・部屋番号：</spqn>
+				<div class="grid-1-1">
+					<span class="font-bold inline-right">建物名・部屋番号：</span>
 					[[${loginUserOrderInfo.buildingNameRoomNum}]]
 				</div>
 			</div>
@@ -48,24 +56,28 @@
 			<hr class="dots-line">
 
 			<!-- 商品履歴詳細 -->
-			<div class="column-center">
-				<div th:each="orderHistoryDetail:${loginUserOrderHistoryDetailList}" class="item-container">
-					<img th:src="@{'/img/items/' + ${orderHistoryDetail.fileName}}">
-					<div class="item-container-right">
-						<span class="font-emphasize" th:text="${orderHistoryDetail.itemName}"></span>
-						<div>
-							<span>価格</span>
-							<span th:utext="${@formatService.getFormattedPrice(orderHistoryDetail.itemPrice)}"></span>
-						</div>
-						<div>
-							<span>数量</span>
-							<span th:text="${orderHistoryDetail.quantity}"></span>
-						</div>
+			<div th:each="orderHistoryDetail:${loginUserOrderHistoryDetailList}" class="item-container">
+				<img th:if="${orderHistoryDetail.fileName.equals('')}"
+					th:src="@{/img/common/no_image.jpg}">
+				<img th:unless="${orderHistoryDetail.fileName.equals('')}"
+					th:src="@{'/img/items/' + ${orderHistoryDetail.fileName}}">
+
+				<div class="item-container-right">
+					<span class="font-emphasize" th:text="${orderHistoryDetail.itemName}"></span>
+					<div>
+						<span>価格</span>
+						<span th:utext="${@formatService.getFormattedPrice(orderHistoryDetail.itemPrice)}"></span>
+					</div>
+					<div>
+						<span>数量</span>
+						<span th:text="${orderHistoryDetail.quantity}"></span>
 					</div>
 				</div>
 			</div>
 		</div>
 	</main>
+
+	<hr>
 
 	<footer th:replace="footer"></footer>
 </body>

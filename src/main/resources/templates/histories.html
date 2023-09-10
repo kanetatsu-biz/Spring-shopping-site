@@ -2,32 +2,53 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>商品一覧</title>
+<title>【管理】注文履歴一覧画面</title>
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
 	<header th:replace="header"></header>
 
+	<hr>
+
 	<main>
-		<div class="main-container column-center histories-container">
-			<a href="/admin" class="margin-top-50">TOPに戻る</a>
+		<div class="main-container width-half">
+			<a href="/admin">＜ TOPに戻る</a>
 
 			<!-- 注文履歴一覧 -->
-			<div th:each="order:${orderList}" class="history-container">
-				<div>
-					<p>アカウント名：[[${order.acoountName}]]</p>
-					<p>注文日時：[[${order.orderedDatetime}]]</p>
-					<p>合計金額：<span th:utext="${@formatService.getFormattedPrice(order.totalPrice)}"></span></p>
-					<p>あて先：[[${order.prefecture}]]</p>
-					<p class="column-center">
+			<div class="column-center">
+				<div th:if="${orderList.isEmpty()}" class="inline-center">
+					<p>注文履歴はございません。</p>
+				</div>
+				<div th:unless="${orderList.isEmpty()}" th:each="order:${orderList}"
+					class="output-form">
+					<div class="grid-1-1">
+						<span class="font-bold inline-right">アカウント名：</span>
+						[[${order.acoountName}]]
+					</div>
+					<div class="grid-1-1">
+						<span class="font-bold inline-right">注文日時：</span>
+						[[${@formatService.getFormattedDateTime(order.orderedDatetime)}]]
+					</div>
+					<div class="grid-1-1">
+						<span class="font-bold inline-right">合計金額：</span>
+						<span th:utext="${@formatService.getFormattedPrice(order.totalPrice)}"></span>
+					</div>
+					<div class="grid-1-1">
+						<span class="font-bold inline-right">あて先：</span>
+						[[${order.prefecture}]]
+					</div>
+					<div class="inline-center">
 						<a th:href="'/admin/order/histories/' + ${order.id}">
 							詳細
 						</a>
-					</p>
+					</div>
 				</div>
+				
 			</div>
 		</div>
 	</main>
+
+	<hr>
 
 	<footer th:replace="footer"></footer>
 </body>

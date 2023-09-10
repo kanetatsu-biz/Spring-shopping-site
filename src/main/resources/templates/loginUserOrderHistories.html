@@ -8,29 +8,40 @@
 <body>
 	<header th:replace="header"></header>
 
+	<hr>
+
 	<main>
-		<div class="main-container column-center">
-			<div class="account-name">
-				<p th:text="${@loginUser.name} + '様　ご注文履歴一覧'"></p>
+		<div class="main-container column-center width-half">
+			<p th:text="${@loginUser.name} + '様　ご注文履歴一覧'"></p>
+
+			<div th:if="${loginUserOrderList.isEmpty()}" class="inline-center">
+				<p>注文履歴はございません。</p>
+				<a href="/items">商品一覧に戻る</a>
 			</div>
-			<div th:if="${loginUserOrderList.isEmpty()}">
-				<p>注文履歴はございません</p>
-				<a href="/items">TOPに戻る</a>
-			</div>
-			<div th:unless="${loginUserOrderList.isEmpty()}" th:each="order:${loginUserOrderList}" class="history-container">
-				<div>
-					<p>注文日時：[[${order.orderedDatetime}]]</p>
-					<p>合計金額：[[${order.totalPrice}]]</p>
-					<p>あて先：[[${order.prefecture}]]</p>
-					<p class="column-center">
-						<a th:href="'/loginUser/order/history/' + ${order.id}">
-							詳細
-						</a>
-					</p>
+			<div th:unless="${loginUserOrderList.isEmpty()}"
+				th:each="order:${loginUserOrderList}" class="output-form">
+				<div class="grid-1-1">
+					<span class="font-bold inline-right">注文日時：</span>
+					[[${@formatService.getFormattedDateTime(order.orderedDatetime)}]]
+				</div>
+				<div class="grid-1-1">
+					<span class="font-bold inline-right">合計金額：</span>
+					<span th:utext="${@formatService.getFormattedPrice(order.totalPrice)}"></span>
+				</div>
+				<div class="grid-1-1">
+					<span class="font-bold inline-right">あて先：</span>
+					[[${order.prefecture}]]
+				</div>
+				<div class="inline-center">
+					<a th:href="'/loginUser/order/history/' + ${order.id}">
+						詳細
+					</a>
 				</div>
 			</div>
 		</div>
 	</main>
+
+	<hr>
 
 	<footer th:replace="footer"></footer>
 </body>

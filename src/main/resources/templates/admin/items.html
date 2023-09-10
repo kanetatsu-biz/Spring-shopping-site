@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>【管理】商品一覧</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+	<header th:replace="header"></header>
+
+	<hr>
+
+	<main>
+		<div class="main-container">
+			<!-- 成功メッセージの表示 -->
+			<div class="inline-center">
+				<p class="success-mes" th:if="${successMes.length > 0}">[[${successMes}]]</p>
+			</div>
+
+			<!--商品追加-->
+			<form action="/admin/items/add" method="get">
+				<button>追加</button>
+			</form>
+
+			<!--カテゴリー表示-->
+			<nav class="category-list margin-top-50">
+				<a href="/admin/items">全商品</a>
+				<a
+					th:each="category:${categories}"
+					th:href="'/admin/items?categoryId='+${category.id}"
+				>
+					<span th:text="${category.name}"></span>
+				</a>
+			</nav>
+
+			<!-- 検索項目 -->
+			<div class="search-container">
+				<form action="/admin/items" method="get" class="column-center">
+					<div>
+						<div class="row-center">
+							<span>商品名：</span>
+							<input type="text" name="itemName" th:value="${itemName}">
+						</div>
+						<div class="row-space-around">
+							<!--文字列の検索条件-->
+		    				<th:block th:each="mp : ${matchPatterns}">
+			    				<input type="radio" th:id="${mp.getKey()}" name="matchPattern"
+			    					th:value="${mp.getKey()}"
+			    					th:checked="${mp.getKey().equals(matchPattern)}" />
+			    				<label th:for="${mp.getKey()}">[[${mp.getValue()}]]</label>
+							</th:block>
+						</div>
+					</div>
+					<div class="row-space-around">
+						<span>価格：</span>
+						<input type="number" name="minPrice" placeholder="下限なし" th:value="${minPrice}">
+						<span>&emsp;～&emsp;</span>
+						<input type="number" name="maxPrice" placeholder="上限なし" th:value="${maxPrice}">
+					</div>
+					<button>検索</button>
+				</form>
+			</div>
+
+			<div class="admin-item-list">	
+				<div th:each="item:${items}" class="admin-item-container">
+					<span th:if="${item.isDeleted}" class="delete-flag">削除済み</span>
+
+					<div class="admin-item-img">
+						<img th:if="${item.fileName.equals('')}"
+							th:src="@{/img/common/no_image.jpg}">
+						<img th:unless="${item.fileName.equals('')}"
+							th:src="@{'/img/items/' + ${item.fileName}}">
+					</div>
+
+					<div class="admin-item-name">
+						<span th:text="${item.name}"></span>
+					</div>
+
+					<div class="item-price">
+						<span th:utext="${@formatService.getFormattedPrice(item.price)}"></span>
+					</div>
+
+					<div class="item-quantity">
+						<span>在庫数：</span>
+						<span th:text="${item.stock}"></span>
+					</div>
+
+					<div class="admin-item-description">
+						<span>説明文：</span>
+						<span th:text="${item.description}"></span>
+					</div>
+
+					<div class="row-buttons">
+						<form th:action="'/admin/items/' + ${item.id} + '/edit'" method="get">
+							<button th:disabled="${item.isDeleted}">編集</button>
+						</form>
+						<form th:action="'/admin/items/' + ${item.id} + '/delete'" method="post">
+							<button th:disabled="${item.isDeleted}">削除</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<hr>
+
+	<footer th:replace="footer"></footer>
+</body>
+</html>

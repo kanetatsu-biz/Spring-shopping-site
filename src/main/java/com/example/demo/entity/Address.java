@@ -15,13 +15,15 @@ public class Address {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id; // あて先ID
 
-	@Column(name = "post_num")
+	@Column(name = "post_num", nullable = false)
 	private String postNum; // 郵便番号
 
+	@Column(nullable = false)
 	private String prefecture; // 都道府県
+	@Column(nullable = false)
 	private String municipality; // 市区町村
 
-	@Column(name = "house_num")
+	@Column(name = "house_num", nullable = false)
 	private String houseNum; // 番地
 
 	@Column(name = "building_name_room_num")
