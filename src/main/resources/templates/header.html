@@ -9,9 +9,9 @@
 					<a href="/admin">管理画面</a>
 				</div>
 				<th:block th:if="${!@loginUser.isAdmin()}">
-		     		<div>
+					<div>
 						<a href="/loginUser/order/histories">注文履歴</a>
-				 	</div>
+					</div>
 					<div>
 						<a href="/addresses">あて先リスト</a>
 					</div>
@@ -31,7 +31,9 @@
 				</th:block>
 			</div>
 			<div class="header-menu-wish">
-				<a href="/wishList">ほしい物リスト</a>
+				<th:block th:if="${@loginUser.isLogin()}">
+					<a href="/wishList">ほしい物リスト</a>
+				</th:block>
 			</div>
 			<div class="header-menu-cart">
 				<a href="/cart">&#128722; カート</a>
