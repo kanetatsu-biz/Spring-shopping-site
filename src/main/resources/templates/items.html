@@ -94,7 +94,8 @@
 						</form>
 						<form action="/wishList/add" method="post">
 							<input type="hidden" name="itemId" th:value="${item.id}">
-							<button class="wish"><i class="fa-solid fa-heart"></i></button>
+							<button class="wish active" th:if="${item.isInWishList}"><i class="fa-solid fa-heart"></i></button>
+							<button class="wish" th:unless="${item.isInWishList}"><i class="fa-solid fa-heart"></i></button>
 						</form>
 					</div>
         		</th:block>
