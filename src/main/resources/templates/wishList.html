@@ -16,8 +16,8 @@
 			<h3 class="font-emphasize">ほしい物リスト一覧</h3>
 			<p class="err-mes" th:if="${errMes.length > 0}">[[${errMes}]]</p>
 			<div th:unless="${wishList.size() > 0}" class="no-wish">
-				<p>ほしいものリストはございません。</p>
-				<a href="/items"> ＜ TOPに戻る</a>
+				<p>ほしい物は未登録です。</p>
+				<a href="/items"> ＜ 商品一覧画面に戻る</a>
 			</div>
 			<div class="wish-list" th:if="${wishList.size() > 0}" th:each="wish: ${wishList}">
 				<span class="wish-list-img">
