@@ -454,6 +454,7 @@ button.wish {
 	margin-top: unset;
 	background-color: var(--main-color);
 	transition: 0.3s;
+	cursor: pointer;
 }
 
 button.wish:hover {
@@ -638,6 +639,14 @@ footer small {
 	font-size: 25px;
 }
 
+.wish-list-content p.name{
+	margin-bottom: 0;
+}
+
+.wish-list-content p.price{
+	margin:0;
+}
+
 .wish-list-content a {
 	display: block;
 	text-align: center;
@@ -670,6 +679,7 @@ footer small {
 	border: 1px solid var(--main-color);
 	position: relative;
 	transition: 0.3s;
+	cursor: pointer;
 }
 
 .wish-list-delete .delete i {

@@ -24,7 +24,10 @@
 					<img th:src="@{'/img/items/' + ${wish.item.fileName}}">
 				</span>
 				<span class="wish-list-content">
-					<p th:text="${wish.item.name}" class="font-emphasize"></p>
+					<span>
+						<p th:text="${wish.item.name}" class="font-emphasize name"></p>
+						<p th:text="${wish.item.price}" class="font-emphasize price"></p>
+					</span>
 					<a th:href="'/items/' + ${wish.itemId}" class="showmore">詳細へ</a>
 				</span>
 				<span class="wish-list-delete">
