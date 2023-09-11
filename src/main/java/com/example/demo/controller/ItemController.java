@@ -23,9 +23,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Category;
 import com.example.demo.entity.Item;
+import com.example.demo.entity.WishList;
 import com.example.demo.model.Cart;
+import com.example.demo.model.LoginUser;
 import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.ItemRepository;
+import com.example.demo.repository.WishListRepository;
 import com.example.demo.service.SearchService;
 import com.example.demo.service.validation.ItemValidationService;
 
@@ -40,6 +43,12 @@ public class ItemController {
 
 	@Autowired
 	Cart cart;
+
+	@Autowired
+	LoginUser loginUser;
+
+	@Autowired
+	WishListRepository wishListRepository;
 
 	// 商品一覧表示
 	@GetMapping("/items")
@@ -77,6 +86,19 @@ public class ItemController {
 			}
 		}
 
+		// ほしい物リストに入っている商品のほしい物追加ボタンの表示変更
+		// ほしい物リストを取得
+		List<WishList> userWishItems = wishListRepository.findByCustomerId(loginUser.getId());
+		for (WishList userWishItem : userWishItems) {
+			// ほしい物リストに入っているかどうかを検索
+			items.stream()
+					.filter(item -> item.getId() == userWishItem.getItemId())
+					.findFirst()
+					.get()
+					// ほしい物リストに入っている商品にはtrueを付与
+					.setInWishList(true);
+		}
+
 		model.addAttribute("items", items);
 
 		//	商品名検索のマッチパターンを取得し、画面に渡す
@@ -103,6 +125,11 @@ public class ItemController {
 		//すでにカートに入っている商品は在庫を変更
 		for (Item cartItem : cart.getItems()) {
 			calcPurchasableStock(item, cartItem);
+		}
+
+		// ほしい物リストに入っているか検索
+		if (wishListRepository.existsByCustomerIdAndItemId(loginUser.getId(), itemId)) {
+			item.setInWishList(true);
 		}
 
 		model.addAttribute("item", item);
