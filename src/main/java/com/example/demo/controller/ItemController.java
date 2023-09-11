@@ -128,9 +128,7 @@ public class ItemController {
 		}
 
 		// ほしい物リストに入っているか検索
-		if (wishListRepository.existsByCustomerIdAndItemId(loginUser.getId(), itemId)) {
-			item.setInWishList(true);
-		}
+		item.setInWishList(wishListRepository.existsByCustomerIdAndItemId(loginUser.getId(), itemId));
 
 		model.addAttribute("item", item);
 
