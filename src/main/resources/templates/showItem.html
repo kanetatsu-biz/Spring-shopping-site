@@ -51,7 +51,7 @@
 					</form>
 					<form action="/wishList/add" method="post">
 						<input type="hidden" name="itemId" th:value="${item.id}">
-						<button th:if="${item.isInWishList}" class="wish active show" th:text="ほしい物リストに追加済み"></button>
+						<button th:if="${item.isInWishList}" class="wish active show" th:text="ほしい物リストに追加済み" disabled></button>
 						<button th:unless="${item.isInWishList}" th:text="ほしい物リストに追加"></button>
 					</form>
 				</div>
