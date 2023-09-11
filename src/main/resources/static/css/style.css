@@ -471,6 +471,13 @@ button.wish.active i {
 	color: var(--accent-color);
 }
 
+button.wish.show.active{
+	color: var(--accent-color);
+	border: 1px solid var(--accent-color);
+	border-radius: unset;
+	background-color: var(--background-color-with-opacity);
+}
+
 .item-img {
 	height: 60%;
 	margin-bottom: 10px;
