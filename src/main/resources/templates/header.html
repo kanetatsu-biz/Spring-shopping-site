@@ -31,7 +31,7 @@
 				</th:block>
 			</div>
 			<div class="header-menu-wish">
-				<th:block th:if="${@loginUser.isLogin()}">
+				<th:block th:if="${@loginUser.isLogin() && !@loginUser.isAdmin()}">
 					<a href="/wishList">ほしい物リスト</a>
 				</th:block>
 			</div>
