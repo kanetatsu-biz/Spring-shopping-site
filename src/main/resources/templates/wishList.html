@@ -26,7 +26,8 @@
 				<span class="wish-list-content">
 					<span>
 						<p th:text="${wish.item.name}" class="font-emphasize name"></p>
-						<p th:text="${wish.item.price}" class="font-emphasize price"></p>
+						<p th:utext="${@formatService.getFormattedPrice(wish.item.price)}"
+							class="font-emphasize price"></p>
 					</span>
 					<a th:href="'/items/' + ${wish.itemId}" class="showmore">詳細へ</a>
 				</span>
