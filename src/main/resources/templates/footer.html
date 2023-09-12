@@ -1,7 +1,7 @@
 <footer>
 	<nav class="footer-menu">
 		<div class="footer-menu-title">
-			<h1><a href="/items">使いやすいショッピングサイト</a></h1>
+			<h1><a href="/items">Spring Shopping</a></h1>
 		</div>
 		<span class="footer-nemu-container">
 			<th:block th:if="${@loginUser.isLogin()}">
@@ -9,9 +9,9 @@
 					<a href="/admin">管理画面</a>
 				</div>
 				<th:block th:if="${!@loginUser.isAdmin()}">
-		     		<div class="footer-menu-element">
+					<div class="footer-menu-element">
 						<a href="/loginUser/order/histories">注文履歴</a>
-				 	</div>
+					</div>
 					<div class="footer-menu-element">
 						<a href="/addresses">あて先リスト</a>
 					</div>
@@ -26,6 +26,14 @@
 					<a href="/login">新規登録 &#047; ログイン</a>
 				</th:block>
 			</div>
+
+
+			<div class="footer-menu-element wish">
+				<th:block th:if="${@loginUser.isLogin()}">
+					<a href="/wishList">ほしい物リスト</a>
+				</th:block>
+			</div>
+
 
 			<div class="footer-menu-element">
 				<a href="/cart">&#128722;カート</a>

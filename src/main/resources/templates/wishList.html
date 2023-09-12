@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>ほしい物リスト一覧</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+	<header th:replace="header"></header>
+
+	<main>
+		<div class="main-container" id="wish-list">
+			<h3 class="font-emphasize">ほしい物リスト一覧</h3>
+			<p class="err-mes" th:if="${errMes.length > 0}">[[${errMes}]]</p>
+			<div th:unless="${wishList.size() > 0}" class="no-wish">
+				<p>ほしい物は未登録です。</p>
+				<a href="/items"> ＜ 商品一覧画面に戻る</a>
+			</div>
+			<div class="wish-list" th:if="${wishList.size() > 0}" th:each="wish: ${wishList}">
+				<span class="wish-list-img">
+					<img th:src="@{'/img/items/' + ${wish.item.fileName}}">
+				</span>
+				<span class="wish-list-content">
+					<span>
+						<p th:text="${wish.item.name}" class="font-emphasize name"></p>
+						<p th:utext="${@formatService.getFormattedPrice(wish.item.price)}"
+							class="font-emphasize price"></p>
+					</span>
+					<a th:href="'/items/' + ${wish.itemId}" class="showmore">詳細へ</a>
+				</span>
+				<span class="wish-list-delete">
+					<form action="/wishList/delete" method="post">
+						<input type="hidden" name="itemId" th:value="${wish.itemId}">
+						<button class="delete"><i class="fa-solid fa-trash-can"></i></button>
+					</form>
+				</span>
+			</div>
+		</div>
+	</main>
+
+	<footer th:replace="footer"></footer>
+
+	<script th:src="@{/js/common.js}"></script>
+</body>
+
+</html>

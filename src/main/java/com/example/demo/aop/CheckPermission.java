@@ -41,8 +41,10 @@ public class CheckPermission {
 	// 一般ログインユーザーでしか実行できないメソッド
 	@Pointcut("execution(* com.example.demo.controller.OrderController.loginUserOrderHistories(..)) ||"
 			+ "execution(* com.example.demo.controller.OrderController.loginUserShowHistory(..)) ||"
+			+ "execution(* com.example.demo.controller.WishListController.*(..)) ||"
 			+ "execution(* com.example.demo.controller.AddressController.*(..))")
 	public void generalLoginUserPermissionPointcut() {
+
 	}
 
 	// 一般ログインユーザーではない場合はアクセス権限エラー画面にリダイレクト

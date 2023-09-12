@@ -26,6 +26,7 @@ PC：1,280px〜
 	--sub-color: rgb(74, 122, 94);
 	--background-color: rgb(249, 238, 211);
 	--background-color-with-opacity: rgba(239, 228, 201, 0.6);
+	--accent-color: rgb(255, 167, 16);
 }
 
 /* common */
@@ -76,7 +77,8 @@ form {
 	width: 100%;
 }
 
-button {
+button,
+.showmore {
 	width: 100%;
 	border: 1px solid var(--main-color);
 	border-radius: 0;
@@ -89,7 +91,8 @@ button {
 	transition: 0.3s;
 }
 
-button:hover {
+button:hover,
+.showmore:hover {
 	color: var(--background-color);
 	background-color: var(--main-color);
 	transition: 0.3s;
@@ -421,22 +424,59 @@ input-form img {
 	padding-bottom: 30px;
 }
 
-.item-list-slider {
-	margin-top: 50px;
-	padding-bottom: 30px;
+.slick-slide{
+	margin: 0px 10px;
 }
 
 .item {
+	position: relative;
+}
+
+.item form:not(:nth-child(2)) {
+	height: 65vh;
+	max-width: 100%;
 	display: flex;
 	flex-direction: column;
-	height: 65vh;
-	margin: 10px;
-	max-width: 100%;
 	text-decoration: none;
 }
 
-.item>* {
-	height: 10%;
+.item form:nth-child(2) {
+	position: absolute;
+	right: 6%;
+	top: 45%;
+	width: fit-content;
+}
+
+button.wish {
+	padding: 10px;
+	border-radius: 50%;
+	border: 3px solid var(--main-color);
+	margin-top: unset;
+	background-color: var(--main-color);
+	transition: 0.3s;
+	cursor: pointer;
+}
+
+button.wish:hover {
+	opacity: 0.8;
+	transition: 0.3s;
+}
+
+button.wish i {
+	font-size: 25px;
+	vertical-align: middle;
+	color: var(--background-color);
+}
+
+button.wish.active i {
+	color: var(--accent-color);
+}
+
+button.wish.show.active{
+	color: var(--accent-color);
+	border: 1px solid var(--accent-color);
+	border-radius: unset;
+	background-color: var(--background-color-with-opacity);
 }
 
 .item-img {
@@ -446,7 +486,7 @@ input-form img {
 
 .item-img img {
 	height: 100%;
-	object-fit: fill;
+	object-fit: cover;
 	width: 100%;
 }
 
@@ -455,6 +495,7 @@ input-form img {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+	flex-grow: 1;
 }
 
 .item-price {
@@ -477,6 +518,21 @@ input-form img {
 }
 
 /* 注文 */
+.input-form .order-buttons {
+	display: flex;
+	flex-flow: row;
+	gap: 15px;
+}
+
+/* 注文確認 */
+.order-confirm-container {
+	margin-top: 50px;
+}
+
+.total-price-item {
+	gap: 0;
+}
+
 /* ボタン横並び */
 .row-buttons {
 	display: grid;
@@ -536,6 +592,143 @@ footer small {
 	padding: 20px;
 	text-decoration: none;
 	width: 100px;
+}
+
+/* 【管理】注文履歴一覧 */
+.history-container {
+	background-color: var(--background-color-with-opacity);
+	display: flex;
+	justify-content: center;
+	width: 80%;
+}
+
+/* 欲しいものリスト */
+#wish-list h3 {
+	text-align: center;
+}
+
+.wish-list {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.wish-list:not(:first-child) {
+	margin-top: 20px;
+}
+
+.wish-list-img {
+	display: block;
+	width: 100%;
+	height: 400px;
+}
+
+.wish-list-img img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.wish-list-content {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.wish-list-content p.font-emphasize {
+	font-size: 25px;
+}
+
+.wish-list-content p.name{
+	margin-bottom: 0;
+}
+
+.wish-list-content p.price{
+	margin:0;
+}
+
+.wish-list-content a {
+	display: block;
+	text-align: center;
+	width: 100%;
+	margin-top: auto;
+	margin-bottom: 0;
+}
+
+.wish-list-delete {
+	width: 100%;
+}
+
+.wish-list-delete form {
+	display: block;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.wish-list-delete .delete {
+	display: block;
+	width: 100%;
+	height: 50px;
+	padding: unset;
+	margin: unset;
+	margin-top: 20px;
+	background-color: var(--background-color-with-opacity);
+	box-shadow: none;
+	border: 1px solid var(--main-color);
+	position: relative;
+	transition: 0.3s;
+	cursor: pointer;
+}
+
+.wish-list-delete .delete i {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.wish-list-delete .delete:hover {
+	background-color: var(--accent-color);
+	transition: 0.3s;
+}
+
+.no-wish {
+	text-align: center;
+}
+
+@media (min-width:750px) {
+
+	.wish-list {
+		flex-direction: row;
+		height: 250px;
+	}
+
+	.wish-list-img {
+		width: 25%;
+		height: 100%;
+	}
+
+	.wish-list-content {
+		width: 65%;
+		margin-top: unset;
+		margin-left: 20px;
+	}
+
+	.wish-list-content a {
+		width: 60%;
+	}
+
+	.wish-list-delete {
+		width: 10%;
+	}
+
+	.wish-list-delete .delete {
+		height: 100%;
+		margin-top: unset;
+		border: unset;
+	}
 }
 
 /* 【管理】商品一覧 */

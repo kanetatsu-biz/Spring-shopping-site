@@ -42,6 +42,9 @@ public class Item {
 	@Column(name = "is_deleted")
 	private boolean isDeleted = false; // ソフトデリート用のフラグ
 
+	@Transient
+	private boolean isInWishList = false; // wishListにあるか
+
 	public Item() {
 	};
 
@@ -128,5 +131,13 @@ public class Item {
 
 	public void setDeleted(boolean isDeleted) {
 		this.isDeleted = isDeleted;
+	}
+
+	public boolean isInWishList() {
+		return isInWishList;
+	}
+
+	public void setInWishList(boolean isInWishList) {
+		this.isInWishList = isInWishList;
 	}
 }
